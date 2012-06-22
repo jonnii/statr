@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Fixtures\DataPoints.cs" />
     <Compile Include="IntegrationApplication.cs" />
+    <Compile Include="Manual\BuildConfiguration.cs" />
     <Compile Include="Manual\ContainerTest.cs" />
     <Compile Include="Manual\MetricTests.cs" />
     <Compile Include="Manual\StorageTests.cs" />
@@ -80,7 +81,7 @@
     <Compile Include="Stories\StatrContext.cs" />
     <Compile Include="Stories\StatrStory.cs" />
     <Compile Include="Stories\Steps\TheStorageEngine.cs" />
-    <Compile Include="Stories\Storage\CreatingStorageFeature.cs" />
+    <Compile Include="Stories\Storage\StorageFeature.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="nlog.config">

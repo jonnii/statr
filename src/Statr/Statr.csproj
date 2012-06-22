@@ -53,8 +53,13 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\IConfigurationService.cs" />
+    <Compile Include="Config\Retention.cs" />
+    <Compile Include="Config\StorageConfiguration.cs" />
+    <Compile Include="Config\StorageEntry.cs" />
     <Compile Include="CountMetric.cs" />
     <Compile Include="IMetricReceiver.cs" />
     <Compile Include="Routing\IMetricRouter.cs" />

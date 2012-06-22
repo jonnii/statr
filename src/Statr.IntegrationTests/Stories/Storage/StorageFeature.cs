@@ -4,7 +4,7 @@ using Statr.IntegrationTests.Stories.Steps;
 namespace Statr.IntegrationTests.Stories.Storage
 {
     [TestFixture]
-    public class CreatingStorageFeature : StatrStory
+    public class StorageFeature : StatrStory
     {
         [Test]
         public void CreatingTree()
