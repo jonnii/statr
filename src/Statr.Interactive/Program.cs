@@ -8,8 +8,8 @@ namespace Statr.Interactive
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Waiting for keypress...");
-            Console.ReadKey();
+            //Console.WriteLine("Waiting for keypress...");
+            //Console.ReadKey();
 
             Console.WriteLine("Starting client");
             using (var client = StatrClient.Build("localhost"))

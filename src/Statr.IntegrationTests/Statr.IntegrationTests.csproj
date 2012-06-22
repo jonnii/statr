@@ -58,6 +58,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Reactive">
+      <HintPath>..\packages\Rx-Main.1.0.11226\lib\Net4\System.Reactive.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -67,6 +70,8 @@
   <ItemGroup>
     <Compile Include="Fixtures\DataPoints.cs" />
     <Compile Include="IntegrationApplication.cs" />
+    <Compile Include="Manual\ContainerTest.cs" />
+    <Compile Include="Manual\MetricTests.cs" />
     <Compile Include="Manual\StorageTests.cs" />
     <Compile Include="Performance\SavingSliceData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

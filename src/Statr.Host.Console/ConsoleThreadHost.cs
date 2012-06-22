@@ -18,6 +18,7 @@ namespace Statr.Host.Console
         private void RunStatrServer()
         {
             serverApplication = new StatrServerApplication();
+            serverApplication.Initialize();
         }
 
         public void Dispose()

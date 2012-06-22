@@ -3,17 +3,21 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using Castle.Core.Logging;
+using Statr.Routing;
 
 namespace Statr
 {
     public class MetricReceiver : IMetricReceiver
     {
+        private readonly IMetricRouter metricRouter;
+
         private bool shouldReceive = true;
 
         private Thread receiveThread;
 
-        public MetricReceiver()
+        public MetricReceiver(IMetricRouter metricRouter)
         {
+            this.metricRouter = metricRouter;
             Logger = NullLogger.Instance;
         }
 
@@ -44,10 +48,13 @@ namespace Statr
                 var sender = new IPEndPoint(IPAddress.Any, 0);
                 var data = udpClient.Receive(ref sender);
 
+                var rawMetric = Encoding.ASCII.GetString(data, 0, data.Length);
+                var trimmed = rawMetric.Trim();
+                Logger.DebugFormat("{0} => {1}", sender, trimmed);
 
+                var metric = Metric.Parse(trimmed);
 
-                Logger.DebugFormat("Message received from {0}:", sender);
-                Logger.DebugFormat(Encoding.ASCII.GetString(data, 0, data.Length));
+                metricRouter.Route(metric);
             }
         }
 

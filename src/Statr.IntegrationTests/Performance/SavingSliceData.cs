@@ -12,7 +12,8 @@ namespace Statr.IntegrationTests.Performance
         public void WritingSliceData()
         {
             var application = new IntegrationApplication();
-            var container = application.Initialize();
+            application.Initialize();
+            var container = application.Container;
 
             var storageEngineFactory = container.Resolve<IStorageEngineFactory>();
             var storageEngine = storageEngineFactory.Create(@"c:\dev\tmp\storage");

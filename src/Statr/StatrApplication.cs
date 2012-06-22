@@ -9,11 +9,11 @@ namespace Statr
 {
     public abstract class StatrApplication : IDisposable
     {
-        private WindsorContainer container;
+        public IWindsorContainer Container { get; private set; }
 
-        public IWindsorContainer Initialize()
+        public void Initialize()
         {
-            container = new WindsorContainer("Config/Windsor.xml");
+            Container = new WindsorContainer("Config/Windsor.xml");
 
             var defaultInstallers = new IWindsorInstaller[]
             {
@@ -22,16 +22,14 @@ namespace Statr
 
             var installers = defaultInstallers.Concat(GetInstallers()).ToArray();
 
-            container.Install(installers);
-
-            return container;
+            Container.Install(installers);
         }
 
         protected abstract IEnumerable<IWindsorInstaller> GetInstallers();
 
         public void Dispose()
         {
-            container.Dispose();
+            Container.Dispose();
         }
     }
 }

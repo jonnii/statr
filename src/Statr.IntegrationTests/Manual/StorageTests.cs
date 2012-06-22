@@ -6,13 +6,12 @@ using Statr.Storage;
 namespace Statr.IntegrationTests.Manual
 {
     [TestFixture]
-    public class StorageTests
+    public class StorageTests : ContainerTest
     {
         [Test, Explicit]
         public void ShouldSave()
         {
-            var application = new IntegrationApplication();
-            var container = application.Initialize();
+            var container = GetContainer();
 
             var storageEngineFactory = container.Resolve<IStorageEngineFactory>();
             var storageEngine = storageEngineFactory.Create(@"c:\dev\tmp\storage");

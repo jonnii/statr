@@ -10,7 +10,8 @@ namespace Statr.IntegrationTests.Stories.Steps
         public static void IsStarted(StatrContext context)
         {
             context.Application = new IntegrationApplication();
-            context.Container = context.Application.Initialize();
+            context.Application.Initialize();
+            context.Container = context.Application.Container;
 
             var storageEngineFactory = context.Container.Resolve<IStorageEngineFactory>();
 
