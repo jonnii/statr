@@ -1,0 +1,11 @@
+﻿<configuration>
+
+  <components>
+    <component id="Statr.MetricReceiver">
+      <parameters>
+        <Port>17890</Port>
+      </parameters>
+    </component>
+  </components>
+
+</configuration>

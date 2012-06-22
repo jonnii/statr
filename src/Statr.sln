@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statr", "Statr\Statr.csproj", "{1C603537-F3BE-4F0C-8933-85EE2DA2906D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statr.Client", "Statr.Client\Statr.Client.csproj", "{DB46D981-4677-4171-AA69-DF34CAB3C555}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statr.Interactive", "Statr.Interactive\Statr.Interactive.csproj", "{DF3D2680-ECE6-494D-B789-0AB226BC8CE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statr.Client.Specifications", "Statr.Client.Specifications\Statr.Client.Specifications.csproj", "{55171998-302B-42BD-A2FB-37BE45761E95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statr.Host.Console", "Statr.Host.Console\Statr.Host.Console.csproj", "{2D825805-DA13-4CE8-8AA3-BBAA57347929}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statr.Specifications", "Statr.Specifications\Statr.Specifications.csproj", "{64AD73BE-A6D9-47A5-8CE7-A3A51DEA2A7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statr.IntegrationTests", "Statr.IntegrationTests\Statr.IntegrationTests.csproj", "{D28020A0-2254-482C-BC38-36B1266541C3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C603537-F3BE-4F0C-8933-85EE2DA2906D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C603537-F3BE-4F0C-8933-85EE2DA2906D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C603537-F3BE-4F0C-8933-85EE2DA2906D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C603537-F3BE-4F0C-8933-85EE2DA2906D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D825805-DA13-4CE8-8AA3-BBAA57347929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D825805-DA13-4CE8-8AA3-BBAA57347929}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D825805-DA13-4CE8-8AA3-BBAA57347929}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D825805-DA13-4CE8-8AA3-BBAA57347929}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55171998-302B-42BD-A2FB-37BE45761E95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55171998-302B-42BD-A2FB-37BE45761E95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55171998-302B-42BD-A2FB-37BE45761E95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55171998-302B-42BD-A2FB-37BE45761E95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64AD73BE-A6D9-47A5-8CE7-A3A51DEA2A7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64AD73BE-A6D9-47A5-8CE7-A3A51DEA2A7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64AD73BE-A6D9-47A5-8CE7-A3A51DEA2A7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64AD73BE-A6D9-47A5-8CE7-A3A51DEA2A7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D28020A0-2254-482C-BC38-36B1266541C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D28020A0-2254-482C-BC38-36B1266541C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D28020A0-2254-482C-BC38-36B1266541C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D28020A0-2254-482C-BC38-36B1266541C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB46D981-4677-4171-AA69-DF34CAB3C555}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB46D981-4677-4171-AA69-DF34CAB3C555}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB46D981-4677-4171-AA69-DF34CAB3C555}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB46D981-4677-4171-AA69-DF34CAB3C555}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF3D2680-ECE6-494D-B789-0AB226BC8CE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF3D2680-ECE6-494D-B789-0AB226BC8CE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF3D2680-ECE6-494D-B789-0AB226BC8CE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF3D2680-ECE6-494D-B789-0AB226BC8CE9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
