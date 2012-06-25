@@ -27,6 +27,28 @@ namespace Statr.Specifications.Routing
             static DataPoint dataPoint;
         }
 
+        [Subject(typeof(MetricRoute))]
+        public class when_pushing_multiple_metrics : with_route
+        {
+            Establish context = () =>
+            {
+                Subject.Start();
+                Subject.DataPointGenerated += (o, e) => dataPoint = e.DataPoint;
+            };
+
+            Because of = () =>
+            {
+                Subject.Push(new CountMetric("asdf", 5));
+                Subject.Push(new CountMetric("asdf", 5));
+                Thread.Sleep(2000);
+            };
+
+            It should_create_data_point_with_sum_of_value = () =>
+                dataPoint.Value.ShouldEqual(10);
+
+            static DataPoint dataPoint;
+        }
+
         public class with_route
         {
             Establish context = () =>

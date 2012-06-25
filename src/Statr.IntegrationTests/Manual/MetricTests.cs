@@ -19,8 +19,6 @@ namespace Statr.IntegrationTests.Manual
                 var router = container.Resolve<IMetricRouter>();
                 router.Route(new CountMetric("stats.cake", 30));
                 router.Route(new CountMetric("stats.cake", 60));
-
-
             }
         }
     }

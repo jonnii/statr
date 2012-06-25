@@ -76,6 +76,7 @@
     <Compile Include="MetricEventArgs.cs" />
     <Compile Include="MetricReceiver.cs" />
     <Compile Include="Routing\IMetricRouteRegistry.cs" />
+    <Compile Include="Routing\AggregatedMetric.cs" />
     <Compile Include="Routing\MetricRouter.cs" />
     <Compile Include="Routing\MetricRoute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -28,18 +28,24 @@ namespace Statr.Routing
             var windows = observable.Window(TimeSpan.FromSeconds(1));
 
             var aggregatedWindows = windows.SelectMany(
-                window => window.Aggregate(new MetricAggregation(), AccumulateMetrics));
+                window => window.Aggregate(new AggregatedMetric(), AccumulateMetrics));
 
             subscription = aggregatedWindows.Subscribe(OnAggregatedWindow);
         }
 
-        private MetricAggregation AccumulateMetrics(MetricAggregation original, EventPattern<MetricEventArgs> newMetric)
+        private AggregatedMetric AccumulateMetrics(AggregatedMetric original, EventPattern<MetricEventArgs> newMetric)
         {
             var metric = (CountMetric)newMetric.EventArgs.Metric;
-            return new MetricAggregation { LastValue = metric.Amount };
+
+            return new AggregatedMetric
+            {
+                LastValue = metric.Amount,
+                NumMetrics = ++original.NumMetrics,
+                Value = original.Value + metric.Amount
+            };
         }
 
-        private void OnAggregatedWindow(MetricAggregation aggregatedWindow)
+        private void OnAggregatedWindow(AggregatedMetric aggregatedWindow)
         {
             var handler = DataPointGenerated;
             if (handler != null)
