@@ -8,14 +8,14 @@ namespace Statr.Routing
     {
         private IDisposable subscription;
 
-        public event EventHandler<MetricEventArgs> MetricReceived;
-
-        public event EventHandler<DataPointEventArgs> DataPointGenerated;
-
         public MetricRoute(string key)
         {
             Key = key;
         }
+
+        public event EventHandler<MetricEventArgs> MetricReceived;
+
+        public event EventHandler<DataPointEventArgs> DataPointGenerated;
 
         public string Key { get; private set; }
 
