@@ -2,10 +2,10 @@ using System;
 
 namespace Statr.Routing
 {
-    public interface IMetricRoute
+    public interface IMetricRoute : IDisposable
     {
-        event EventHandler<MetricEventArgs> MetricReceived;
+        string Key { get; }
 
-        void NotifyMetric(Metric metric);
+        void Push(Metric metric);
     }
 }

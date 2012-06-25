@@ -1,12 +1,20 @@
+using System.Text.RegularExpressions;
+using Statr.Config;
+
 namespace Statr.Routing
 {
     public class RouteDefinition
     {
-        public RouteDefinition(string pattern)
+        public RouteDefinition(StorageEntry storage)
         {
-            Pattern = pattern;
+            Storage = storage;
         }
 
-        public string Pattern { get; private set; }
+        public StorageEntry Storage { get; set; }
+
+        public bool AppliesTo(string metricName)
+        {
+            return Regex.IsMatch(metricName, Storage.Pattern);
+        }
     }
 }

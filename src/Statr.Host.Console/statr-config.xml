@@ -2,6 +2,7 @@
 <StorageConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Entries>
     <StorageEntry>
+      <Name>All stats</Name>
       <Pattern>^stats</Pattern>
       <Retentions>
         <Retention>

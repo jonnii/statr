@@ -1,8 +1,5 @@
-using System;
-using System.Linq;
-using System.Reactive.Linq;
-using System.Threading;
 using NUnit.Framework;
+using Statr.Config;
 using Statr.Routing;
 
 namespace Statr.IntegrationTests.Manual
@@ -13,38 +10,18 @@ namespace Statr.IntegrationTests.Manual
         [Test, Explicit]
         public void ShouldSave()
         {
-            var container = GetContainer();
+            using (var container = GetContainer())
+            {
+                var registry = container.Resolve<IMetricRouteRegistry>();
+                registry.RegisterRoute(
+                    new RouteDefinition(new StorageEntry("all stats", "^stats", new Retention("1m", "15m"))));
 
-            var router = container.Resolve<IMetricRouter>();
-            var subscription = router.RegisterRoute(new RouteDefinition("^stats"));
+                var router = container.Resolve<IMetricRouter>();
+                router.Route(new CountMetric("stats.cake", 30));
+                router.Route(new CountMetric("stats.cake", 60));
 
-            var observable = Observable.FromEventPattern<EventHandler<MetricEventArgs>, MetricEventArgs>(
-              h => subscription.MetricReceived += h,
-              h => subscription.MetricReceived -= h);
 
-            observable
-                .Buffer(TimeSpan.FromSeconds(1))
-                .Subscribe(o =>
-                {
-                    var metrics = o
-                        .Select(e => e.EventArgs.Metric)
-                        .Cast<CountMetric>();
-
-                    var numEvents = metrics.Sum(e => e.Amount);
-                    Console.WriteLine(numEvents);
-                });
-
-            Thread.Sleep(1000);
-            subscription.NotifyMetric(new CountMetric("fribble", 5));
-            subscription.NotifyMetric(new CountMetric("fribble", 5));
-            Thread.Sleep(2000);
-            subscription.NotifyMetric(new CountMetric("fribble", 5));
-            subscription.NotifyMetric(new CountMetric("fribble", 5));
-            subscription.NotifyMetric(new CountMetric("fribble", 5));
-            Thread.Sleep(5000);
-            subscription.NotifyMetric(new CountMetric("fribble", 5));
-            subscription.NotifyMetric(new CountMetric("fribble", 5));
-            Thread.Sleep(2000);
+            }
         }
     }
 }

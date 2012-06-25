@@ -53,6 +53,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Reactive">
+      <HintPath>..\packages\Rx-Main.1.0.11226\lib\Net4\System.Reactive.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +65,7 @@
     <Compile Include="Config\StorageEntry.cs" />
     <Compile Include="CountMetric.cs" />
     <Compile Include="IMetricReceiver.cs" />
+    <Compile Include="DataPointEventArgs.cs" />
     <Compile Include="Routing\IMetricRouter.cs" />
     <Compile Include="Routing\IMetricRoute.cs" />
     <Compile Include="Installers\RoutingInstaller.cs" />
@@ -71,14 +75,16 @@
     <Compile Include="Metric.cs" />
     <Compile Include="MetricEventArgs.cs" />
     <Compile Include="MetricReceiver.cs" />
+    <Compile Include="Routing\IMetricRouteRegistry.cs" />
     <Compile Include="Routing\MetricRouter.cs" />
     <Compile Include="Routing\MetricRoute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Routing\MetricRouteRegistry.cs" />
     <Compile Include="Routing\RouteDefinition.cs" />
     <Compile Include="StatrApplication.cs" />
     <Compile Include="StatrException.cs" />
     <Compile Include="StatrServerApplication.cs" />
-    <Compile Include="Storage\DataPoint.cs" />
+    <Compile Include="DataPoint.cs" />
     <Compile Include="Storage\DataPointCollection.cs" />
     <Compile Include="Storage\IStorageEngine.cs" />
     <Compile Include="Storage\IStorageEngineFactory.cs" />

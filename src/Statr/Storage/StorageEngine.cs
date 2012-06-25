@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Castle.Core.Logging;
 
 namespace Statr.Storage

@@ -1,17 +1,15 @@
-using System.Collections.Concurrent;
-using System.Linq;
-using System.Text.RegularExpressions;
+using System.Collections.Generic;
 using Castle.Core.Logging;
 
 namespace Statr.Routing
 {
     public class MetricRouter : IMetricRouter
     {
-        private readonly ConcurrentDictionary<RouteDefinition, IMetricRoute> routes =
-            new ConcurrentDictionary<RouteDefinition, IMetricRoute>();
+        private readonly IMetricRouteRegistry metricRouteRegistry;
 
-        public MetricRouter()
+        public MetricRouter(IMetricRouteRegistry metricRouteRegistry)
         {
+            this.metricRouteRegistry = metricRouteRegistry;
             Logger = NullLogger.Instance;
         }
 
@@ -21,24 +19,17 @@ namespace Statr.Routing
         {
             Logger.DebugFormat("Routing {0}", metric);
 
-            var matchingRoutes = routes.Keys.Where(
-                k => Regex.IsMatch(metric.Name, k.Pattern));
+            var matchingRoutes = GetMetricRoutes(metric);
 
-            foreach (var matchingRoute in matchingRoutes)
+            foreach (var route in matchingRoutes)
             {
-                IMetricRoute route;
-                if (routes.TryGetValue(matchingRoute, out route))
-                {
-                    route.NotifyMetric(metric);
-                }
+                route.Push(metric);
             }
         }
 
-        public IMetricRoute RegisterRoute(RouteDefinition routeDefinition)
+        public IEnumerable<IMetricRoute> GetMetricRoutes(Metric metric)
         {
-            var subscription = new MetricRoute();
-            routes.TryAdd(routeDefinition, subscription);
-            return subscription;
+            return metricRouteRegistry.GetRoutes(metric);
         }
     }
 }

@@ -1,6 +1,6 @@
 using System;
 
-namespace Statr.Storage
+namespace Statr
 {
     public class DataPoint
     {
