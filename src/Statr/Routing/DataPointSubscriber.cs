@@ -13,7 +13,7 @@ namespace Statr.Routing
 
         public void Push(DataPoint dataPoint)
         {
-            Logger.DebugFormat("Received data point: {0}", dataPoint);
+            Logger.InfoFormat("Received data point: {0}", dataPoint);
         }
     }
 }

@@ -43,7 +43,7 @@ namespace Statr.Routing
 
         public IMetricRoute[] BuildRoutes(string metricName)
         {
-            Logger.DebugFormat("Building routes for: {0}", metricName);
+            Logger.InfoFormat("Building routes for: {0}", metricName);
 
             var configuration = configRepository.GetConfiguration();
             var retentions = configuration.GetRetentions(metricName);
@@ -56,7 +56,7 @@ namespace Statr.Routing
         {
             var route = metricRouteFactory.Build(metricName, retention);
 
-            Logger.DebugFormat(
+            Logger.InfoFormat(
                 " => Building route: {0} ({1}@{2})",
                 metricName,
                 retention.Frequency,
@@ -71,7 +71,7 @@ namespace Statr.Routing
 
         public void OnRouteOnDataPointGenerated(object sender, DataPointEventArgs args)
         {
-            Logger.DebugFormat("Notifying data point subscribers");
+            Logger.InfoFormat("Notifying data point subscribers");
 
             dataPointSubscriber.Push(args.DataPoint);
         }

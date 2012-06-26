@@ -16,10 +16,17 @@ namespace Statr.Installers
             typeof(Castle.Services.Logging.NLogIntegration.NLogFactory)
         };
 
+        private readonly string logFileName;
+
+        public InfrastructureInstaller(string logFileName)
+        {
+            this.logFileName = logFileName;
+        }
+
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.AddFacility(new StartableFacility());
-            container.AddFacility<LoggingFacility>(f => f.UseNLog());
+            container.AddFacility<LoggingFacility>(f => f.UseNLog().WithConfig(logFileName ?? "nlog.config"));
             container.AddFacility<TypedFactoryFacility>();
         }
     }

@@ -39,7 +39,7 @@ namespace Statr.Routing
 
         public void Start()
         {
-            Logger.DebugFormat("Starting route", RouteName);
+            Logger.InfoFormat("Starting route", RouteName);
 
             var observable = Observable.FromEventPattern<EventHandler<MetricEventArgs>, MetricEventArgs>(
                 h => MetricReceived += h,
@@ -94,7 +94,7 @@ namespace Statr.Routing
 
         public void Dispose()
         {
-            Logger.DebugFormat("Disposing of metric route: {0}", RouteName);
+            Logger.InfoFormat("Disposing of metric route: {0}", RouteName);
 
             if (subscription == null)
             {

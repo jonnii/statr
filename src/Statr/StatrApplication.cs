@@ -18,7 +18,7 @@ namespace Statr
 
             var defaultInstallers = new IWindsorInstaller[]
             {
-                new InfrastructureInstaller(),
+                new InfrastructureInstaller(LogFileName),
                 new ConfigInstaller(), 
             };
 
@@ -26,6 +26,8 @@ namespace Statr
 
             Container.Install(installers);
         }
+
+        public string LogFileName { get; set; }
 
         protected abstract IEnumerable<IWindsorInstaller> GetInstallers();
 

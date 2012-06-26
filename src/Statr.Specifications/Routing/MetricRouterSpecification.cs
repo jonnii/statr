@@ -22,6 +22,9 @@ namespace Statr.Specifications.Routing
             It should_notify_metric_routes = () =>
                  route.WasToldTo(r => r.Push(Param.IsAny<Metric>()));
 
+            It should_have_processed_metric = () =>
+                Subject.NumProcessedMetrics.ShouldEqual<ulong>(1);
+
             static IMetricRoute route;
         }
     }

@@ -16,6 +16,8 @@ namespace Statr.Routing
 
         public ILogger Logger { get; set; }
 
+        public ulong NumProcessedMetrics { get; private set; }
+
         public void Route(Metric metric)
         {
             Logger.DebugFormat("Routing {0}", metric);
@@ -26,6 +28,8 @@ namespace Statr.Routing
             {
                 route.Push(metric);
             }
+
+            ++NumProcessedMetrics;
         }
 
         public IEnumerable<IMetricRoute> GetMetricRoutes(Metric metric)

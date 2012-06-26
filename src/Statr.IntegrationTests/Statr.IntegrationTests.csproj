@@ -71,9 +71,10 @@
     <Compile Include="Fixtures\DataPoints.cs" />
     <Compile Include="IntegrationApplication.cs" />
     <Compile Include="Manual\BuildConfiguration.cs" />
-    <Compile Include="Manual\ContainerTest.cs" />
+    <Compile Include="ContainerTest.cs" />
     <Compile Include="Manual\MetricTests.cs" />
     <Compile Include="Manual\StorageTests.cs" />
+    <Compile Include="Performance\RoutingMetrics.cs" />
     <Compile Include="Performance\SavingSliceData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stories\Configuration\ReadConfigurationFeature.cs" />
@@ -87,6 +88,9 @@
     <Compile Include="Stories\Storage\StorageFeature.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="performance.nlog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="nlog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
