@@ -25,6 +25,12 @@ namespace Statr.Specifications.Routing
             It should_create_data_point = () =>
                 dataPoint.Value.ShouldEqual(5);
 
+            It should_have_processed_metric = () =>
+                Subject.NumProcessedMetrics.ShouldEqual<ulong>(1L);
+
+            It should_have_published_data_point = () =>
+                Subject.NumPublishedDataPoints.ShouldEqual<ulong>(1L);
+
             static DataPoint dataPoint;
         }
 
@@ -41,9 +47,7 @@ namespace Statr.Specifications.Routing
             };
 
             Because of = () =>
-            {
                 aggregated = metrics.Aggregate(new AggregatedMetric(), Subject.AggregateMetrics);
-            };
 
             It should_sum_metric_values = () =>
                 aggregated.Value.ShouldEqual(10);

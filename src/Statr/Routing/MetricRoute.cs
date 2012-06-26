@@ -23,6 +23,10 @@ namespace Statr.Routing
 
         public int FrequencyInSeconds { get; private set; }
 
+        public ulong NumProcessedMetrics { get; private set; }
+
+        public ulong NumPublishedDataPoints { get; private set; }
+
         public void Start()
         {
             var observable = Observable.FromEventPattern<EventHandler<MetricEventArgs>, MetricEventArgs>(
@@ -65,11 +69,13 @@ namespace Statr.Routing
             }
 
             DataPointGenerated.Raise(this, new DataPointEventArgs(aggregatedMetrics.ToDataPoint()));
+            ++NumPublishedDataPoints;
         }
 
         public void Push(Metric metric)
         {
             MetricReceived.Raise(this, new MetricEventArgs(metric));
+            ++NumProcessedMetrics;
         }
 
         public void Dispose()
