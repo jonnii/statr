@@ -2,11 +2,11 @@
 using Machine.Specifications;
 using Statr.Configuration;
 
-namespace Statr.Specifications.Config
+namespace Statr.Specifications.Configuration
 {
-    public class YamlConfigServiceSpecification
+    public class YamlConfigRepositorySpecification
     {
-        [Subject(typeof(YamlConfigService))]
+        [Subject(typeof(YamlConfigRepository))]
         public class when_serializing_configuration : with_configuration_file
         {
             Because of = () =>
@@ -18,12 +18,12 @@ namespace Statr.Specifications.Config
             static string serialized;
         }
 
-        public class with_configuration_file : WithSubject<YamlConfigService>
+        public class with_configuration_file : WithSubject<YamlConfigRepository>
         {
             Establish context = () =>
-                config = new Configuration.Config();
+                config = new Config();
 
-            protected static Configuration.Config config;
+            protected static Config config;
         }
     }
 }

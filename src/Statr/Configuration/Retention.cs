@@ -4,14 +4,14 @@ namespace Statr.Configuration
     {
         public Retention() { }
 
-        public Retention(string frequency, string history)
+        public Retention(int frequency, int history)
         {
             Frequency = frequency;
             History = history;
         }
 
-        public string Frequency { get; set; }
+        public int Frequency { get; set; }
 
-        public string History { get; set; }
+        public int History { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace Statr.IntegrationTests.Manual
                     new StorageEntry
                     {
                         Pattern = "^stats",
-                        Retention = new List<string>
+                        Retentions = new List<string>
                         {
                             "every 5s for 10d"
                         }
@@ -26,7 +26,7 @@ namespace Statr.IntegrationTests.Manual
                 }
             };
 
-            var configurationService = GetContainer().Resolve<IConfigService>();
+            var configurationService = GetContainer().Resolve<IConfigRepository>();
 
             var serialized = configurationService.Serialize(config);
 

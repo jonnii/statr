@@ -9,7 +9,7 @@ namespace Statr.Configuration
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
-                Component.For<IConfigService>().ImplementedBy<YamlConfigService>());
+                Component.For<IConfigRepository>().ImplementedBy<YamlConfigRepository>());
         }
     }
 }

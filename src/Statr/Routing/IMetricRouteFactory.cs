@@ -1,3 +1,5 @@
+using Statr.Configuration;
+
 namespace Statr.Routing
 {
     /// <summary>
@@ -8,9 +10,8 @@ namespace Statr.Routing
         /// <summary>
         /// Builds a metric route
         /// </summary>
-        /// <param name="metricName">The name of the metric</param>
-        /// <param name="frequencyInSeconds">The frequency in seconds that this metric route will publish aggregated metrics</param>
+        /// <param name="retention">The retention for this route</param>
         /// <returns>A metric route</returns>
-        IMetricRoute Build(string metricName, int frequencyInSeconds);
+        IMetricRoute Build(Retention retention);
     }
 }

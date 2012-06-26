@@ -4,13 +4,13 @@ using YamlDotNet.RepresentationModel.Serialization;
 
 namespace Statr.Configuration
 {
-    public class YamlConfigService : IConfigService
+    public class YamlConfigRepository : IConfigRepository
     {
         private const string ConfigurationFileName = "statr.yaml";
 
         private readonly YamlSerializer<Config> serializer;
 
-        public YamlConfigService()
+        public YamlConfigRepository()
         {
             Path = Environment.CurrentDirectory;
 
@@ -24,7 +24,7 @@ namespace Statr.Configuration
 
         }
 
-        public Config GetStorageConfiguration()
+        public Config GetConfiguration()
         {
             using (var reader = File.OpenText(ConfigurationFileName))
             {

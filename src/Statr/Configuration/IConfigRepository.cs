@@ -1,8 +1,8 @@
 ﻿namespace Statr.Configuration
 {
-    public interface IConfigService
+    public interface IConfigRepository
     {
-        Config GetStorageConfiguration();
+        Config GetConfiguration();
 
         string Serialize(Config config);
     }

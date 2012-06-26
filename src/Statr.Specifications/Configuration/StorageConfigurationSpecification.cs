@@ -1,4 +1,4 @@
-﻿namespace Statr.Specifications.Config
+﻿namespace Statr.Specifications.Configuration
 {
     public class StorageConfigurationSpecification
     {

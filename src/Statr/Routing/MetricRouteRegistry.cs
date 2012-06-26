@@ -2,6 +2,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Logging;
+using Statr.Configuration;
 
 namespace Statr.Routing
 {
@@ -9,15 +10,17 @@ namespace Statr.Routing
     {
         private readonly IMetricRouteFactory metricRouteFactory;
 
-        private readonly List<RouteDefinition> routeDefinitions =
-            new List<RouteDefinition>();
+        private readonly IConfigRepository configRepository;
 
         private readonly ConcurrentDictionary<string, IMetricRoute[]> registeredRoutes =
             new ConcurrentDictionary<string, IMetricRoute[]>();
 
-        public MetricRouteRegistry(IMetricRouteFactory metricRouteFactory)
+        public MetricRouteRegistry(
+            IMetricRouteFactory metricRouteFactory,
+            IConfigRepository configRepository)
         {
             this.metricRouteFactory = metricRouteFactory;
+            this.configRepository = configRepository;
             Logger = NullLogger.Instance;
         }
 
@@ -33,22 +36,15 @@ namespace Statr.Routing
             return registeredRoutes.GetOrAdd(metric.Name, BuildRoutes);
         }
 
-        public void RegisterRoute(RouteDefinition routeDefinition)
-        {
-            Logger.DebugFormat("Registering route: {0}", routeDefinition);
-            routeDefinitions.Add(routeDefinition);
-        }
-
         public IMetricRoute[] BuildRoutes(string metricName)
         {
             Logger.DebugFormat("Building routes for: {0}", metricName);
 
-            var matchingDefinitions = routeDefinitions.First(d => d.AppliesTo(metricName));
+            var configuration = configRepository.GetConfiguration();
 
-            return new IMetricRoute[]
-            {
-                metricRouteFactory.Build(metricName, 1)
-            };
+            var entries = configuration.GetRouteDefinitions(metricName);
+
+            return entries.Select(metricRouteFactory.Build).ToArray();
         }
     }
 }
