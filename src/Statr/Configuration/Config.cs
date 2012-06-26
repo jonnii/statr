@@ -25,7 +25,7 @@ namespace Statr.Configuration
 
         public List<StorageEntry> Entries { get; set; }
 
-        public IEnumerable<Retention> GetRouteDefinitions(string metricName)
+        public IEnumerable<Retention> GetRetentions(string metricName)
         {
             var entry = Entries.FirstOrDefault(e => e.Matches(metricName));
 

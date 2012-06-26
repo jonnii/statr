@@ -1,6 +1,7 @@
 using System;
 using System.Reactive;
 using System.Reactive.Linq;
+using Statr.Configuration;
 using Statr.Extensions;
 
 namespace Statr.Routing
@@ -9,10 +10,10 @@ namespace Statr.Routing
     {
         private IDisposable subscription;
 
-        public MetricRoute(string metricName, int frequencyInSeconds)
+        public MetricRoute(string metricName, Retention retention)
         {
             MetricName = metricName;
-            FrequencyInSeconds = frequencyInSeconds;
+            Retention = retention;
         }
 
         public event EventHandler<MetricEventArgs> MetricReceived;
@@ -21,7 +22,7 @@ namespace Statr.Routing
 
         public string MetricName { get; private set; }
 
-        public int FrequencyInSeconds { get; private set; }
+        public Retention Retention { get; private set; }
 
         public ulong NumProcessedMetrics { get; private set; }
 
@@ -34,7 +35,7 @@ namespace Statr.Routing
                 h => MetricReceived -= h);
 
             // create windows for the frequency of this route
-            var windows = observable.Window(TimeSpan.FromSeconds(FrequencyInSeconds));
+            var windows = observable.Window(TimeSpan.FromSeconds(Retention.Frequency));
 
             // aggregate all the metrics in the windows
             var aggregatedWindows = windows.SelectMany(

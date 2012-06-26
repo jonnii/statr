@@ -35,7 +35,7 @@ namespace Statr.Specifications.Configuration
         public class when_getting_route_definitions : with_config
         {
             Because of = () =>
-                definitions = config.GetRouteDefinitions("stats.fribble.frabble");
+                definitions = config.GetRetentions("stats.fribble.frabble");
 
             It should_create_definition_for_each_retention_level = () =>
                 definitions.Count().ShouldEqual(2);

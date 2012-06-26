@@ -41,10 +41,10 @@ namespace Statr.Routing
             Logger.DebugFormat("Building routes for: {0}", metricName);
 
             var configuration = configRepository.GetConfiguration();
+            var retentions = configuration.GetRetentions(metricName);
 
-            var entries = configuration.GetRouteDefinitions(metricName);
-
-            return entries.Select(metricRouteFactory.Build).ToArray();
+            return retentions.Select(
+                retention => metricRouteFactory.Build(metricName, retention)).ToArray();
         }
     }
 }
