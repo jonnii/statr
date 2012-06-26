@@ -12,15 +12,19 @@ namespace Statr.Routing
 
         private readonly IConfigRepository configRepository;
 
+        private readonly IDataPointSubscriber dataPointSubscriber;
+
         private readonly ConcurrentDictionary<string, IMetricRoute[]> registeredRoutes =
             new ConcurrentDictionary<string, IMetricRoute[]>();
 
         public MetricRouteManager(
             IMetricRouteFactory metricRouteFactory,
-            IConfigRepository configRepository)
+            IConfigRepository configRepository,
+            IDataPointSubscriber dataPointSubscriber)
         {
             this.metricRouteFactory = metricRouteFactory;
             this.configRepository = configRepository;
+            this.dataPointSubscriber = dataPointSubscriber;
 
             Logger = NullLogger.Instance;
         }
@@ -45,7 +49,31 @@ namespace Statr.Routing
             var retentions = configuration.GetRetentions(metricName);
 
             return retentions.Select(
-                retention => metricRouteFactory.Build(metricName, retention)).ToArray();
+                retention => BuildRoute(metricName, retention)).ToArray();
+        }
+
+        public IMetricRoute BuildRoute(string metricName, Retention retention)
+        {
+            var route = metricRouteFactory.Build(metricName, retention);
+
+            Logger.DebugFormat(
+                " => Building route: {0} ({1}@{2})",
+                metricName,
+                retention.Frequency,
+                retention.History);
+
+            route.DataPointGenerated += OnRouteOnDataPointGenerated;
+
+            route.Start();
+
+            return route;
+        }
+
+        public void OnRouteOnDataPointGenerated(object sender, DataPointEventArgs args)
+        {
+            Logger.DebugFormat("Notifying data point subscribers");
+
+            dataPointSubscriber.Push(args.DataPoint);
         }
     }
 }

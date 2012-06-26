@@ -79,8 +79,8 @@
     <Compile Include="IMetricReceiver.cs" />
     <Compile Include="DataPointEventArgs.cs" />
     <Compile Include="Routing\AggregatedMetric.cs" />
-    <Compile Include="Routing\DataPointRouter.cs" />
-    <Compile Include="Routing\IDataPointRouter.cs" />
+    <Compile Include="Routing\DataPointSubscriber.cs" />
+    <Compile Include="Routing\IDataPointSubscriber.cs" />
     <Compile Include="Routing\IMetricRouteFactory.cs" />
     <Compile Include="Routing\IMetricRouter.cs" />
     <Compile Include="Routing\IMetricRoute.cs" />

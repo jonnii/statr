@@ -10,9 +10,9 @@ namespace Statr.Routing
         /// <summary>
         /// Builds a metric route
         /// </summary>
-        /// <param name="metricName">The name of the metric</param>
+        /// <param name="routeName">The name of the metric</param>
         /// <param name="retention">The retention for this route</param>
         /// <returns>A metric route</returns>
-        IMetricRoute Build(string metricName, Retention retention);
+        IMetricRoute Build(string routeName, Retention retention);
     }
 }

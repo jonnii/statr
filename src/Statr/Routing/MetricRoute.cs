@@ -1,6 +1,7 @@
 using System;
 using System.Reactive;
 using System.Reactive.Linq;
+using Castle.Core.Logging;
 using Statr.Configuration;
 using Statr.Extensions;
 
@@ -10,17 +11,21 @@ namespace Statr.Routing
     {
         private IDisposable subscription;
 
-        public MetricRoute(string metricName, Retention retention)
+        public MetricRoute(string routeName, Retention retention)
         {
-            MetricName = metricName;
+            RouteName = routeName;
             Retention = retention;
+
+            Logger = NullLogger.Instance;
         }
 
         public event EventHandler<MetricEventArgs> MetricReceived;
 
         public event EventHandler<DataPointEventArgs> DataPointGenerated;
 
-        public string MetricName { get; private set; }
+        public ILogger Logger { get; set; }
+
+        public string RouteName { get; private set; }
 
         public Retention Retention { get; private set; }
 
@@ -30,6 +35,8 @@ namespace Statr.Routing
 
         public void Start()
         {
+            Logger.DebugFormat("Starting route", RouteName);
+
             var observable = Observable.FromEventPattern<EventHandler<MetricEventArgs>, MetricEventArgs>(
                 h => MetricReceived += h,
                 h => MetricReceived -= h);

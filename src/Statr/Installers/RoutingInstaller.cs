@@ -14,7 +14,8 @@ namespace Statr.Installers
                 Component.For<IMetricRouter>().ImplementedBy<MetricRouter>(),
                 Component.For<IMetricRouteManager>().ImplementedBy<MetricRouteManager>(),
                 Component.For<IMetricRouteFactory>().AsFactory(),
-                Component.For<IMetricRoute>().ImplementedBy<MetricRoute>().LifestyleTransient());
+                Component.For<IMetricRoute>().ImplementedBy<MetricRoute>().LifestyleTransient(),
+                Component.For<IDataPointSubscriber>().ImplementedBy<DataPointSubscriber>());
         }
     }
 }

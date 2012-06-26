@@ -19,5 +19,10 @@ namespace Statr
         public long TimeStamp { get; set; }
 
         public float? Value { get; set; }
+
+        public override string ToString()
+        {
+            return string.Concat("[DataPoint TimeStamp=", TimeStamp, " Value=", Value, "]");
+        }
     }
 }
