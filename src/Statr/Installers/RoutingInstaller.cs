@@ -12,7 +12,7 @@ namespace Statr.Installers
         {
             container.Register(
                 Component.For<IMetricRouter>().ImplementedBy<MetricRouter>(),
-                Component.For<IMetricRouteRegistry>().ImplementedBy<MetricRouteRegistry>(),
+                Component.For<IMetricRouteManager>().ImplementedBy<MetricRouteManager>(),
                 Component.For<IMetricRouteFactory>().AsFactory(),
                 Component.For<IMetricRoute>().ImplementedBy<MetricRoute>().LifestyleTransient());
         }

@@ -79,6 +79,8 @@
     <Compile Include="IMetricReceiver.cs" />
     <Compile Include="DataPointEventArgs.cs" />
     <Compile Include="Routing\AggregatedMetric.cs" />
+    <Compile Include="Routing\DataPointRouter.cs" />
+    <Compile Include="Routing\IDataPointRouter.cs" />
     <Compile Include="Routing\IMetricRouteFactory.cs" />
     <Compile Include="Routing\IMetricRouter.cs" />
     <Compile Include="Routing\IMetricRoute.cs" />
@@ -89,11 +91,11 @@
     <Compile Include="Metric.cs" />
     <Compile Include="MetricEventArgs.cs" />
     <Compile Include="MetricReceiver.cs" />
-    <Compile Include="Routing\IMetricRouteRegistry.cs" />
+    <Compile Include="Routing\IMetricRouteManager.cs" />
     <Compile Include="Routing\MetricRouter.cs" />
     <Compile Include="Routing\MetricRoute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Routing\MetricRouteRegistry.cs" />
+    <Compile Include="Routing\MetricRouteManager.cs" />
     <Compile Include="StatrApplication.cs" />
     <Compile Include="StatrException.cs" />
     <Compile Include="StatrServerApplication.cs" />

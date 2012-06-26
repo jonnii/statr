@@ -7,9 +7,9 @@ using Statr.Routing;
 
 namespace Statr.Specifications.Routing
 {
-    public class MetricRouteRegistrySpecification
+    public class MetricRouteManagerSpecification
     {
-        [Subject(typeof(MetricRouteRegistry))]
+        [Subject(typeof(MetricRouteManager))]
         public class when_getting_routes : with_configuration
         {
             Because of = () =>
@@ -24,7 +24,7 @@ namespace Statr.Specifications.Routing
             static IEnumerable<IMetricRoute> routes;
         }
 
-        [Subject(typeof(MetricRouteRegistry))]
+        [Subject(typeof(MetricRouteManager))]
         public class when_getting_route_for_existing_metric : with_configuration
         {
             Establish context = () =>
@@ -39,7 +39,7 @@ namespace Statr.Specifications.Routing
             static IEnumerable<IMetricRoute> routes;
         }
 
-        public class with_configuration : WithSubject<MetricRouteRegistry>
+        public class with_configuration : WithSubject<MetricRouteManager>
         {
             Establish context = () =>
             {

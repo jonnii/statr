@@ -5,11 +5,12 @@ namespace Statr.Routing
 {
     public class MetricRouter : IMetricRouter
     {
-        private readonly IMetricRouteRegistry metricRouteRegistry;
+        private readonly IMetricRouteManager metricRouteManager;
 
-        public MetricRouter(IMetricRouteRegistry metricRouteRegistry)
+        public MetricRouter(IMetricRouteManager metricRouteManager)
         {
-            this.metricRouteRegistry = metricRouteRegistry;
+            this.metricRouteManager = metricRouteManager;
+
             Logger = NullLogger.Instance;
         }
 
@@ -29,7 +30,7 @@ namespace Statr.Routing
 
         public IEnumerable<IMetricRoute> GetMetricRoutes(Metric metric)
         {
-            return metricRouteRegistry.GetRoutes(metric);
+            return metricRouteManager.GetRoutes(metric);
         }
     }
 }

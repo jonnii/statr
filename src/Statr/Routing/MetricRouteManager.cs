@@ -6,7 +6,7 @@ using Statr.Configuration;
 
 namespace Statr.Routing
 {
-    public class MetricRouteRegistry : IMetricRouteRegistry
+    public class MetricRouteManager : IMetricRouteManager
     {
         private readonly IMetricRouteFactory metricRouteFactory;
 
@@ -15,12 +15,13 @@ namespace Statr.Routing
         private readonly ConcurrentDictionary<string, IMetricRoute[]> registeredRoutes =
             new ConcurrentDictionary<string, IMetricRoute[]>();
 
-        public MetricRouteRegistry(
+        public MetricRouteManager(
             IMetricRouteFactory metricRouteFactory,
             IConfigRepository configRepository)
         {
             this.metricRouteFactory = metricRouteFactory;
             this.configRepository = configRepository;
+
             Logger = NullLogger.Instance;
         }
 

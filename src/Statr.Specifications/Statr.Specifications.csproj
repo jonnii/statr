@@ -67,7 +67,7 @@
     <Compile Include="Configuration\StorageConfigurationSpecification.cs" />
     <Compile Include="MetricSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Routing\MetricRouteRegistrySpecification.cs" />
+    <Compile Include="Routing\MetricRouteManagerSpecification.cs" />
     <Compile Include="Routing\MetricRouterSpecification.cs" />
     <Compile Include="Routing\MetricRouteSpecification.cs" />
     <Compile Include="Storage\StorageEngineSpecification.cs" />

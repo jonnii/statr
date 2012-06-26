@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Statr.Routing
 {
-    public interface IMetricRouteRegistry
+    public interface IMetricRouteManager
     {
         IEnumerable<IMetricRoute> GetRoutes(Metric metric);
     }

@@ -12,7 +12,7 @@ namespace Statr.Specifications.Routing
             Establish context = () =>
             {
                 route = An<IMetricRoute>();
-                The<IMetricRouteRegistry>().WhenToldTo(r => r.GetRoutes(Param.IsAny<Metric>())).
+                The<IMetricRouteManager>().WhenToldTo(r => r.GetRoutes(Param.IsAny<Metric>())).
                     Return(new[] { route });
             };
 
