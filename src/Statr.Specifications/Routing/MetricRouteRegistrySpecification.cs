@@ -2,7 +2,7 @@
 using System.Linq;
 using Machine.Fakes;
 using Machine.Specifications;
-using Statr.Config;
+using Statr.Configuration;
 using Statr.Routing;
 
 namespace Statr.Specifications.Routing
@@ -13,7 +13,7 @@ namespace Statr.Specifications.Routing
         public class when_getting_routes : WithSubject<MetricRouteRegistry>
         {
             Establish context = () =>
-                Subject.RegisterRoute(new RouteDefinition(new StorageEntry("all stats", "^stats", new Retention("10s", "10d"))));
+                Subject.RegisterRoute(new RouteDefinition(new StorageEntry("all stats", "^stats", "10s:10d")));
 
             Because of = () =>
                 routes = Subject.GetRoutes(new CountMetric("stats.cputime", 50));
@@ -32,7 +32,7 @@ namespace Statr.Specifications.Routing
         {
             Establish context = () =>
             {
-                Subject.RegisterRoute(new RouteDefinition(new StorageEntry("all stats", "^stats", new Retention("10s", "10d"))));
+                Subject.RegisterRoute(new RouteDefinition(new StorageEntry("all stats", "^stats", "10s:10d")));
                 Subject.GetRoutes(new CountMetric("stats.cputime", 50));
             };
 

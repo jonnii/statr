@@ -1,5 +1,5 @@
 using System.Text.RegularExpressions;
-using Statr.Config;
+using Statr.Configuration;
 
 namespace Statr.Routing
 {

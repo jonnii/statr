@@ -4,13 +4,13 @@ namespace Statr
 {
     public class DataPoint
     {
-        public DataPoint(DateTime timeStamp, long? value)
+        public DataPoint(DateTime timeStamp, float? value)
         {
             TimeStamp = timeStamp.Ticks;
             Value = value;
         }
 
-        public DataPoint(long timeStamp, long? value)
+        public DataPoint(long timeStamp, float? value)
         {
             TimeStamp = timeStamp;
             Value = value;
@@ -18,6 +18,6 @@ namespace Statr
 
         public long TimeStamp { get; set; }
 
-        public long? Value { get; set; }
+        public float? Value { get; set; }
     }
 }

@@ -6,9 +6,9 @@ namespace Statr.Routing
     {
         public int NumMetrics { get; set; }
 
-        public long LastValue { get; set; }
+        public float LastValue { get; set; }
 
-        public long Value { get; set; }
+        public float Value { get; set; }
 
         public bool HasMetrics
         {

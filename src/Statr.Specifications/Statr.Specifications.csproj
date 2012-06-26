@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\YamlConfigServiceSpecification.cs" />
     <Compile Include="Config\StorageConfigurationSpecification.cs" />
     <Compile Include="MetricSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

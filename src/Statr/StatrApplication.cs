@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using Statr.Configuration;
 using Statr.Installers;
 
 namespace Statr
@@ -13,11 +14,12 @@ namespace Statr
 
         public void Initialize()
         {
-            Container = new WindsorContainer("Config/Windsor.xml");
+            Container = new WindsorContainer("Configuration/Windsor.xml");
 
             var defaultInstallers = new IWindsorInstaller[]
             {
-                new InfrastructureInstaller()
+                new InfrastructureInstaller(),
+                new ConfigInstaller(), 
             };
 
             var installers = defaultInstallers.Concat(GetInstallers()).ToArray();

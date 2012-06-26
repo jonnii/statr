@@ -2,7 +2,7 @@ namespace Statr.Storage
 {
     public class SliceData
     {
-        public SliceData(long startTime, long[] dataPoints)
+        public SliceData(long startTime, float[] dataPoints)
         {
             StartTime = startTime;
             DataPoints = dataPoints;
@@ -10,6 +10,6 @@ namespace Statr.Storage
 
         public long StartTime { get; private set; }
 
-        public long[] DataPoints { get; private set; }
+        public float[] DataPoints { get; private set; }
     }
 }

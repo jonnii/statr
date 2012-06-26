@@ -1,4 +1,4 @@
-namespace Statr.Config
+namespace Statr.Configuration
 {
     public class Retention
     {

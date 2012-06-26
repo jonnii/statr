@@ -1,37 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
-using Statr.Config;
+using Statr.Configuration;
 
 namespace Statr.IntegrationTests.Manual
 {
     [TestFixture]
-    public class BuildConfiguration
+    public class BuildConfiguration : ContainerTest
     {
-        [Test]
+        [Test, Explicit]
         public void Should()
         {
-            var config = new StorageConfiguration
+            var config = new Config
             {
-                Entries = new[]
+                Entries = new List<StorageEntry>
                 {
                     new StorageEntry
                     {
                         Pattern = "^stats",
-                        Retentions = new[]
+                        Retention = new List<string>
                         {
-                            new Retention
-                            {
-                                Frequency = "5s",
-                                History = "10d"
-                            }
+                            "every 5s for 10d"
                         }
                     }
                 }
             };
 
-            var xml = config.ToXml();
+            var configurationService = GetContainer().Resolve<IConfigService>();
 
-            Console.WriteLine(xml);
+            var serialized = configurationService.Serialize(config);
+
+            Console.WriteLine(serialized);
         }
     }
 }

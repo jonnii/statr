@@ -14,7 +14,7 @@ namespace Statr
                 var pipe = raw.IndexOf("|", StringComparison.Ordinal);
                 var amount = raw.Substring(colon + 1, pipe - colon - 1);
 
-                return new CountMetric(name, long.Parse(amount));
+                return new CountMetric(name, float.Parse(amount));
             }
 
             throw new NotSupportedException("metric not yet supported");

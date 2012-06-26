@@ -2,13 +2,13 @@ namespace Statr
 {
     public class CountMetric : Metric
     {
-        public CountMetric(string name, long amount)
+        public CountMetric(string name, float amount)
             : base(name)
         {
             Amount = amount;
         }
 
-        public long Amount { get; set; }
+        public float Amount { get; set; }
 
         public override string ToString()
         {

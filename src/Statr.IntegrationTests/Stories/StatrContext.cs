@@ -1,4 +1,5 @@
 using Castle.Windsor;
+using Statr.Configuration;
 using Statr.Storage;
 
 namespace Statr.IntegrationTests.Stories
@@ -10,5 +11,7 @@ namespace Statr.IntegrationTests.Stories
         public IWindsorContainer Container { get; set; }
 
         public IStorageEngine StorageEngine { get; set; }
+
+        public Config Config { get; set; }
     }
 }

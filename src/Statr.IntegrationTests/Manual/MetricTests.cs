@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using Statr.Config;
+using Statr.Configuration;
 using Statr.Routing;
 
 namespace Statr.IntegrationTests.Manual
@@ -14,7 +14,7 @@ namespace Statr.IntegrationTests.Manual
             {
                 var registry = container.Resolve<IMetricRouteRegistry>();
                 registry.RegisterRoute(
-                    new RouteDefinition(new StorageEntry("all stats", "^stats", new Retention("1m", "15m"))));
+                    new RouteDefinition(new StorageEntry("all stats", "^stats", "1m:15m")));
 
                 var router = container.Resolve<IMetricRouter>();
                 router.Route(new CountMetric("stats.cake", 30));
