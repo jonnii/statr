@@ -11,6 +11,8 @@ namespace Statr.Routing
     {
         private IDisposable subscription;
 
+        private IObservable<AggregatedMetric> aggregatedWindows;
+
         public MetricRoute(string routeName, Retention retention)
         {
             RouteName = routeName;
@@ -33,6 +35,8 @@ namespace Statr.Routing
 
         public ulong NumPublishedDataPoints { get; private set; }
 
+        public AggregatedMetric LastSeenAggregatedMetric { get; private set; }
+
         public void Start()
         {
             Logger.DebugFormat("Starting route", RouteName);
@@ -45,7 +49,7 @@ namespace Statr.Routing
             var windows = observable.Window(TimeSpan.FromSeconds(Retention.Frequency));
 
             // aggregate all the metrics in the windows
-            var aggregatedWindows = windows.SelectMany(
+            aggregatedWindows = windows.SelectMany(
                 window => window.Aggregate(new AggregatedMetric(), AggregateMetrics));
 
             // subscribe to the aggregated metrics
@@ -61,17 +65,19 @@ namespace Statr.Routing
         {
             var countMetric = (CountMetric)metric;
 
-            return new AggregatedMetric
+            LastSeenAggregatedMetric = new AggregatedMetric
             {
                 LastValue = countMetric.Amount,
                 NumMetrics = ++original.NumMetrics,
                 Value = original.Value + countMetric.Amount
             };
+
+            return LastSeenAggregatedMetric;
         }
 
         public void OnMetricsAggregated(AggregatedMetric aggregatedMetrics)
         {
-            if (!aggregatedMetrics.HasMetrics)
+            if (aggregatedMetrics == null || !aggregatedMetrics.HasMetrics)
             {
                 return;
             }
@@ -88,10 +94,16 @@ namespace Statr.Routing
 
         public void Dispose()
         {
-            if (subscription != null)
+            Logger.DebugFormat("Disposing of metric route: {0}", RouteName);
+
+            if (subscription == null)
             {
-                subscription.Dispose();
+                return;
             }
+
+            subscription.Dispose();
+
+            OnMetricsAggregated(LastSeenAggregatedMetric);
         }
     }
 }

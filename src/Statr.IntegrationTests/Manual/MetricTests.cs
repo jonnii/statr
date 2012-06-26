@@ -1,4 +1,3 @@
-using System.Threading;
 using NUnit.Framework;
 using Statr.Routing;
 
@@ -17,8 +16,6 @@ namespace Statr.IntegrationTests.Manual
                 metricRouter.Route(new CountMetric("stats.cake", 20));
                 metricRouter.Route(new CountMetric("stats.cake", 40));
                 metricRouter.Route(new CountMetric("stats.cake", 60));
-
-                Thread.Sleep(10000);
             }
         }
     }
