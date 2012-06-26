@@ -1,6 +1,7 @@
 using System;
 using System.Reactive;
 using System.Reactive.Linq;
+using Statr.Extensions;
 
 namespace Statr.Routing
 {
@@ -8,59 +9,67 @@ namespace Statr.Routing
     {
         private IDisposable subscription;
 
-        public MetricRoute(string key)
+        public MetricRoute(string metricName, int frequencyInSeconds)
         {
-            Key = key;
+            MetricName = metricName;
+            FrequencyInSeconds = frequencyInSeconds;
         }
 
         public event EventHandler<MetricEventArgs> MetricReceived;
 
         public event EventHandler<DataPointEventArgs> DataPointGenerated;
 
-        public string Key { get; private set; }
+        public string MetricName { get; private set; }
+
+        public int FrequencyInSeconds { get; private set; }
 
         public void Start()
         {
             var observable = Observable.FromEventPattern<EventHandler<MetricEventArgs>, MetricEventArgs>(
-              h => MetricReceived += h,
-              h => MetricReceived -= h);
+                h => MetricReceived += h,
+                h => MetricReceived -= h);
 
-            var windows = observable.Window(TimeSpan.FromSeconds(1));
+            // create windows for the frequency of this route
+            var windows = observable.Window(TimeSpan.FromSeconds(FrequencyInSeconds));
 
+            // aggregate all the metrics in the windows
             var aggregatedWindows = windows.SelectMany(
-                window => window.Aggregate(new AggregatedMetric(), AccumulateMetrics));
+                window => window.Aggregate(new AggregatedMetric(), AggregateMetrics));
 
-            subscription = aggregatedWindows.Subscribe(OnAggregatedWindow);
+            // subscribe to the aggregated metrics
+            subscription = aggregatedWindows.Subscribe(OnMetricsAggregated);
         }
 
-        private AggregatedMetric AccumulateMetrics(AggregatedMetric original, EventPattern<MetricEventArgs> newMetric)
+        public AggregatedMetric AggregateMetrics(AggregatedMetric original, EventPattern<MetricEventArgs> newMetric)
         {
-            var metric = (CountMetric)newMetric.EventArgs.Metric;
+            return AggregateMetrics(original, newMetric.EventArgs.Metric);
+        }
+
+        public AggregatedMetric AggregateMetrics(AggregatedMetric original, Metric metric)
+        {
+            var countMetric = (CountMetric)metric;
 
             return new AggregatedMetric
             {
-                LastValue = metric.Amount,
+                LastValue = countMetric.Amount,
                 NumMetrics = ++original.NumMetrics,
-                Value = original.Value + metric.Amount
+                Value = original.Value + countMetric.Amount
             };
         }
 
-        private void OnAggregatedWindow(AggregatedMetric aggregatedWindow)
+        public void OnMetricsAggregated(AggregatedMetric aggregatedMetrics)
         {
-            var handler = DataPointGenerated;
-            if (handler != null)
+            if (!aggregatedMetrics.HasMetrics)
             {
-                handler(this, new DataPointEventArgs(aggregatedWindow.ToDataPoint()));
+                return;
             }
+
+            DataPointGenerated.Raise(this, new DataPointEventArgs(aggregatedMetrics.ToDataPoint()));
         }
 
         public void Push(Metric metric)
         {
-            var handler = MetricReceived;
-            if (handler != null)
-            {
-                handler(this, new MetricEventArgs(metric));
-            }
+            MetricReceived.Raise(this, new MetricEventArgs(metric));
         }
 
         public void Dispose()

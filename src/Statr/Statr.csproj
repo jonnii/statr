@@ -64,9 +64,11 @@
     <Compile Include="Config\StorageConfiguration.cs" />
     <Compile Include="Config\StorageEntry.cs" />
     <Compile Include="CountMetric.cs" />
+    <Compile Include="Extensions\EventExtensions.cs" />
     <Compile Include="IMetricReceiver.cs" />
     <Compile Include="DataPointEventArgs.cs" />
     <Compile Include="Routing\AggregatedMetric.cs" />
+    <Compile Include="Routing\IMetricRouteFactory.cs" />
     <Compile Include="Routing\IMetricRouter.cs" />
     <Compile Include="Routing\IMetricRoute.cs" />
     <Compile Include="Installers\RoutingInstaller.cs" />

@@ -7,14 +7,17 @@ namespace Statr.Routing
 {
     public class MetricRouteRegistry : IMetricRouteRegistry
     {
+        private readonly IMetricRouteFactory metricRouteFactory;
+
         private readonly List<RouteDefinition> routeDefinitions =
             new List<RouteDefinition>();
 
         private readonly ConcurrentDictionary<string, IMetricRoute[]> registeredRoutes =
             new ConcurrentDictionary<string, IMetricRoute[]>();
 
-        public MetricRouteRegistry()
+        public MetricRouteRegistry(IMetricRouteFactory metricRouteFactory)
         {
+            this.metricRouteFactory = metricRouteFactory;
             Logger = NullLogger.Instance;
         }
 
@@ -44,7 +47,7 @@ namespace Statr.Routing
 
             return new IMetricRoute[]
             {
-                new MetricRoute(metricName)
+                metricRouteFactory.Build(metricName, 1)
             };
         }
     }

@@ -10,6 +10,11 @@ namespace Statr.Routing
 
         public long Value { get; set; }
 
+        public bool HasMetrics
+        {
+            get { return NumMetrics != 0; }
+        }
+
         public DataPoint ToDataPoint()
         {
             return new DataPoint(DateTime.UtcNow, Value);

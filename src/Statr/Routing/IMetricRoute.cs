@@ -4,7 +4,7 @@ namespace Statr.Routing
 {
     public interface IMetricRoute : IDisposable
     {
-        string Key { get; }
+        string MetricName { get; }
 
         void Push(Metric metric);
     }

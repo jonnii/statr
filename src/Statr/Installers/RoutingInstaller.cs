@@ -1,4 +1,5 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using Castle.Facilities.TypedFactory;
+using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Statr.Routing;
@@ -11,7 +12,9 @@ namespace Statr.Installers
         {
             container.Register(
                 Component.For<IMetricRouter>().ImplementedBy<MetricRouter>(),
-                Component.For<IMetricRouteRegistry>().ImplementedBy<MetricRouteRegistry>());
+                Component.For<IMetricRouteRegistry>().ImplementedBy<MetricRouteRegistry>(),
+                Component.For<IMetricRouteFactory>().AsFactory(),
+                Component.For<IMetricRoute>().ImplementedBy<MetricRoute>().LifestyleTransient());
         }
     }
 }
