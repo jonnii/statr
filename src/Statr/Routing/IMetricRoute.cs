@@ -16,6 +16,11 @@ namespace Statr.Routing
         string RouteName { get; }
 
         /// <summary>
+        /// The frequency in seconds for this route
+        /// </summary>
+        int FrequencyInSeconds { get; }
+
+        /// <summary>
         /// Starts this route, this means the route will start accepting metrics and
         /// will publish data points
         /// </summary>

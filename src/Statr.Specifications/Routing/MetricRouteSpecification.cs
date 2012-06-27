@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading;
 using Machine.Specifications;
-using Statr.Configuration;
 using Statr.Routing;
 
 namespace Statr.Specifications.Routing
@@ -76,7 +75,7 @@ namespace Statr.Specifications.Routing
         public class with_route
         {
             Establish context = () =>
-                Subject = new MetricRoute("key", new Retention(1, 60));
+                Subject = new MetricRoute("key", 1);
 
             protected static MetricRoute Subject;
         }

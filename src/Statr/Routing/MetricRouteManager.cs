@@ -1,5 +1,4 @@
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Logging;
 using Statr.Configuration;
@@ -14,8 +13,8 @@ namespace Statr.Routing
 
         private readonly IDataPointSubscriber dataPointSubscriber;
 
-        private readonly ConcurrentDictionary<string, IMetricRoute[]> registeredRoutes =
-            new ConcurrentDictionary<string, IMetricRoute[]>();
+        private readonly ConcurrentDictionary<string, IMetricRoute> registeredRoutes =
+            new ConcurrentDictionary<string, IMetricRoute>();
 
         public MetricRouteManager(
             IMetricRouteFactory metricRouteFactory,
@@ -36,25 +35,27 @@ namespace Statr.Routing
             get { return registeredRoutes.Count; }
         }
 
-        public IEnumerable<IMetricRoute> GetRoutes(Metric metric)
+        public IMetricRoute GetRoutes(Metric metric)
         {
-            return registeredRoutes.GetOrAdd(metric.Name, BuildRoutes);
+            return registeredRoutes.GetOrAdd(metric.Name, BuildRoute);
         }
 
-        public IMetricRoute[] BuildRoutes(string metricName)
+        public IMetricRoute BuildRoute(string metricName)
         {
             Logger.InfoFormat("Building routes for: {0}", metricName);
 
             var configuration = configRepository.GetConfiguration();
-            var retentions = configuration.GetRetentions(metricName);
 
-            return retentions.Select(
-                retention => BuildRoute(metricName, retention)).ToArray();
+            var highestFrequencyRetention = configuration.GetRetentions(metricName)
+                .OrderBy(r => r.Frequency)
+                .First();
+
+            return BuildRoute(metricName, highestFrequencyRetention);
         }
 
         public IMetricRoute BuildRoute(string metricName, Retention retention)
         {
-            var route = metricRouteFactory.Build(metricName, retention);
+            var route = metricRouteFactory.Build(metricName, retention.Frequency);
 
             Logger.InfoFormat(
                 " => Building route: {0} ({1}@{2})",

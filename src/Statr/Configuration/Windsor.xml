@@ -6,6 +6,12 @@
         <Port>17890</Port>
       </parameters>
     </component>
+
+    <component id="Statr.Management.ManagementBootstrapper">
+      <parameters>
+        <Port>17891</Port>
+      </parameters>
+    </component>
   </components>
 
 </configuration>

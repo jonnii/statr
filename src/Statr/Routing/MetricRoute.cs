@@ -2,7 +2,6 @@ using System;
 using System.Reactive;
 using System.Reactive.Linq;
 using Castle.Core.Logging;
-using Statr.Configuration;
 using Statr.Extensions;
 
 namespace Statr.Routing
@@ -13,10 +12,10 @@ namespace Statr.Routing
 
         private IObservable<AggregatedMetric> aggregatedWindows;
 
-        public MetricRoute(string routeName, Retention retention)
+        public MetricRoute(string routeName, int frequencyInSeconds)
         {
             RouteName = routeName;
-            Retention = retention;
+            FrequencyInSeconds = frequencyInSeconds;
 
             Logger = NullLogger.Instance;
         }
@@ -29,7 +28,7 @@ namespace Statr.Routing
 
         public string RouteName { get; private set; }
 
-        public Retention Retention { get; private set; }
+        public int FrequencyInSeconds { get; private set; }
 
         public ulong NumProcessedMetrics { get; private set; }
 
@@ -46,7 +45,7 @@ namespace Statr.Routing
                 h => MetricReceived -= h);
 
             // create windows for the frequency of this route
-            var windows = observable.Window(TimeSpan.FromSeconds(Retention.Frequency));
+            var windows = observable.Window(TimeSpan.FromSeconds(FrequencyInSeconds));
 
             // aggregate all the metrics in the windows
             aggregatedWindows = windows.SelectMany(

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Castle.MicroKernel.Registration;
 using Statr.Installers;
+using Statr.Management;
 
 namespace Statr
 {
@@ -11,6 +12,7 @@ namespace Statr
             yield return new StorageInstaller();
             yield return new RoutingInstaller();
             yield return new ServerInstaller();
+            yield return new ManagementInstaller();
         }
     }
 }

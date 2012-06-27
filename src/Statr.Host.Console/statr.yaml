@@ -1,15 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<StorageConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Entries>
-    <StorageEntry>
-      <Name>All stats</Name>
-      <Pattern>^stats</Pattern>
-      <Retentions>
-        <Retention>
-          <Frequency>5s</Frequency>
-          <History>10d</History>
-        </Retention>
-      </Retentions>
-    </StorageEntry>
-  </Entries>
-</StorageConfiguration>
+﻿Entries:
+- Pattern: ^stats
+  Retentions:
+    - 5s:10d

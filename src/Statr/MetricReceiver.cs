@@ -18,6 +18,7 @@ namespace Statr
         public MetricReceiver(IMetricRouter metricRouter)
         {
             this.metricRouter = metricRouter;
+
             Logger = NullLogger.Instance;
         }
 
@@ -32,10 +33,12 @@ namespace Statr
                 throw new StatrException("The server cannot be started because the port has not been set");
             }
 
-            Logger.DebugFormat("Starting server on port {0}", Port);
+            Logger.DebugFormat("Starting MetricReceiver on port {0}", Port);
 
             receiveThread = new Thread(InitializeServer);
             receiveThread.Start();
+
+            Logger.DebugFormat("MetricReceiver started");
         }
 
         public void InitializeServer()

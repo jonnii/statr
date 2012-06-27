@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Castle.Core.Logging;
 
 namespace Statr.Routing
@@ -22,17 +21,14 @@ namespace Statr.Routing
         {
             Logger.DebugFormat("Routing {0}", metric);
 
-            var matchingRoutes = GetMetricRoutes(metric);
+            var mathchingRoute = GetMetricRoutes(metric);
 
-            foreach (var route in matchingRoutes)
-            {
-                route.Push(metric);
-            }
+            mathchingRoute.Push(metric);
 
             ++NumProcessedMetrics;
         }
 
-        public IEnumerable<IMetricRoute> GetMetricRoutes(Metric metric)
+        public IMetricRoute GetMetricRoutes(Metric metric)
         {
             return metricRouteManager.GetRoutes(metric);
         }
