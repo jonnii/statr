@@ -12,7 +12,7 @@ namespace Statr.Routing
             {
                 LastValue = countMetric.Value,
                 NumMetrics = ++original.NumMetrics,
-                Value = original.Value + countMetric.Value
+                Value = countMetric.Value
             };
 
             return Current;
