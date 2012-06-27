@@ -56,7 +56,7 @@ namespace Statr.Routing
 
         public IMetricRoute BuildRoute(string metricName, Retention retention)
         {
-            var route = metricRouteFactory.Build(metricName, retention.Frequency);
+            var route = metricRouteFactory.Build(metricName, retention.Frequency, new AccumulateAggregationStrategy());
 
             Logger.InfoFormat(
                 " => Building route: {0} ({1}@{2})",

@@ -8,12 +8,18 @@ namespace Statr.Routing
 {
     public class MetricRoute : IMetricRoute
     {
+        private readonly IAggregationStrategy aggregationStrategy;
+
         private IDisposable subscription;
 
         private IObservable<AggregatedMetric> aggregatedWindows;
 
-        public MetricRoute(string routeName, int frequencyInSeconds)
+        public MetricRoute(
+            string routeName,
+            int frequencyInSeconds,
+            IAggregationStrategy aggregationStrategy)
         {
+            this.aggregationStrategy = aggregationStrategy;
             RouteName = routeName;
             FrequencyInSeconds = frequencyInSeconds;
 
@@ -33,8 +39,6 @@ namespace Statr.Routing
         public ulong NumProcessedMetrics { get; private set; }
 
         public ulong NumPublishedDataPoints { get; private set; }
-
-        public AggregatedMetric LastSeenAggregatedMetric { get; private set; }
 
         public void Start()
         {
@@ -57,21 +61,7 @@ namespace Statr.Routing
 
         public AggregatedMetric AggregateMetrics(AggregatedMetric original, EventPattern<MetricEventArgs> newMetric)
         {
-            return AggregateMetrics(original, newMetric.EventArgs.Metric);
-        }
-
-        public AggregatedMetric AggregateMetrics(AggregatedMetric original, Metric metric)
-        {
-            var countMetric = metric;
-
-            LastSeenAggregatedMetric = new AggregatedMetric
-            {
-                LastValue = countMetric.Value,
-                NumMetrics = ++original.NumMetrics,
-                Value = original.Value + countMetric.Value
-            };
-
-            return LastSeenAggregatedMetric;
+            return aggregationStrategy.Aggregate(original, newMetric.EventArgs.Metric);
         }
 
         public void OnMetricsAggregated(AggregatedMetric aggregatedMetrics)
@@ -102,7 +92,7 @@ namespace Statr.Routing
 
             subscription.Dispose();
 
-            OnMetricsAggregated(LastSeenAggregatedMetric);
+            OnMetricsAggregated(aggregationStrategy.Current);
         }
     }
 }

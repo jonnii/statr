@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using Machine.Specifications;
 using Statr.Routing;
 
@@ -32,29 +31,6 @@ namespace Statr.Specifications.Routing
                 Subject.NumPublishedDataPoints.ShouldEqual<ulong>(1L);
 
             static DataPoint dataPoint;
-        }
-
-        [Subject(typeof(MetricRoute))]
-        public class when_aggregating_multiple_metrics : with_route
-        {
-            Establish context = () =>
-            {
-                metrics = new[]
-                {
-                    new Metric("key", 5f, MetricType.Count),
-                    new Metric("key", 5f, MetricType.Count)
-                };
-            };
-
-            Because of = () =>
-                aggregated = metrics.Aggregate(new AggregatedMetric(), Subject.AggregateMetrics);
-
-            It should_sum_metric_values = () =>
-                aggregated.Value.ShouldEqual(10);
-
-            static Metric[] metrics;
-
-            static AggregatedMetric aggregated;
         }
 
         [Subject(typeof(MetricRoute))]
@@ -102,7 +78,7 @@ namespace Statr.Specifications.Routing
         public class with_route
         {
             Establish context = () =>
-                Subject = new MetricRoute("key", 1);
+                Subject = new MetricRoute("key", 1, new AccumulateAggregationStrategy());
 
             protected static MetricRoute Subject;
         }

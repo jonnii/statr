@@ -14,7 +14,7 @@ namespace Statr.Specifications.Routing
             {
                 route = An<IMetricRoute>();
 
-                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<string>(), Param.IsAny<int>()))
+                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<string>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
                     .Return(route);
             };
 
@@ -35,7 +35,7 @@ namespace Statr.Specifications.Routing
         {
             Establish context = () =>
             {
-                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<string>(), Param.IsAny<int>()))
+                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<string>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
                     .Return(An<IMetricRoute>());
 
                 Subject.GetRoute(new Metric("stats.cputime", 50, MetricType.Count));
@@ -53,7 +53,7 @@ namespace Statr.Specifications.Routing
         {
             Establish context = () =>
             {
-                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<string>(), Param.IsAny<int>()))
+                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<string>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
                     .Return(() => An<IMetricRoute>());
 
                 countRoute = Subject.GetRoute(new Metric("stats.cputime", 50, MetricType.Count));
@@ -80,7 +80,7 @@ namespace Statr.Specifications.Routing
             {
                 route = new Moq.Mock<IMetricRoute>();
 
-                metricRouteFactory.WhenToldTo(f => f.Build(Param.IsAny<string>(), Param.IsAny<int>()))
+                metricRouteFactory.WhenToldTo(f => f.Build(Param.IsAny<string>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
                     .Return(route.Object);
 
                 Subject.BuildRoute("metric.name", new Retention(1, 60));
@@ -99,7 +99,7 @@ namespace Statr.Specifications.Routing
         public class when_building_route : with_configuration
         {
             Establish context = () =>
-                metricRouteFactory.WhenToldTo(f => f.Build("stats.awesome", 60))
+                metricRouteFactory.WhenToldTo(f => f.Build("stats.awesome", 60, Param.IsAny<IAggregationStrategy>()))
                     .Return(An<IMetricRoute>());
 
             Because of = () =>
