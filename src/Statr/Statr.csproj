@@ -111,6 +111,7 @@
     <Compile Include="MetricType.cs" />
     <Compile Include="Routing\AccumulateAggregationStrategy.cs" />
     <Compile Include="Routing\IAggregationStrategy.cs" />
+    <Compile Include="Routing\LastValueAggregationStrategy.cs" />
     <Compile Include="Routing\RouteKey.cs" />
     <Compile Include="Routing\AggregatedMetric.cs" />
     <Compile Include="Routing\DataPointSubscriber.cs" />

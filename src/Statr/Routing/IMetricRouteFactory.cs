@@ -8,13 +8,10 @@ namespace Statr.Routing
         /// <summary>
         /// Builds a metric route
         /// </summary>
-        /// <param name="routeName">The name of the metric</param>
+        /// <param name="routeKey">The name of the metric</param>
         /// <param name="frequencyInSeconds">The frequency of this metric route</param>
         /// <param name="aggregationStrategy">The aggregation strategy for this metric route</param>
         /// <returns>A metric route</returns>
-        IMetricRoute Build(
-            string routeName,
-            int frequencyInSeconds,
-            IAggregationStrategy aggregationStrategy);
+        IMetricRoute Build(RouteKey routeKey, int frequencyInSeconds, IAggregationStrategy aggregationStrategy);
     }
 }

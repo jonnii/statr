@@ -45,24 +45,26 @@ namespace Statr.Routing
             Logger.InfoFormat("Building routes for: {0}", routeKey);
 
             var configuration = configRepository.GetConfiguration();
-            var routeKeyName = routeKey.Name;
 
-            var highestFrequencyRetention = configuration.GetRetentions(routeKeyName)
+            var highestFrequencyRetention = configuration.GetRetentions(routeKey.Name)
                 .OrderBy(r => r.Frequency)
                 .First();
 
-            return BuildRoute(routeKeyName, highestFrequencyRetention);
+            return BuildRoute(routeKey, highestFrequencyRetention);
         }
 
-        public IMetricRoute BuildRoute(string metricName, Retention retention)
+        public IMetricRoute BuildRoute(RouteKey routeKey, Retention retention)
         {
-            var route = metricRouteFactory.Build(metricName, retention.Frequency, new AccumulateAggregationStrategy());
+            var strategy = new AccumulateAggregationStrategy();
+
+            var route = metricRouteFactory.Build(routeKey, retention.Frequency, strategy);
 
             Logger.InfoFormat(
-                " => Building route: {0} ({1}@{2})",
-                metricName,
+                " => Building route: {0} ({1}@{2} w/ {3})",
+                routeKey.Name,
                 retention.Frequency,
-                retention.History);
+                retention.History,
+                strategy.GetType().Name);
 
             route.DataPointGenerated += OnRouteOnDataPointGenerated;
 

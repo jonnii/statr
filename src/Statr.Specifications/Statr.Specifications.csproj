@@ -71,6 +71,7 @@
     <Compile Include="Routing\MetricRouteManagerSpecification.cs" />
     <Compile Include="Routing\MetricRouterSpecification.cs" />
     <Compile Include="Routing\MetricRouteSpecification.cs" />
+    <Compile Include="Routing\RouteKeySpecification.cs" />
     <Compile Include="Storage\StorageEngineSpecification.cs" />
   </ItemGroup>
   <ItemGroup>
