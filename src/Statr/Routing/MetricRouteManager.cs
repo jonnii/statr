@@ -13,8 +13,8 @@ namespace Statr.Routing
 
         private readonly IDataPointSubscriber dataPointSubscriber;
 
-        private readonly ConcurrentDictionary<string, IMetricRoute> registeredRoutes =
-            new ConcurrentDictionary<string, IMetricRoute>();
+        private readonly ConcurrentDictionary<RouteKey, IMetricRoute> registeredRoutes =
+            new ConcurrentDictionary<RouteKey, IMetricRoute>();
 
         public MetricRouteManager(
             IMetricRouteFactory metricRouteFactory,
@@ -37,20 +37,21 @@ namespace Statr.Routing
 
         public IMetricRoute GetRoute(Metric metric)
         {
-            return registeredRoutes.GetOrAdd(metric.Name, BuildRoute);
+            return registeredRoutes.GetOrAdd(metric.ToRouteKey(), BuildRoute);
         }
 
-        public IMetricRoute BuildRoute(string metricName)
+        public IMetricRoute BuildRoute(RouteKey routeKey)
         {
-            Logger.InfoFormat("Building routes for: {0}", metricName);
+            Logger.InfoFormat("Building routes for: {0}", routeKey);
 
             var configuration = configRepository.GetConfiguration();
+            var routeKeyName = routeKey.Name;
 
-            var highestFrequencyRetention = configuration.GetRetentions(metricName)
+            var highestFrequencyRetention = configuration.GetRetentions(routeKeyName)
                 .OrderBy(r => r.Frequency)
                 .First();
 
-            return BuildRoute(metricName, highestFrequencyRetention);
+            return BuildRoute(routeKeyName, highestFrequencyRetention);
         }
 
         public IMetricRoute BuildRoute(string metricName, Retention retention)

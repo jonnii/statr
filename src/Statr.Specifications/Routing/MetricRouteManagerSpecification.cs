@@ -49,6 +49,31 @@ namespace Statr.Specifications.Routing
         }
 
         [Subject(typeof(MetricRouteManager))]
+        public class when_getting_route_for_existing_metric_name_and_different_metric_type : with_configuration
+        {
+            Establish context = () =>
+            {
+                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<string>(), Param.IsAny<int>()))
+                    .Return(() => An<IMetricRoute>());
+
+                countRoute = Subject.GetRoute(new Metric("stats.cputime", 50, MetricType.Count));
+            };
+
+            Because of = () =>
+                gaugeRoute = Subject.GetRoute(new Metric("stats.cputime", 50, MetricType.Gauge));
+
+            It should_not_register_routes_twice = () =>
+                Subject.NumRoutes.ShouldEqual(2);
+
+            It should_create_different_route_for_different_metric_types = () =>
+                gaugeRoute.ShouldNotBeTheSameAs(countRoute);
+
+            static IMetricRoute countRoute;
+
+            static IMetricRoute gaugeRoute;
+        }
+
+        [Subject(typeof(MetricRouteManager))]
         public class with_built_route : with_metric_route_manager
         {
             Establish context = () =>
@@ -78,7 +103,7 @@ namespace Statr.Specifications.Routing
                     .Return(An<IMetricRoute>());
 
             Because of = () =>
-                route = Subject.BuildRoute("stats.awesome");
+                route = Subject.BuildRoute(new RouteKey("stats.awesome", MetricType.Count));
 
             It should_build_metric_route_for_highest_frequency_retention_period = () =>
                 route.ShouldNotBeNull();

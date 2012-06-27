@@ -109,6 +109,7 @@
     <Compile Include="Management\ManagementInstaller.cs" />
     <Compile Include="Management\WindsorContainerAdapter.cs" />
     <Compile Include="MetricType.cs" />
+    <Compile Include="Routing\RouteKey.cs" />
     <Compile Include="Routing\AggregatedMetric.cs" />
     <Compile Include="Routing\DataPointSubscriber.cs" />
     <Compile Include="Routing\IDataPointSubscriber.cs" />

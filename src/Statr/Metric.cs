@@ -1,4 +1,5 @@
 using System;
+using Statr.Routing;
 
 namespace Statr
 {
@@ -43,5 +44,15 @@ namespace Statr
         public float Value { get; private set; }
 
         public MetricType MetricType { get; private set; }
+
+        public override string ToString()
+        {
+            return string.Concat("[Metric Name=", Name, " Value=", Value, " MetricType=", MetricType, "]");
+        }
+
+        public RouteKey ToRouteKey()
+        {
+            return new RouteKey(Name, MetricType);
+        }
     }
 }
