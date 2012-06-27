@@ -23,6 +23,7 @@ namespace Statr.Routing
             {
                 return false;
             }
+
             if (ReferenceEquals(this, obj))
             {
                 return true;
