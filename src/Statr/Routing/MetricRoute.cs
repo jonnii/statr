@@ -62,13 +62,13 @@ namespace Statr.Routing
 
         public AggregatedMetric AggregateMetrics(AggregatedMetric original, Metric metric)
         {
-            var countMetric = (CountMetric)metric;
+            var countMetric = metric;
 
             LastSeenAggregatedMetric = new AggregatedMetric
             {
-                LastValue = countMetric.Amount,
+                LastValue = countMetric.Value,
                 NumMetrics = ++original.NumMetrics,
-                Value = original.Value + countMetric.Amount
+                Value = original.Value + countMetric.Value
             };
 
             return LastSeenAggregatedMetric;

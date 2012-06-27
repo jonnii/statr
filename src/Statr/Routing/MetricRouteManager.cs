@@ -35,7 +35,7 @@ namespace Statr.Routing
             get { return registeredRoutes.Count; }
         }
 
-        public IMetricRoute GetRoutes(Metric metric)
+        public IMetricRoute GetRoute(Metric metric)
         {
             return registeredRoutes.GetOrAdd(metric.Name, BuildRoute);
         }

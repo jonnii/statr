@@ -18,7 +18,7 @@ namespace Statr.Specifications.Routing
 
             Because of = () =>
             {
-                Subject.Push(new CountMetric("asdf", 5));
+                Subject.Push(new Metric("asdf", 5, MetricType.Count));
                 Thread.Sleep(1200);
             };
 
@@ -39,10 +39,10 @@ namespace Statr.Specifications.Routing
         {
             Establish context = () =>
             {
-                metrics = new Metric[]
+                metrics = new[]
                 {
-                    new CountMetric("key", 5),
-                    new CountMetric("key", 5)
+                    new Metric("key", 5f, MetricType.Count),
+                    new Metric("key", 5f, MetricType.Count)
                 };
             };
 
@@ -70,6 +70,33 @@ namespace Statr.Specifications.Routing
                 raised.ShouldBeFalse();
 
             static bool raised;
+        }
+
+        [Subject(typeof(MetricRoute))]
+        public class when_pushing_gauge_metric : with_route
+        {
+            Establish context = () =>
+            {
+                Subject.DataPointGenerated += (o, e) => dataPoint = e.DataPoint;
+                Subject.Start();
+            };
+
+            Because of = () =>
+            {
+                Subject.Push(new Metric("asdf", 5, MetricType.Gauge));
+                Thread.Sleep(1200);
+            };
+
+            It should_create_data_point = () =>
+                dataPoint.Value.ShouldEqual(5);
+
+            It should_have_processed_metric = () =>
+                Subject.NumProcessedMetrics.ShouldEqual<ulong>(1L);
+
+            It should_have_published_data_point = () =>
+                Subject.NumPublishedDataPoints.ShouldEqual<ulong>(1L);
+
+            static DataPoint dataPoint;
         }
 
         public class with_route

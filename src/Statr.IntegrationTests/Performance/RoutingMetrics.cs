@@ -37,10 +37,10 @@ namespace Statr.IntegrationTests.Performance
         {
             for (var i = 0; i < 1000000; ++i)
             {
-                yield return new CountMetric("stats.cats", 1);
-                yield return new CountMetric("stats.dogs", 1);
-                yield return new CountMetric("stats.horses", 1);
-                yield return new CountMetric("stats.fish", 1);
+                yield return new Metric("stats.cats", 1, MetricType.Count);
+                yield return new Metric("stats.dogs", 1, MetricType.Count);
+                yield return new Metric("stats.horses", 1, MetricType.Count);
+                yield return new Metric("stats.fish", 1, MetricType.Count);
             }
         }
     }

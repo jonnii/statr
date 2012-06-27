@@ -21,16 +21,10 @@ namespace Statr.Routing
         {
             Logger.DebugFormat("Routing {0}", metric);
 
-            var mathchingRoute = GetMetricRoutes(metric);
-
-            mathchingRoute.Push(metric);
+            var route = metricRouteManager.GetRoute(metric);
+            route.Push(metric);
 
             ++NumProcessedMetrics;
-        }
-
-        public IMetricRoute GetMetricRoutes(Metric metric)
-        {
-            return metricRouteManager.GetRoutes(metric);
         }
     }
 }

@@ -12,10 +12,10 @@ namespace Statr.IntegrationTests.Manual
             using (var container = GetContainer())
             {
                 var metricRouter = container.Resolve<IMetricRouter>();
-                metricRouter.Route(new CountMetric("stats.cake", 30));
-                metricRouter.Route(new CountMetric("stats.cake", 20));
-                metricRouter.Route(new CountMetric("stats.cake", 40));
-                metricRouter.Route(new CountMetric("stats.cake", 60));
+                metricRouter.Route(new Metric("stats.cake", 30, MetricType.Count));
+                metricRouter.Route(new Metric("stats.cake", 20, MetricType.Count));
+                metricRouter.Route(new Metric("stats.cake", 40, MetricType.Count));
+                metricRouter.Route(new Metric("stats.cake", 60, MetricType.Count));
             }
         }
     }

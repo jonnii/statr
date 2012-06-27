@@ -2,6 +2,6 @@ namespace Statr.Routing
 {
     public interface IMetricRouteManager
     {
-        IMetricRoute GetRoutes(Metric metric);
+        IMetricRoute GetRoute(Metric metric);
     }
 }

@@ -8,7 +8,7 @@ namespace Statr.Specifications.Routing
     public class MetricRouteManagerSpecification
     {
         [Subject(typeof(MetricRouteManager))]
-        public class when_getting_routes : with_configuration
+        public class when_getting_route : with_configuration
         {
             Establish context = () =>
             {
@@ -19,7 +19,7 @@ namespace Statr.Specifications.Routing
             };
 
             Because of = () =>
-                Subject.GetRoutes(new CountMetric("stats.cputime", 50));
+                Subject.GetRoute(new Metric("stats.cputime", 50, MetricType.Count));
 
             It should_have_one_registered_route = () =>
                 Subject.NumRoutes.ShouldEqual(1);
@@ -38,11 +38,11 @@ namespace Statr.Specifications.Routing
                 metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<string>(), Param.IsAny<int>()))
                     .Return(An<IMetricRoute>());
 
-                Subject.GetRoutes(new CountMetric("stats.cputime", 50));
+                Subject.GetRoute(new Metric("stats.cputime", 50, MetricType.Count));
             };
 
             Because of = () =>
-                Subject.GetRoutes(new CountMetric("stats.cputime", 50));
+                Subject.GetRoute(new Metric("stats.cputime", 50, MetricType.Count));
 
             It should_not_register_routes_twice = () =>
                 Subject.NumRoutes.ShouldEqual(1);

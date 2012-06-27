@@ -12,11 +12,11 @@ namespace Statr.Specifications.Routing
             Establish context = () =>
             {
                 route = An<IMetricRoute>();
-                The<IMetricRouteManager>().WhenToldTo(r => r.GetRoutes(Param.IsAny<Metric>())).Return(route);
+                The<IMetricRouteManager>().WhenToldTo(r => r.GetRoute(Param.IsAny<Metric>())).Return(route);
             };
 
             Because of = () =>
-                Subject.Route(new CountMetric("metric.name", 50));
+                Subject.Route(new Metric("metric.name", 50, MetricType.Count));
 
             It should_notify_metric_routes = () =>
                  route.WasToldTo(r => r.Push(Param.IsAny<Metric>()));

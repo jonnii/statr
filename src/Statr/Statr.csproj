@@ -101,15 +101,14 @@
     <Compile Include="Configuration\Retention.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\Entry.cs" />
-    <Compile Include="CountMetric.cs" />
     <Compile Include="Extensions\EventExtensions.cs" />
-    <Compile Include="GaugeMetric.cs" />
     <Compile Include="IMetricReceiver.cs" />
     <Compile Include="DataPointEventArgs.cs" />
     <Compile Include="Management\ManagementAppHost.cs" />
     <Compile Include="Management\ManagementBootstrapper.cs" />
     <Compile Include="Management\ManagementInstaller.cs" />
     <Compile Include="Management\WindsorContainerAdapter.cs" />
+    <Compile Include="MetricType.cs" />
     <Compile Include="Routing\AggregatedMetric.cs" />
     <Compile Include="Routing\DataPointSubscriber.cs" />
     <Compile Include="Routing\IDataPointSubscriber.cs" />
