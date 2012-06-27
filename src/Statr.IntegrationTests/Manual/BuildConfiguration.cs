@@ -13,9 +13,9 @@ namespace Statr.IntegrationTests.Manual
         {
             var config = new Config
             {
-                Entries = new List<StorageEntry>
+                Entries = new List<Entry>
                 {
-                    new StorageEntry
+                    new Entry
                     {
                         Pattern = "^stats",
                         Retentions = new List<string>

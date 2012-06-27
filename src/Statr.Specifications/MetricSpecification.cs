@@ -33,5 +33,20 @@ namespace Statr.Specifications
 
             static CountMetric metric;
         }
+
+        [Subject(typeof(Metric))]
+        public class when_parsing_gauge
+        {
+            Because of = () =>
+                metric = (GaugeMetric)Metric.Parse("metric.name:666|g");
+
+            It should_have_name = () =>
+                metric.Name.ShouldEqual("metric.name");
+
+            It should_have_count = () =>
+                metric.Amount.ShouldEqual(666);
+
+            static GaugeMetric metric;
+        }
     }
 }

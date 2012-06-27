@@ -4,11 +4,11 @@ using System.Text.RegularExpressions;
 
 namespace Statr.Configuration
 {
-    public class StorageEntry
+    public class Entry
     {
-        public StorageEntry() { }
+        public Entry() { }
 
-        public StorageEntry(string name, string pattern, params string[] retentions)
+        public Entry(string name, string pattern, params string[] retentions)
         {
             Name = name;
             Pattern = pattern;

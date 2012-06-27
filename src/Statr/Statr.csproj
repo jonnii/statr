@@ -100,9 +100,10 @@
     <Compile Include="Configuration\IConfigRepository.cs" />
     <Compile Include="Configuration\Retention.cs" />
     <Compile Include="Configuration\Config.cs" />
-    <Compile Include="Configuration\StorageEntry.cs" />
+    <Compile Include="Configuration\Entry.cs" />
     <Compile Include="CountMetric.cs" />
     <Compile Include="Extensions\EventExtensions.cs" />
+    <Compile Include="GaugeMetric.cs" />
     <Compile Include="IMetricReceiver.cs" />
     <Compile Include="DataPointEventArgs.cs" />
     <Compile Include="Management\ManagementAppHost.cs" />

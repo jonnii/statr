@@ -17,6 +17,14 @@ namespace Statr
                 return new CountMetric(name, float.Parse(amount));
             }
 
+            if (raw.EndsWith("g"))
+            {
+                var pipe = raw.IndexOf("|", StringComparison.Ordinal);
+                var amount = raw.Substring(colon + 1, pipe - colon - 1);
+
+                return new GaugeMetric(name, float.Parse(amount));
+            }
+
             throw new NotSupportedException("metric not yet supported");
         }
 

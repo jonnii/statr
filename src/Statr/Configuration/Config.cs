@@ -20,10 +20,10 @@ namespace Statr.Configuration
 
         public Config()
         {
-            Entries = new List<StorageEntry>();
+            Entries = new List<Entry>();
         }
 
-        public List<StorageEntry> Entries { get; set; }
+        public List<Entry> Entries { get; set; }
 
         public IEnumerable<Retention> GetRetentions(string metricName)
         {
@@ -40,9 +40,9 @@ namespace Statr.Configuration
             return entry.Retentions.Select(RetentionParser.Parse);
         }
 
-        public StorageEntry AddEntry(string name, string pattern, params string[] retentions)
+        public Entry AddEntry(string name, string pattern, params string[] retentions)
         {
-            var entry = new StorageEntry(name, pattern, retentions);
+            var entry = new Entry(name, pattern, retentions);
             Entries.Add(entry);
             return entry;
         }

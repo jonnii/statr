@@ -1,8 +1,8 @@
 namespace Statr
 {
-    public class CountMetric : Metric
+    public class GaugeMetric : Metric
     {
-        public CountMetric(string name, float amount)
+        public GaugeMetric(string name, float amount)
             : base(name)
         {
             Amount = amount;
@@ -12,7 +12,7 @@ namespace Statr
 
         public override string ToString()
         {
-            return string.Concat("[Count Name=", Name, ", Amount=", Amount, "]");
+            return string.Concat("[Gauge Name=", Name, ", Amount=", Amount, "]");
         }
     }
 }
