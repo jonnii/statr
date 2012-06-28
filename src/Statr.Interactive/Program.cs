@@ -28,7 +28,6 @@ namespace Statr.Interactive
                     Console.WriteLine("------------");
                     Console.WriteLine();
                     Console.WriteLine("send metrics \t\t s <name> <type> <num> <interval> <value>");
-                    Console.WriteLine("send metrics (thread) \t s! <name> <type> <num> <interval> <value>");
                     Console.WriteLine("q - quit");
 
                     var currentLine = Console.ReadLine();
@@ -67,7 +66,7 @@ namespace Statr.Interactive
 
         private static void SendMetrics(IStatrClient client, string currentLine)
         {
-            var match = Regex.Match(currentLine, @"s!? ([a-zA-Z-_\.]+) (\w+) (\d+) (\d+) (\d+)");
+            var match = Regex.Match(currentLine, @"s ([a-zA-Z-_\.]+) (\w+) (\d+) (\d+) (\d+)");
             var name = match.Groups[1].Value;
             var type = match.Groups[2].Value;
             var num = int.Parse(match.Groups[3].Value);
