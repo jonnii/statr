@@ -11,6 +11,9 @@
                 System.Console.WriteLine("Press any key to stop the server");
                 System.Console.ReadKey();
             }
+
+            System.Console.WriteLine("!! SERVER STOPPED");
+            System.Console.ReadKey();
         }
     }
 }

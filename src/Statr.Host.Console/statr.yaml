@@ -1,4 +1,4 @@
 ﻿Entries:
 - Pattern: ^stats
   Retentions:
-    - 5s:10d
+    - 30s:10d
