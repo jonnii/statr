@@ -2,7 +2,7 @@ namespace Statr.Interactive
 {
     public class GeneratorRequest
     {
-        public GeneratorRequest(string name, string type, int num, int interval, int value)
+        public GeneratorRequest(string name, string type, int num, Range interval, Range value)
         {
             Name = name;
             Type = type;
@@ -17,9 +17,9 @@ namespace Statr.Interactive
 
         public int Num { get; private set; }
 
-        public int Interval { get; private set; }
+        public Range Interval { get; private set; }
 
-        public int Value { get; private set; }
+        public Range Value { get; private set; }
 
         public override string ToString()
         {
@@ -30,6 +30,16 @@ namespace Statr.Interactive
                 Type,
                 Interval,
                 Value);
+        }
+
+        public int GetNextInterval()
+        {
+            return Interval.GetValue();
+        }
+
+        public float GetValue()
+        {
+            return Value.GetValue();
         }
     }
 }

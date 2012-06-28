@@ -59,8 +59,9 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="InteractiveSpecifications.cs" />
+    <Compile Include="MetricsGeneratorSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RangeSpecification.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

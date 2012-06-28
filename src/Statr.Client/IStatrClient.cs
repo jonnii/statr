@@ -19,13 +19,13 @@ namespace Statr.Client
         /// </summary>
         /// <param name="bucket">The bucket to increment</param>
         /// <param name="amount">The amount to increment by</param>
-        void Count(string bucket, int amount);
+        void Count(string bucket, float amount);
 
         /// <summary>
         /// Sets the gauge to the specified value
         /// </summary>
         /// <param name="gaugeName">The name of the gauge</param>
         /// <param name="value">The value to increment by</param>
-        void Gauge(string gaugeName, int value);
+        void Gauge(string gaugeName, float value);
     }
 }

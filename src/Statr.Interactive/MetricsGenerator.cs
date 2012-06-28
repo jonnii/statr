@@ -89,7 +89,7 @@ namespace Statr.Interactive
                     x => x < request.Num,
                     x => x + 1,
                     x => x,
-                    x => TimeSpan.FromMilliseconds(request.Interval))
+                    x => TimeSpan.FromMilliseconds(request.GetNextInterval()))
                     .Finally(() => Console.WriteLine("Finished sending stats: {0}", request.Name));
 
                 Action sendMetric;
@@ -97,10 +97,10 @@ namespace Statr.Interactive
                 switch (request.Type)
                 {
                     case "count":
-                        sendMetric = () => client.Count(request.Name, request.Value);
+                        sendMetric = () => client.Count(request.Name, request.GetValue());
                         break;
                     case "gauge":
-                        sendMetric = () => client.Gauge(request.Name, request.Value);
+                        sendMetric = () => client.Gauge(request.Name, request.GetValue());
                         break;
                     default:
                         throw new FormatException("Unknown metric type: " + request.Type);
@@ -121,13 +121,13 @@ namespace Statr.Interactive
 
         public GeneratorRequest BuildGeneratorRequest(string line)
         {
-            var match = Regex.Match(line, @"s ([a-zA-Z-_\.]+) (\w+) (\d+) (\d+) (\d+)");
+            var match = Regex.Match(line, @"s ([a-zA-Z-_\.]+) (\w+) (\d+) ([\d-]+) ([\d-]+)");
 
             var name = match.Groups[1].Value;
             var type = match.Groups[2].Value;
             var num = int.Parse(match.Groups[3].Value);
-            var interval = int.Parse(match.Groups[4].Value);
-            var value = int.Parse(match.Groups[5].Value);
+            var interval = Range.Parse(match.Groups[4].Value);
+            var value = Range.Parse(match.Groups[5].Value);
 
             return new GeneratorRequest(
                 name, type, num, interval, value);

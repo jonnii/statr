@@ -33,14 +33,14 @@ namespace Statr.Client
             Count(bucket, 1);
         }
 
-        public void Count(string bucket, int magnitude)
+        public void Count(string bucket, float magnitude)
         {
             var formattedMetric =
                 string.Concat(bucket, ":" + magnitude + "|c");
             Transport.Send(formattedMetric);
         }
 
-        public void Gauge(string gaugeName, int value)
+        public void Gauge(string gaugeName, float value)
         {
             var formattedGauge =
                 string.Concat(gaugeName, ":" + value + "|g");

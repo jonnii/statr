@@ -39,6 +39,16 @@ namespace Statr.Client.Specifications
         }
 
         [Subject(typeof(StatrClient))]
+        public class when_counting_with_float_amount : with_client
+        {
+            Because of = () =>
+                client.Count("metric.name", 10.555f);
+
+            It should_send_metric_to_transport = () =>
+                transport.WasToldTo(t => t.Send("metric.name:10.555|c"));
+        }
+
+        [Subject(typeof(StatrClient))]
         public class when_setting_gauge : with_client
         {
             Because of = () =>
