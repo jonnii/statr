@@ -32,6 +32,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{6B5CFB62
 		CommonAssemblyInfo.cs = CommonAssemblyInfo.cs
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statr.Host.Service", "Statr.Host.Service\Statr.Host.Service.csproj", "{665C445F-6525-4632-B1BA-FA73DE31365B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{64AD73BE-A6D9-47A5-8CE7-A3A51DEA2A7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64AD73BE-A6D9-47A5-8CE7-A3A51DEA2A7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64AD73BE-A6D9-47A5-8CE7-A3A51DEA2A7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{665C445F-6525-4632-B1BA-FA73DE31365B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{665C445F-6525-4632-B1BA-FA73DE31365B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{665C445F-6525-4632-B1BA-FA73DE31365B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{665C445F-6525-4632-B1BA-FA73DE31365B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D28020A0-2254-482C-BC38-36B1266541C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D28020A0-2254-482C-BC38-36B1266541C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D28020A0-2254-482C-BC38-36B1266541C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
