@@ -25,10 +25,10 @@ namespace Statr.Storage
 
         public SliceData ToSliceData()
         {
-            var startTime = this.dataPoints.First().TimeStamp;
-            var dataPoints = this.dataPoints.Select(d => d.Value.Value).ToArray();
+            var startTime = dataPoints.First().TimeStamp;
+            var dataPointValues = dataPoints.Select(d => d.Value.Value).ToArray();
 
-            return new SliceData(startTime, dataPoints);
+            return new SliceData(startTime, dataPointValues);
         }
     }
 }
