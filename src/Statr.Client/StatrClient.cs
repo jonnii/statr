@@ -54,5 +54,10 @@ namespace Statr.Client
                 Transport.Dispose();
             }
         }
+
+        public override string ToString()
+        {
+            return string.Concat("[StatrClient Transport=", Transport, "]");
+        }
     }
 }

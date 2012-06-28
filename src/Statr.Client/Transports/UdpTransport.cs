@@ -38,5 +38,10 @@ namespace Statr.Client.Transports
                 udpClient.Value.Close();
             }
         }
+
+        public override string ToString()
+        {
+            return string.Concat("[UdpTransport Host=", host, " Port=", port, "]");
+        }
     }
 }

@@ -13,8 +13,10 @@ namespace Statr.Configuration
         {
             timeSpanConverters.Add("s", i => i);
             timeSpanConverters.Add("m", i => i * 60);
+            timeSpanConverters.Add("h", i => i * 3600);
             timeSpanConverters.Add("d", i => i * 86400);
             timeSpanConverters.Add("w", i => i * 604800);
+            timeSpanConverters.Add("y", i => i * 31556926);
         }
 
         public static Retention Parse(string retention)

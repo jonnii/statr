@@ -8,14 +8,14 @@ namespace Statr.Interactive
     {
         public static void Main(string[] args)
         {
-            //Console.WriteLine("Waiting for keypress...");
-            //Console.ReadKey();
-
             Console.WriteLine("Starting client");
             using (var client = StatrClient.Build("localhost"))
             {
+                Console.WriteLine("Created client {0}", client);
+
                 while (true)
                 {
+                    Console.WriteLine("sending stat");
                     client.Count("stats.ticker");
                     Thread.Sleep(1000);
                 }
