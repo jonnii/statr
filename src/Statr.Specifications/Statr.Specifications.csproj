@@ -61,6 +61,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Configuration\ConfigSpecification.cs" />
     <Compile Include="Configuration\RetentionParserSpecification.cs" />
     <Compile Include="Configuration\YamlConfigRepositorySpecification.cs" />

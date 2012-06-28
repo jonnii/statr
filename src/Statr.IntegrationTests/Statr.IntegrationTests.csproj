@@ -68,6 +68,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CommonAssemblyInfo.cs">
+      <Link>CommonAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Fixtures\DataPoints.cs" />
     <Compile Include="IntegrationApplication.cs" />
     <Compile Include="Manual\BuildConfiguration.cs" />
