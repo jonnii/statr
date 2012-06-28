@@ -33,9 +33,27 @@ send a count metric:
     // Create a client pointing to local host
     var client = StatrClient.Build("localhost");
 
-	// Send the count metric
+    // Send the count metric
     client.Count("stats.user.signups");
-	
+    
+    // send a gauge meric
+    client.Gauge("stats.engine.gas.remaining", 50);
+
+
+Can I send metrics to the server without changing my application?
+-----------------------------------------------------------------
+
+If you want metrics from your app you'll need to modify it, however if all you want to do is send some metrics 
+then you can use the interactive console. With the interactive console you send metrics like this:
+
+    s <name> <type> <num> <interval> <value>
+    
+For example:
+
+    s stats.sample.merics count 1000 50 5
+    
+This will send 1000 count metrics with the name 'stats.sample.metrics' ever 50ms with the value of 5. 
+
 
 Contributing
 ------------
