@@ -110,6 +110,8 @@
     <Compile Include="Management\ManagementAppHost.cs" />
     <Compile Include="Management\ManagementBootstrapper.cs" />
     <Compile Include="Management\ManagementInstaller.cs" />
+    <Compile Include="Management\Config\ConfigRequest.cs" />
+    <Compile Include="Management\Config\ConfigService.cs" />
     <Compile Include="Management\WindsorContainerAdapter.cs" />
     <Compile Include="MetricType.cs" />
     <Compile Include="Routing\AccumulateAggregationStrategy.cs" />

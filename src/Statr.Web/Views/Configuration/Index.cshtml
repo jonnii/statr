@@ -1,0 +1,13 @@
+﻿@model Statr.Configuration.Config
+@{
+    ViewBag.Title = "Configuration";
+}
+
+<h2>Configuration</h2>
+
+@foreach (var item in Model.Entries)
+{
+    <div>
+        @item.Pattern
+    </div>
+}

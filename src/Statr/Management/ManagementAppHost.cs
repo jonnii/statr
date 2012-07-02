@@ -1,5 +1,6 @@
 ﻿using Funq;
 using ServiceStack.WebHost.Endpoints;
+using Statr.Management.Config;
 
 namespace Statr.Management
 {
@@ -13,6 +14,7 @@ namespace Statr.Management
 
         public override void Configure(Container funqContainer)
         {
+            Routes.Add<ConfigRequest>("/config");
         }
     }
 }
