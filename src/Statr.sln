@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statr.Host.Service", "Statr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statr.Interactive.Specifications", "Statr.Interactive.Specifications\Statr.Interactive.Specifications.csproj", "{BC6587DC-DD6B-4185-A9CF-D0DDB03AA756}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statr.Web", "Statr.Web\Statr.Web.csproj", "{FB75C894-0697-4BEB-A281-97BD23A5F458}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +80,10 @@ Global
 		{DF3D2680-ECE6-494D-B789-0AB226BC8CE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF3D2680-ECE6-494D-B789-0AB226BC8CE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF3D2680-ECE6-494D-B789-0AB226BC8CE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB75C894-0697-4BEB-A281-97BD23A5F458}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB75C894-0697-4BEB-A281-97BD23A5F458}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB75C894-0697-4BEB-A281-97BD23A5F458}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB75C894-0697-4BEB-A281-97BD23A5F458}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
