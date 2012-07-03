@@ -12,6 +12,12 @@
         <Port>17891</Port>
       </parameters>
     </component>
+
+    <component id="Statr.Api.StatrApi">
+      <parameters>
+        <RootUrl>http://localhost:17891</RootUrl>
+      </parameters>
+    </component>
   </components>
 
 </configuration>

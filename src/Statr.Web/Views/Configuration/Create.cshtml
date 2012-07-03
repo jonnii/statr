@@ -1,0 +1,25 @@
+﻿@using Statr.Web.Helpers
+@model Statr.Web.ViewModels.CreateConfigurationViewModel
+@{
+    ViewBag.Title = "title";
+}
+@using (Html.BeginHorizontalForm())
+{
+    <fieldset>
+        <legend>Add Configuration</legend>
+
+        @Html.ValidationSummary("Please fix the following validation errors", new { @class = "alert alert-error" })
+        @Html.LabeledTextBoxFor(e => e.Name)
+        @Html.LabeledTextBoxFor(e => e.Pattern)
+
+        <div class="form-actions">
+            <input type="submit" class="btn btn-primary" value="Add Configuration" />
+
+            @Html.ActionLink(
+                "Cancel",
+                "Index",
+                new { },
+                new { @class = "btn" })
+        </div>
+    </fieldset>
+}

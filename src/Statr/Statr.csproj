@@ -78,6 +78,9 @@
     <Reference Include="ServiceStack.Text">
       <HintPath>..\packages\ServiceStack.Text.3.8.3\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
+    <Reference Include="SpeakEasy">
+      <HintPath>..\packages\SpeakEasy.0.1.6\lib\net40\SpeakEasy.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Reactive">
@@ -96,6 +99,8 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Api\IStatrApi.cs" />
+    <Compile Include="Api\StatrApi.cs" />
     <Compile Include="Configuration\ConfigException.cs" />
     <Compile Include="Configuration\ConfigInstaller.cs" />
     <Compile Include="Configuration\RetentionParser.cs" />
@@ -105,6 +110,7 @@
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\Entry.cs" />
     <Compile Include="Extensions\EventExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="IMetricReceiver.cs" />
     <Compile Include="DataPointEventArgs.cs" />
     <Compile Include="Management\ManagementAppHost.cs" />

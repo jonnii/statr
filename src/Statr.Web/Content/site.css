@@ -16,18 +16,6 @@ header, footer, nav, section
 
 /* Styles for basic forms
 -----------------------------------------------------------*/
-fieldset
-{
-    border: 1px solid #ddd;
-    padding: 0 1.4em 1.4em 1.4em;
-    margin: 0 0 1.5em 0;
-}
-
-legend
-{
-    font-size: 1.2em;
-    font-weight: bold;
-}
 
 textarea
 {
@@ -63,10 +51,14 @@ textarea
     background-color: #fee;
 }
 
-.validation-summary-errors
+.validation-summary-errors span
 {
     font-weight: bold;
-    color: #f00;
+}
+
+.validation-summary-errors ul
+{
+    margin-top: 10px;
 }
 
 .validation-summary-valid

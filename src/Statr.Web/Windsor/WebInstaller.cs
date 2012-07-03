@@ -2,7 +2,7 @@
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using SpeakEasy;
+using Statr.Api;
 
 namespace Statr.Web.Windsor
 {
@@ -11,14 +11,14 @@ namespace Statr.Web.Windsor
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
-                Component.For<IHttpClient>().Instance(CreateHttpClient()),
+                Component.For<IStatrApi>().ImplementedBy<StatrApi>(),
 
                 Classes.FromThisAssembly().BasedOn<Controller>().LifestyleTransient());
         }
 
-        private IHttpClient CreateHttpClient()
-        {
-            return HttpClient.Create("http://localhost:17891");
-        }
+        //private IHttpClient CreateHttpClient()
+        //{
+        //    return HttpClient.Create("http://localhost:17891");
+        //}
     }
 }

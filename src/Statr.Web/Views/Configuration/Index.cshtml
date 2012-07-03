@@ -1,13 +1,29 @@
-﻿@model Statr.Configuration.Config
+﻿@using Statr.Extensions
+@model Statr.Configuration.Config
 @{
     ViewBag.Title = "Configuration";
 }
 
 <h2>Configuration</h2>
 
-@foreach (var item in Model.Entries)
-{
-    <div>
-        @item.Pattern
-    </div>
-}
+@Html.ActionLink("Add", "Create", new { }, new { @class = "btn btn-info" })
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Pattern</th>
+            <th>Retentions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Entries)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Pattern</td>
+                <td>@item.Retentions.Join()</td>
+            </tr>
+        }
+    </tbody>
+</table>
