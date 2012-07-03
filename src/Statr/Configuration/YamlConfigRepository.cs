@@ -1,5 +1,7 @@
 using System;
 using System.IO;
+using FluentValidation;
+using Statr.Infrastructure;
 using YamlDotNet.RepresentationModel.Serialization;
 
 namespace Statr.Configuration
@@ -8,10 +10,19 @@ namespace Statr.Configuration
     {
         private const string ConfigurationFileName = "statr.yaml";
 
+        private readonly IFileSystem fileSystem;
+
+        private readonly IValidator<Config> configValidator;
+
         private readonly YamlSerializer<Config> serializer;
 
-        public YamlConfigRepository()
+        public YamlConfigRepository(
+            IFileSystem fileSystem,
+            IValidator<Config> configValidator)
         {
+            this.fileSystem = fileSystem;
+            this.configValidator = configValidator;
+
             Path = Environment.CurrentDirectory;
 
             serializer = new YamlSerializer<Config>();
@@ -21,12 +32,14 @@ namespace Statr.Configuration
 
         public void WriteConfiguration(Config config)
         {
+            configValidator.ValidateAndThrow(config);
 
+            fileSystem.WriteText(ConfigurationFileName, Serialize(config));
         }
 
         public Config GetConfiguration()
         {
-            using (var reader = File.OpenText(ConfigurationFileName))
+            using (var reader = fileSystem.OpenText(ConfigurationFileName))
             {
                 return serializer.Deserialize(reader);
             }

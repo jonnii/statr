@@ -5,5 +5,7 @@
         Config GetConfiguration();
 
         string Serialize(Config config);
+
+        void WriteConfiguration(Config config);
     }
 }

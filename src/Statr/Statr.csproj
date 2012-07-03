@@ -45,6 +45,9 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\packages\Castle.Windsor.3.0.0.4001\lib\net40\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.3.3.1.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.7\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -103,6 +106,8 @@
     <Compile Include="Api\StatrApi.cs" />
     <Compile Include="Configuration\ConfigException.cs" />
     <Compile Include="Configuration\ConfigInstaller.cs" />
+    <Compile Include="Configuration\ConfigValidator.cs" />
+    <Compile Include="Configuration\EntryValidator.cs" />
     <Compile Include="Configuration\RetentionParser.cs" />
     <Compile Include="Configuration\YamlConfigRepository.cs" />
     <Compile Include="Configuration\IConfigRepository.cs" />
@@ -111,6 +116,8 @@
     <Compile Include="Configuration\Entry.cs" />
     <Compile Include="Extensions\EventExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Infrastructure\FileSystem.cs" />
+    <Compile Include="Infrastructure\IFileSystem.cs" />
     <Compile Include="IMetricReceiver.cs" />
     <Compile Include="DataPointEventArgs.cs" />
     <Compile Include="Management\ManagementAppHost.cs" />

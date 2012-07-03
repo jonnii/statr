@@ -1,6 +1,10 @@
-﻿using Machine.Fakes;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using Machine.Fakes;
 using Machine.Specifications;
 using Statr.Configuration;
+using Statr.Infrastructure;
+using Statr.Specifications.Fixtures;
 
 namespace Statr.Specifications.Configuration
 {
@@ -16,6 +20,20 @@ namespace Statr.Specifications.Configuration
                 serialized.ShouldNotBeEmpty();
 
             static string serialized;
+        }
+
+        [Subject(typeof(YamlConfigRepository))]
+        public class when_writing_config : with_configuration_file
+        {
+            Establish context = () =>
+                The<IValidator<Config>>().WhenToldTo(v => v.Validate(Param.IsAny<Config>()))
+                    .Return(new ValidationResult());
+
+            Because of = () =>
+                Subject.WriteConfiguration(ConfigFixture.CreateWithInvalidEntry());
+
+            It should_write_config = () =>
+                The<IFileSystem>().WasToldTo(s => s.WriteText(Param.IsAny<string>(), Param.IsAny<string>()));
         }
 
         public class with_configuration_file : WithSubject<YamlConfigRepository>

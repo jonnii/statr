@@ -28,7 +28,13 @@ namespace Statr.Web.Controllers
         [HttpPost]
         public ActionResult Create(CreateConfigurationViewModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+
+
+            }
+
+            return null;
         }
     }
 }
