@@ -27,10 +27,7 @@ namespace Statr.Routing
             Logger.DebugFormat("Registering data point generator");
 
             var observable = dataPointGenerator.DataPoints;
-            observable.Subscribe(c =>
-            {
-                root.OnNext(c);
-            });
+            observable.Subscribe(c => root.OnNext(c));
         }
     }
 }

@@ -16,7 +16,8 @@ namespace Statr.Installers
                 Component.For<IStorageEngine>().ImplementedBy<StorageEngine>(),
                 Component.For<IBucketRepository>().ImplementedBy<BucketRepository>(),
                 Component.For<IDataPointRepository>().ImplementedBy<DataPointRepository>(),
-                Component.For<IDataPointCache>().ImplementedBy<DataPointCache>().StartUsingMethod("Start"));
+                Component.For<IDataPointCache>().ImplementedBy<DataPointCache>().StartUsingMethod("Start"),
+                Component.For<IDataPointWriter>().ImplementedBy<DataPointWriter>().StartUsingMethod("Start"));
         }
     }
 }

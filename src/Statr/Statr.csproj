@@ -166,6 +166,7 @@
     <Compile Include="DataPoint.cs" />
     <Compile Include="Storage\DataPointCollection.cs" />
     <Compile Include="Storage\IDataPointRepository.cs" />
+    <Compile Include="Storage\IDataPointWriter.cs" />
     <Compile Include="Storage\IStorageEngine.cs" />
     <Compile Include="Storage\IStorageEngineFactory.cs" />
     <Compile Include="Storage\IStorageNode.cs" />
