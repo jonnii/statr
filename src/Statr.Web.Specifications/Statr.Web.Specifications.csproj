@@ -89,6 +89,7 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Controllers\ConfigurationControllerSpecification.cs" />
+    <Compile Include="Controllers\BucketsControllerSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

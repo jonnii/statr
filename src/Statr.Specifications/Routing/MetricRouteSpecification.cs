@@ -78,7 +78,7 @@ namespace Statr.Specifications.Routing
         public class with_route
         {
             Establish context = () =>
-                Subject = new MetricRoute(new RouteKey("key", MetricType.Count), 1, new AccumulateAggregationStrategy());
+                Subject = new MetricRoute(new Bucket("key", MetricType.Count), 1, new AccumulateAggregationStrategy());
 
             protected static MetricRoute Subject;
         }

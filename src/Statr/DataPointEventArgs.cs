@@ -5,13 +5,13 @@ namespace Statr
 {
     public class DataPointEventArgs : EventArgs
     {
-        public DataPointEventArgs(RouteKey routeKey, DataPoint dataPoint)
+        public DataPointEventArgs(Bucket bucket, DataPoint dataPoint)
         {
-            RouteKey = routeKey;
+            Bucket = bucket;
             DataPoint = dataPoint;
         }
 
-        public RouteKey RouteKey { get; private set; }
+        public Bucket Bucket { get; private set; }
 
         public DataPoint DataPoint { get; private set; }
     }

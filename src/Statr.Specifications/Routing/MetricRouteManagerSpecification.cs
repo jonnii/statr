@@ -14,7 +14,7 @@ namespace Statr.Specifications.Routing
             {
                 route = An<IMetricRoute>();
 
-                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<RouteKey>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
+                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<Bucket>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
                     .Return(route);
             };
 
@@ -35,7 +35,7 @@ namespace Statr.Specifications.Routing
         {
             Establish context = () =>
             {
-                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<RouteKey>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
+                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<Bucket>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
                     .Return(An<IMetricRoute>());
 
                 Subject.GetRoute(new Metric("stats.cputime", 50, MetricType.Count));
@@ -53,7 +53,7 @@ namespace Statr.Specifications.Routing
         {
             Establish context = () =>
             {
-                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<RouteKey>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
+                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<Bucket>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
                     .Return(() => An<IMetricRoute>());
 
                 countRoute = Subject.GetRoute(new Metric("stats.cputime", 50, MetricType.Count));
@@ -79,34 +79,34 @@ namespace Statr.Specifications.Routing
             Establish context = () =>
             {
                 route = new Moq.Mock<IMetricRoute>();
-                routeKey = new RouteKey("stats.awesome", MetricType.Count);
+                bucket = new Bucket("stats.awesome", MetricType.Count);
 
-                metricRouteFactory.WhenToldTo(f => f.Build(Param.IsAny<RouteKey>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
+                metricRouteFactory.WhenToldTo(f => f.Build(Param.IsAny<Bucket>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
                     .Return(route.Object);
 
-                Subject.BuildRoute(routeKey, new Retention(1, 60));
+                Subject.BuildRoute(bucket, new Retention(1, 60));
             };
 
             Because of = () =>
-                route.Raise(r => r.DataPointGenerated += null, new DataPointEventArgs(routeKey, new DataPoint(1, 1)));
+                route.Raise(r => r.DataPointGenerated += null, new DataPointEventArgs(bucket, new DataPoint(1, 1)));
 
             It should_notify_all_data_point_subscribers = () =>
-                dataPointSubscriber.WasToldTo(r => r.Push(routeKey, Param.IsAny<DataPoint>()));
+                dataPointSubscriber.WasToldTo(r => r.Push(bucket, Param.IsAny<DataPoint>()));
 
             static Moq.Mock<IMetricRoute> route;
 
-            static RouteKey routeKey;
+            static Bucket bucket;
         }
 
         [Subject(typeof(MetricRouteManager))]
         public class when_building_route : with_configuration
         {
             Establish context = () =>
-                metricRouteFactory.WhenToldTo(f => f.Build(new RouteKey("stats.awesome", MetricType.Count), 60, Param.IsAny<IAggregationStrategy>()))
+                metricRouteFactory.WhenToldTo(f => f.Build(new Bucket("stats.awesome", MetricType.Count), 60, Param.IsAny<IAggregationStrategy>()))
                     .Return(An<IMetricRoute>());
 
             Because of = () =>
-                route = Subject.BuildRoute(new RouteKey("stats.awesome", MetricType.Count));
+                route = Subject.BuildRoute(new Bucket("stats.awesome", MetricType.Count));
 
             It should_build_metric_route_for_highest_frequency_retention_period = () =>
                 route.ShouldNotBeNull();

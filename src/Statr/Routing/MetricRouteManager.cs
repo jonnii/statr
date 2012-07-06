@@ -13,8 +13,8 @@ namespace Statr.Routing
 
         private readonly IDataPointSubscriber[] dataPointSubscribers;
 
-        private readonly ConcurrentDictionary<RouteKey, IMetricRoute> registeredRoutes =
-            new ConcurrentDictionary<RouteKey, IMetricRoute>();
+        private readonly ConcurrentDictionary<Bucket, IMetricRoute> registeredRoutes =
+            new ConcurrentDictionary<Bucket, IMetricRoute>();
 
         public MetricRouteManager(
             IMetricRouteFactory metricRouteFactory,
@@ -37,7 +37,7 @@ namespace Statr.Routing
 
         public IMetricRoute GetRoute(Metric metric)
         {
-            return registeredRoutes.GetOrAdd(metric.ToRouteKey(), BuildRoute);
+            return registeredRoutes.GetOrAdd(metric.ToBucket(), BuildRoute);
         }
 
         public void FlushAll()
@@ -50,28 +50,28 @@ namespace Statr.Routing
             }
         }
 
-        public IMetricRoute BuildRoute(RouteKey routeKey)
+        public IMetricRoute BuildRoute(Bucket bucket)
         {
-            Logger.InfoFormat("Building routes for: {0}", routeKey);
+            Logger.InfoFormat("Building routes for: {0}", bucket);
 
             var configuration = configRepository.GetConfiguration();
 
-            var highestFrequencyRetention = configuration.GetRetentions(routeKey.Name)
+            var highestFrequencyRetention = configuration.GetRetentions(bucket.Name)
                 .OrderBy(r => r.Frequency)
                 .First();
 
-            return BuildRoute(routeKey, highestFrequencyRetention);
+            return BuildRoute(bucket, highestFrequencyRetention);
         }
 
-        public IMetricRoute BuildRoute(RouteKey routeKey, Retention retention)
+        public IMetricRoute BuildRoute(Bucket bucket, Retention retention)
         {
             var strategy = new AccumulateAggregationStrategy();
 
-            var route = metricRouteFactory.Build(routeKey, retention.Frequency, strategy);
+            var route = metricRouteFactory.Build(bucket, retention.Frequency, strategy);
 
             Logger.InfoFormat(
                 " => Building route: {0} ({1}@{2} w/ {3})",
-                routeKey.Name,
+                bucket.Name,
                 retention.Frequency,
                 retention.History,
                 strategy.GetType().Name);
@@ -89,7 +89,7 @@ namespace Statr.Routing
 
             foreach (var dataPointSubscriber in dataPointSubscribers)
             {
-                dataPointSubscriber.Push(args.RouteKey, args.DataPoint);
+                dataPointSubscriber.Push(args.Bucket, args.DataPoint);
             }
         }
     }

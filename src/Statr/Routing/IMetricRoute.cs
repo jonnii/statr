@@ -13,7 +13,7 @@ namespace Statr.Routing
         /// <summary>
         /// The route key for this metric route
         /// </summary>
-        RouteKey RouteKey { get; }
+        Bucket Bucket { get; }
 
         /// <summary>
         /// The frequency in seconds for this route

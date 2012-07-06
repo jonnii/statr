@@ -2,9 +2,9 @@ using System;
 
 namespace Statr.Routing
 {
-    public class RouteKey
+    public class Bucket
     {
-        public RouteKey(string name, MetricType metricType)
+        public Bucket(string name, MetricType metricType)
         {
             Name = name;
             MetricType = metricType;
@@ -30,7 +30,7 @@ namespace Statr.Routing
 
         public override string ToString()
         {
-            return string.Concat("[RouteKey Name=", Name, " MetricType=", MetricType, "]");
+            return string.Concat("[Bucket Name=", Name, " MetricType=", MetricType, "]");
         }
 
         public override bool Equals(object obj)
@@ -45,10 +45,10 @@ namespace Statr.Routing
                 return true;
             }
 
-            return obj.GetType() == GetType() && Equals((RouteKey)obj);
+            return obj.GetType() == GetType() && Equals((Bucket)obj);
         }
 
-        protected bool Equals(RouteKey other)
+        protected bool Equals(Bucket other)
         {
             return string.Equals(Name, other.Name) && MetricType.Equals(other.MetricType);
         }

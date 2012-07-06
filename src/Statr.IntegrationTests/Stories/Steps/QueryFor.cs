@@ -12,7 +12,7 @@ namespace Statr.IntegrationTests.Stories.Steps
         {
             return context =>
             {
-                var routeKey = new RouteKey(metricName, type);
+                var routeKey = new Bucket(metricName, type);
 
                 var repository = context.Container.Resolve<IDataPointRepository>();
                 var metrics = repository.Get(routeKey);

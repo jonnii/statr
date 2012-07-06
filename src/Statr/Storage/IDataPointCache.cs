@@ -5,6 +5,8 @@ namespace Statr.Storage
 {
     public interface IDataPointCache
     {
-        IEnumerable<DataPoint> Get(RouteKey routeKey);
+        IEnumerable<Bucket> GetBuckets();
+
+        IEnumerable<DataPoint> Get(Bucket bucket);
     }
 }

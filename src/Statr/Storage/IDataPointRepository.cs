@@ -5,7 +5,7 @@ namespace Statr.Storage
 {
     public interface IDataPointRepository
     {
-        IEnumerable<DataPoint> Get(RouteKey routeKey);
+        IEnumerable<DataPoint> Get(Bucket bucket);
     }
 
 }

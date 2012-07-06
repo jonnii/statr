@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using SpeakEasy;
 using Statr.Configuration;
+using Statr.Routing;
 
 namespace Statr.Api
 {
@@ -28,6 +30,11 @@ namespace Statr.Api
         public Config GetConfig()
         {
             return Client.Get("config").OnOk().As<Config>();
+        }
+
+        public IEnumerable<Bucket> GetBuckets()
+        {
+            return Client.Get("buckets").OnOk().As<List<Bucket>>();
         }
     }
 }

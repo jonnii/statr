@@ -10,10 +10,10 @@ namespace Statr.Specifications.Storage
     public class DataPointCacheSpecification
     {
         [Subject(typeof(DataPointCache))]
-        public class with_empty_cache : WithSubject<DataPointCache>
+        public class when_getting_bucket : with_empty_cache
         {
             Because of = () =>
-                points = Subject.Get(new RouteKey("metric.name", MetricType.Count));
+                points = Subject.Get(new Bucket("metric.name", MetricType.Count));
 
             It should_get_empty_result = () =>
                 points.ShouldBeEmpty();
@@ -22,18 +22,38 @@ namespace Statr.Specifications.Storage
         }
 
         [Subject(typeof(DataPointCache))]
-        public class with_points : WithSubject<DataPointCache>
+        public class when_getting_bucket_with_points : with_points
         {
-            Establish context = () =>
-                Subject.Push(new RouteKey("metric.name", MetricType.Count), new DataPoint(DateTime.Now, 500));
-
             Because of = () =>
-                points = Subject.Get(new RouteKey("metric.name", MetricType.Count));
+                points = Subject.Get(new Bucket("metric.name", MetricType.Count));
 
             It should_get_results = () =>
                 points.ShouldNotBeEmpty();
 
             static IEnumerable<DataPoint> points;
+        }
+
+        [Subject(typeof(DataPointCache))]
+        public class when_getting_buckets : with_points
+        {
+            Because of = () =>
+                buckets = Subject.GetBuckets();
+
+            It should_get_buckets = () =>
+                buckets.ShouldNotBeEmpty();
+
+            static IEnumerable<Bucket> buckets;
+        }
+
+        public class with_empty_cache : WithSubject<DataPointCache>
+        {
+
+        }
+
+        public class with_points : WithSubject<DataPointCache>
+        {
+            Establish context = () =>
+                Subject.Push(new Bucket("metric.name", MetricType.Count), new DataPoint(DateTime.Now, 500));
         }
     }
 }

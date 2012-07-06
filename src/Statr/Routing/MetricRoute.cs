@@ -15,13 +15,13 @@ namespace Statr.Routing
         private IObservable<AggregatedMetric> aggregatedWindows;
 
         public MetricRoute(
-            RouteKey routeKey,
+            Bucket bucket,
             int frequencyInSeconds,
             IAggregationStrategy aggregationStrategy)
         {
             this.aggregationStrategy = aggregationStrategy;
 
-            RouteKey = routeKey;
+            Bucket = bucket;
             FrequencyInSeconds = frequencyInSeconds;
 
             Logger = NullLogger.Instance;
@@ -33,7 +33,7 @@ namespace Statr.Routing
 
         public ILogger Logger { get; set; }
 
-        public RouteKey RouteKey { get; private set; }
+        public Bucket Bucket { get; private set; }
 
         public int FrequencyInSeconds { get; private set; }
 
@@ -43,7 +43,7 @@ namespace Statr.Routing
 
         public void Start()
         {
-            Logger.InfoFormat("Starting route {0}", RouteKey);
+            Logger.InfoFormat("Starting route {0}", Bucket);
 
             var observable = Observable.FromEventPattern<EventHandler<MetricEventArgs>, MetricEventArgs>(
                 h => MetricReceived += h,
@@ -72,7 +72,7 @@ namespace Statr.Routing
                 return;
             }
 
-            DataPointGenerated.Raise(this, new DataPointEventArgs(RouteKey, aggregatedMetrics.ToDataPoint()));
+            DataPointGenerated.Raise(this, new DataPointEventArgs(Bucket, aggregatedMetrics.ToDataPoint()));
             ++NumPublishedDataPoints;
         }
 
@@ -89,7 +89,7 @@ namespace Statr.Routing
 
         public void Dispose()
         {
-            Logger.InfoFormat("Disposing of metric route: {0}", RouteKey);
+            Logger.InfoFormat("Disposing of metric route: {0}", Bucket);
 
             if (subscription == null)
             {

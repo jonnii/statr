@@ -12,9 +12,9 @@ namespace Statr.Storage
             this.dataPointCache = dataPointCache;
         }
 
-        public IEnumerable<DataPoint> Get(RouteKey routeKey)
+        public IEnumerable<DataPoint> Get(Bucket bucket)
         {
-            return dataPointCache.Get(routeKey);
+            return dataPointCache.Get(bucket);
         }
     }
 }

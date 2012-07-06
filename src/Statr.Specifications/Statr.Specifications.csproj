@@ -111,6 +111,7 @@
     <Compile Include="Configuration\StorageConfigurationSpecification.cs" />
     <Compile Include="Fixtures\ConfigFixture.cs" />
     <Compile Include="Fixtures\DataPointFixture.cs" />
+    <Compile Include="Management\Buckets\BucketsServiceSpecification.cs" />
     <Compile Include="Management\Config\ConfigServiceSpecification.cs" />
     <Compile Include="MetricSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -119,7 +120,7 @@
     <Compile Include="Routing\MetricRouteManagerSpecification.cs" />
     <Compile Include="Routing\MetricRouterSpecification.cs" />
     <Compile Include="Routing\MetricRouteSpecification.cs" />
-    <Compile Include="Routing\RouteKeySpecification.cs" />
+    <Compile Include="Routing\BucketSpecification.cs" />
     <Compile Include="Storage\DataPointCacheSpecification.cs" />
     <Compile Include="Storage\DataPointRepositorySpecification.cs" />
     <Compile Include="Storage\StorageEngineSpecification.cs" />

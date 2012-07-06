@@ -60,9 +60,9 @@ namespace Statr
             return string.Concat("[Metric Name=", Name, " Value=", Value, " MetricType=", MetricType, "]");
         }
 
-        public RouteKey ToRouteKey()
+        public Bucket ToBucket()
         {
-            return new RouteKey(Name, MetricType);
+            return new Bucket(Name, MetricType);
         }
     }
 }
