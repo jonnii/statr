@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Statr.Routing;
 
 namespace Statr.Storage
 {
@@ -12,7 +11,7 @@ namespace Statr.Storage
             this.dataPointCache = dataPointCache;
         }
 
-        public IEnumerable<DataPoint> Get(Bucket bucket)
+        public IEnumerable<DataPoint> Get(BucketReference bucket)
         {
             return dataPointCache.Get(bucket);
         }

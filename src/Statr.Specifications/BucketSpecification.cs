@@ -1,7 +1,7 @@
 ﻿using Machine.Specifications;
 using Statr.Routing;
 
-namespace Statr.Specifications.Routing
+namespace Statr.Specifications
 {
     public class BucketSpecification
     {

@@ -2,6 +2,6 @@
 {
     public interface IDataPointSubscriber
     {
-        void Push(Bucket bucket, DataPoint dataPoint);
+        void Push(BucketReference bucket, DataPoint dataPoint);
     }
 }

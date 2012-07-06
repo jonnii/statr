@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using NUnit.Framework;
-using Statr.Routing;
 using Statr.Storage;
 
 namespace Statr.IntegrationTests.Stories.Steps
@@ -12,12 +11,12 @@ namespace Statr.IntegrationTests.Stories.Steps
         {
             return context =>
             {
-                var routeKey = new Bucket(metricName, type);
+                var bucket = new BucketReference(metricName, type);
 
                 var repository = context.Container.Resolve<IDataPointRepository>();
-                var metrics = repository.Get(routeKey);
+                var metrics = repository.Get(bucket);
 
-                Assert.That(predicate(metrics), "The query for the metrics {0} did not pass", routeKey);
+                Assert.That(predicate(metrics), "The query for the metrics {0} did not pass", bucket);
             };
         }
     }

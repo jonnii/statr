@@ -11,9 +11,9 @@ namespace Statr.Routing
         event EventHandler<DataPointEventArgs> DataPointGenerated;
 
         /// <summary>
-        /// The route key for this metric route
+        /// The bucket for this metric route
         /// </summary>
-        Bucket Bucket { get; }
+        BucketReference Bucket { get; }
 
         /// <summary>
         /// The frequency in seconds for this route

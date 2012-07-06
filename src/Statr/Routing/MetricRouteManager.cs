@@ -2,6 +2,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using Castle.Core.Logging;
 using Statr.Configuration;
+using Statr.Storage;
 
 namespace Statr.Routing
 {
@@ -9,19 +10,23 @@ namespace Statr.Routing
     {
         private readonly IMetricRouteFactory metricRouteFactory;
 
+        private readonly IBucketRepository bucketRepository;
+
         private readonly IConfigRepository configRepository;
 
         private readonly IDataPointSubscriber[] dataPointSubscribers;
 
-        private readonly ConcurrentDictionary<Bucket, IMetricRoute> registeredRoutes =
-            new ConcurrentDictionary<Bucket, IMetricRoute>();
+        private readonly ConcurrentDictionary<BucketReference, IMetricRoute> registeredRoutes =
+            new ConcurrentDictionary<BucketReference, IMetricRoute>();
 
         public MetricRouteManager(
             IMetricRouteFactory metricRouteFactory,
+            IBucketRepository bucketRepository,
             IConfigRepository configRepository,
             IDataPointSubscriber[] dataPointSubscribers)
         {
             this.metricRouteFactory = metricRouteFactory;
+            this.bucketRepository = bucketRepository;
             this.configRepository = configRepository;
             this.dataPointSubscribers = dataPointSubscribers;
 
@@ -50,28 +55,29 @@ namespace Statr.Routing
             }
         }
 
-        public IMetricRoute BuildRoute(Bucket bucket)
+        public IMetricRoute BuildRoute(BucketReference bucketReference)
         {
-            Logger.InfoFormat("Building routes for: {0}", bucket);
+            Logger.InfoFormat("Building routes for: {0}", bucketReference);
 
             var configuration = configRepository.GetConfiguration();
 
-            var highestFrequencyRetention = configuration.GetRetentions(bucket.Name)
+            var highestFrequencyRetention = configuration.GetRetentions(bucketReference.Name)
                 .OrderBy(r => r.Frequency)
                 .First();
 
-            return BuildRoute(bucket, highestFrequencyRetention);
+            return BuildRoute(bucketReference, highestFrequencyRetention);
         }
 
-        public IMetricRoute BuildRoute(Bucket bucket, Retention retention)
+        public IMetricRoute BuildRoute(BucketReference bucketReference, Retention retention)
         {
-            var strategy = new AccumulateAggregationStrategy();
+            var bucket = bucketRepository.Get(bucketReference);
+            var strategy = bucket.BuildAggregationStrategy();
 
-            var route = metricRouteFactory.Build(bucket, retention.Frequency, strategy);
+            var route = metricRouteFactory.Build(bucketReference, retention.Frequency, strategy);
 
             Logger.InfoFormat(
                 " => Building route: {0} ({1}@{2} w/ {3})",
-                bucket.Name,
+                bucketReference.Name,
                 retention.Frequency,
                 retention.History,
                 strategy.GetType().Name);

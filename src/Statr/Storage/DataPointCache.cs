@@ -8,8 +8,8 @@ namespace Statr.Storage
 {
     public class DataPointCache : IDataPointCache, IDataPointSubscriber
     {
-        private readonly ConcurrentDictionary<Bucket, DataPointCollection> dataPoints =
-            new ConcurrentDictionary<Bucket, DataPointCollection>();
+        private readonly ConcurrentDictionary<BucketReference, DataPointCollection> dataPoints =
+            new ConcurrentDictionary<BucketReference, DataPointCollection>();
 
         public DataPointCache()
         {
@@ -18,7 +18,7 @@ namespace Statr.Storage
 
         public ILogger Logger { get; set; }
 
-        public void Push(Bucket bucket, DataPoint dataPoint)
+        public void Push(BucketReference bucket, DataPoint dataPoint)
         {
             var pushedDataPoint = dataPoint;
 
@@ -30,19 +30,14 @@ namespace Statr.Storage
                 (key, list) => list.Add(pushedDataPoint));
         }
 
-        public DataPointCollection CreateDataPointCacheEntry(Bucket key, DataPoint point)
+        public DataPointCollection CreateDataPointCacheEntry(BucketReference key, DataPoint point)
         {
             Logger.DebugFormat("Creating data point cache entry for {0}", key);
 
             return new DataPointCollection { point };
         }
 
-        public IEnumerable<Bucket> GetBuckets()
-        {
-            return dataPoints.Keys;
-        }
-
-        public IEnumerable<DataPoint> Get(Bucket bucket)
+        public IEnumerable<DataPoint> Get(BucketReference bucket)
         {
             DataPointCollection collection;
 

@@ -15,13 +15,13 @@ namespace Statr.Routing
         private IObservable<AggregatedMetric> aggregatedWindows;
 
         public MetricRoute(
-            Bucket bucket,
+            BucketReference bucketReference,
             int frequencyInSeconds,
             IAggregationStrategy aggregationStrategy)
         {
             this.aggregationStrategy = aggregationStrategy;
 
-            Bucket = bucket;
+            Bucket = bucketReference;
             FrequencyInSeconds = frequencyInSeconds;
 
             Logger = NullLogger.Instance;
@@ -33,7 +33,7 @@ namespace Statr.Routing
 
         public ILogger Logger { get; set; }
 
-        public Bucket Bucket { get; private set; }
+        public BucketReference Bucket { get; private set; }
 
         public int FrequencyInSeconds { get; private set; }
 

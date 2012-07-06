@@ -5,16 +5,16 @@ namespace Statr.Management.Buckets
 {
     public class BucketsService : RestServiceBase<BucketsRequest>
     {
-        private readonly IDataPointCache dataPointCache;
+        private readonly IBucketRepository bucketRepository;
 
-        public BucketsService(IDataPointCache dataPointCache)
+        public BucketsService(IBucketRepository bucketRepository)
         {
-            this.dataPointCache = dataPointCache;
+            this.bucketRepository = bucketRepository;
         }
 
         public override object OnGet(BucketsRequest request)
         {
-            return dataPointCache.GetBuckets();
+            return bucketRepository.List();
         }
     }
 }

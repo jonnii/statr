@@ -16,7 +16,7 @@ namespace Statr.Specifications.Management.Buckets
                 Subject.OnGet(new BucketsRequest());
 
             It should_get_buckets = () =>
-                The<IDataPointCache>().WasToldTo(r => r.GetBuckets());
+                The<IBucketRepository>().WasToldTo(r => r.List());
         }
     }
 }

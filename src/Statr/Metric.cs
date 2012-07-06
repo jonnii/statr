@@ -1,34 +1,9 @@
 using System;
-using Statr.Routing;
 
 namespace Statr
 {
     public class Metric
     {
-        public static Metric Parse(string raw)
-        {
-            var colon = raw.IndexOf(":", StringComparison.Ordinal);
-            var name = raw.Substring(0, colon);
-
-            if (raw.EndsWith("c"))
-            {
-                var pipe = raw.IndexOf("|", StringComparison.Ordinal);
-                var value = raw.Substring(colon + 1, pipe - colon - 1);
-
-                return new Metric(name, float.Parse(value), MetricType.Count);
-            }
-
-            if (raw.EndsWith("g"))
-            {
-                var pipe = raw.IndexOf("|", StringComparison.Ordinal);
-                var value = raw.Substring(colon + 1, pipe - colon - 1);
-
-                return new Metric(name, float.Parse(value), MetricType.Gauge);
-            }
-
-            throw new NotSupportedException("metric not yet supported");
-        }
-
         public static Metric Count(string name, float value)
         {
             return new Metric(name, value, MetricType.Count);
@@ -60,9 +35,9 @@ namespace Statr
             return string.Concat("[Metric Name=", Name, " Value=", Value, " MetricType=", MetricType, "]");
         }
 
-        public Bucket ToBucket()
+        public BucketReference ToBucket()
         {
-            return new Bucket(Name, MetricType);
+            return new BucketReference(Name, MetricType);
         }
     }
 }

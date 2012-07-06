@@ -1,14 +1,15 @@
-﻿using Machine.Specifications;
+﻿using Machine.Fakes;
+using Machine.Specifications;
 
 namespace Statr.Specifications
 {
-    public class MetricSpecification
+    public class MetricParserSpecification
     {
-        [Subject(typeof(Metric))]
-        public class when_parsing_count
+        [Subject(typeof(MetricParser))]
+        public class when_parsing_count : WithSubject<MetricParser>
         {
             Because of = () =>
-                metric = Metric.Parse("metric.name:4|c");
+                metric = Subject.Parse("metric.name:4|c");
 
             It should_have_name = () =>
                 metric.Name.ShouldEqual("metric.name");
@@ -22,11 +23,11 @@ namespace Statr.Specifications
             static Metric metric;
         }
 
-        [Subject(typeof(Metric))]
-        public class when_parsing_float_count
+        [Subject(typeof(MetricParser))]
+        public class when_parsing_float_count : WithSubject<MetricParser>
         {
             Because of = () =>
-                metric = Metric.Parse("metric.name:4.5|c");
+                metric = Subject.Parse("metric.name:4.5|c");
 
             It should_have_name = () =>
                 metric.Name.ShouldEqual("metric.name");
@@ -40,11 +41,11 @@ namespace Statr.Specifications
             static Metric metric;
         }
 
-        [Subject(typeof(Metric))]
-        public class when_parsing_gauge
+        [Subject(typeof(MetricParser))]
+        public class when_parsing_gauge : WithSubject<MetricParser>
         {
             Because of = () =>
-                metric = Metric.Parse("metric.name:666|g");
+                metric = Subject.Parse("metric.name:666|g");
 
             It should_have_name = () =>
                 metric.Name.ShouldEqual("metric.name");

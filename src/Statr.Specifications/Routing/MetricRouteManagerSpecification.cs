@@ -2,6 +2,7 @@
 using Machine.Specifications;
 using Statr.Configuration;
 using Statr.Routing;
+using Statr.Storage;
 
 namespace Statr.Specifications.Routing
 {
@@ -14,7 +15,7 @@ namespace Statr.Specifications.Routing
             {
                 route = An<IMetricRoute>();
 
-                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<Bucket>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
+                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<BucketReference>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
                     .Return(route);
             };
 
@@ -35,7 +36,7 @@ namespace Statr.Specifications.Routing
         {
             Establish context = () =>
             {
-                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<Bucket>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
+                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<BucketReference>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
                     .Return(An<IMetricRoute>());
 
                 Subject.GetRoute(new Metric("stats.cputime", 50, MetricType.Count));
@@ -53,7 +54,7 @@ namespace Statr.Specifications.Routing
         {
             Establish context = () =>
             {
-                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<Bucket>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
+                metricRouteFactory.WhenToldTo(r => r.Build(Param.IsAny<BucketReference>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
                     .Return(() => An<IMetricRoute>());
 
                 countRoute = Subject.GetRoute(new Metric("stats.cputime", 50, MetricType.Count));
@@ -79,9 +80,9 @@ namespace Statr.Specifications.Routing
             Establish context = () =>
             {
                 route = new Moq.Mock<IMetricRoute>();
-                bucket = new Bucket("stats.awesome", MetricType.Count);
+                bucket = new BucketReference("stats.awesome", MetricType.Count);
 
-                metricRouteFactory.WhenToldTo(f => f.Build(Param.IsAny<Bucket>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
+                metricRouteFactory.WhenToldTo(f => f.Build(Param.IsAny<BucketReference>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
                     .Return(route.Object);
 
                 Subject.BuildRoute(bucket, new Retention(1, 60));
@@ -95,18 +96,18 @@ namespace Statr.Specifications.Routing
 
             static Moq.Mock<IMetricRoute> route;
 
-            static Bucket bucket;
+            static BucketReference bucket;
         }
 
         [Subject(typeof(MetricRouteManager))]
         public class when_building_route : with_configuration
         {
             Establish context = () =>
-                metricRouteFactory.WhenToldTo(f => f.Build(new Bucket("stats.awesome", MetricType.Count), 60, Param.IsAny<IAggregationStrategy>()))
+                metricRouteFactory.WhenToldTo(f => f.Build(new BucketReference("stats.awesome", MetricType.Count), 60, Param.IsAny<IAggregationStrategy>()))
                     .Return(An<IMetricRoute>());
 
             Because of = () =>
-                route = Subject.BuildRoute(new Bucket("stats.awesome", MetricType.Count));
+                route = Subject.BuildRoute(new BucketReference("stats.awesome", MetricType.Count));
 
             It should_build_metric_route_for_highest_frequency_retention_period = () =>
                 route.ShouldNotBeNull();
@@ -121,9 +122,13 @@ namespace Statr.Specifications.Routing
                 metricRouteFactory = An<IMetricRouteFactory>();
                 configRepository = An<IConfigRepository>();
                 dataPointSubscriber = An<IDataPointSubscriber>();
+                bucketRepository = An<IBucketRepository>();
+
+                bucketRepository.WhenToldTo(r => r.Get(Param.IsAny<BucketReference>())).Return(new Bucket("bucket", MetricType.Count));
 
                 Subject = new MetricRouteManager(
                     metricRouteFactory,
+                    bucketRepository,
                     configRepository,
                     new[] { dataPointSubscriber });
             };
@@ -135,6 +140,8 @@ namespace Statr.Specifications.Routing
             protected static IConfigRepository configRepository;
 
             protected static IDataPointSubscriber dataPointSubscriber;
+
+            private static IBucketRepository bucketRepository;
         }
 
         public class with_configuration : with_metric_route_manager

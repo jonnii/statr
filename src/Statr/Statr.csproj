@@ -104,10 +104,15 @@
     </Compile>
     <Compile Include="Api\IStatrApi.cs" />
     <Compile Include="Api\StatrApi.cs" />
+    <Compile Include="BucketReference.cs" />
+    <Compile Include="IMetricParser.cs" />
     <Compile Include="Management\Buckets\BucketsRequest.cs" />
     <Compile Include="Management\Buckets\BucketsService.cs" />
+    <Compile Include="MetricParser.cs" />
+    <Compile Include="Storage\BucketRepository.cs" />
     <Compile Include="Storage\DataPointCache.cs" />
     <Compile Include="Storage\DataPointRepository.cs" />
+    <Compile Include="Storage\IBucketRepository.cs" />
     <Compile Include="Storage\IDataPointCache.cs" />
     <Compile Include="Configuration\ConfigException.cs" />
     <Compile Include="Configuration\ConfigInstaller.cs" />
@@ -135,7 +140,7 @@
     <Compile Include="Routing\AccumulateAggregationStrategy.cs" />
     <Compile Include="Routing\IAggregationStrategy.cs" />
     <Compile Include="Routing\LastValueAggregationStrategy.cs" />
-    <Compile Include="Routing\Bucket.cs" />
+    <Compile Include="Bucket.cs" />
     <Compile Include="Routing\AggregatedMetric.cs" />
     <Compile Include="Routing\IDataPointSubscriber.cs" />
     <Compile Include="Routing\IMetricRouteFactory.cs" />

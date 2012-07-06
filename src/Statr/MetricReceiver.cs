@@ -9,14 +9,19 @@ namespace Statr
 {
     public class MetricReceiver : IMetricReceiver
     {
+        private readonly IMetricParser metricParser;
+
         private readonly IMetricRouter metricRouter;
 
         private bool shouldReceive = true;
 
         private Thread receiveThread;
 
-        public MetricReceiver(IMetricRouter metricRouter)
+        public MetricReceiver(
+            IMetricParser metricParser,
+            IMetricRouter metricRouter)
         {
+            this.metricParser = metricParser;
             this.metricRouter = metricRouter;
 
             Logger = NullLogger.Instance;
@@ -55,7 +60,7 @@ namespace Statr
                 var trimmed = rawMetric.Trim();
                 Logger.DebugFormat("{0} => {1}", sender, trimmed);
 
-                var metric = Metric.Parse(trimmed);
+                var metric = metricParser.Parse(trimmed);
 
                 metricRouter.Route(metric);
             }
