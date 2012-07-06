@@ -14,7 +14,7 @@ namespace Statr.Routing
 
         private readonly IConfigRepository configRepository;
 
-        private readonly IDataPointSubscriber[] dataPointSubscribers;
+        private readonly IDataPointStream dataPointStream;
 
         private readonly ConcurrentDictionary<BucketReference, IMetricRoute> registeredRoutes =
             new ConcurrentDictionary<BucketReference, IMetricRoute>();
@@ -23,12 +23,12 @@ namespace Statr.Routing
             IMetricRouteFactory metricRouteFactory,
             IBucketRepository bucketRepository,
             IConfigRepository configRepository,
-            IDataPointSubscriber[] dataPointSubscribers)
+            IDataPointStream dataPointStream)
         {
             this.metricRouteFactory = metricRouteFactory;
             this.bucketRepository = bucketRepository;
             this.configRepository = configRepository;
-            this.dataPointSubscribers = dataPointSubscribers;
+            this.dataPointStream = dataPointStream;
 
             Logger = NullLogger.Instance;
         }
@@ -47,6 +47,8 @@ namespace Statr.Routing
 
         public void FlushAll()
         {
+            Logger.DebugFormat("Flushing all routes");
+
             var routes = registeredRoutes.Values;
 
             foreach (var route in routes)
@@ -82,21 +84,11 @@ namespace Statr.Routing
                 retention.History,
                 strategy.GetType().Name);
 
-            route.DataPointGenerated += OnRouteOnDataPointGenerated;
+            dataPointStream.Register(route);
 
             route.Start();
 
             return route;
-        }
-
-        public void OnRouteOnDataPointGenerated(object sender, DataPointEventArgs args)
-        {
-            Logger.InfoFormat("Notifying data point subscribers");
-
-            foreach (var dataPointSubscriber in dataPointSubscribers)
-            {
-                dataPointSubscriber.Push(args.Bucket, args.DataPoint);
-            }
         }
     }
 }

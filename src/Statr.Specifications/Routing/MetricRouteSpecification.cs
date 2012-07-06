@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using Machine.Specifications;
 using Statr.Routing;
 
@@ -11,7 +12,7 @@ namespace Statr.Specifications.Routing
         {
             Establish context = () =>
             {
-                Subject.DataPointGenerated += (o, e) => dataPoint = e.DataPoint;
+                Subject.DataPoints.Subscribe(t => { dataPoint = t.DataPoint; });
                 Subject.Start();
             };
 
@@ -36,8 +37,7 @@ namespace Statr.Specifications.Routing
         [Subject(typeof(MetricRoute))]
         public class when_raising_event_for_aggregated_metric_with_window_with_no_metrics : with_route
         {
-            Establish context = () =>
-                Subject.DataPointGenerated += (o, e) => raised = true;
+            Establish context = () => Subject.DataPoints.Subscribe(t => raised = true);
 
             Because of = () =>
                 Subject.OnMetricsAggregated(new AggregatedMetric { NumMetrics = 0 });
@@ -53,7 +53,7 @@ namespace Statr.Specifications.Routing
         {
             Establish context = () =>
             {
-                Subject.DataPointGenerated += (o, e) => dataPoint = e.DataPoint;
+                Subject.DataPoints.Subscribe(t => { dataPoint = t.DataPoint; });
                 Subject.Start();
             };
 

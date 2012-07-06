@@ -109,9 +109,12 @@
     <Compile Include="Management\Buckets\BucketsRequest.cs" />
     <Compile Include="Management\Buckets\BucketsService.cs" />
     <Compile Include="MetricParser.cs" />
+    <Compile Include="Routing\DataPointStream.cs" />
+    <Compile Include="Routing\IDataPointGenerator.cs" />
     <Compile Include="Storage\BucketRepository.cs" />
     <Compile Include="Storage\DataPointCache.cs" />
     <Compile Include="Storage\DataPointRepository.cs" />
+    <Compile Include="Storage\DataPointWriter.cs" />
     <Compile Include="Storage\IBucketRepository.cs" />
     <Compile Include="Storage\IDataPointCache.cs" />
     <Compile Include="Configuration\ConfigException.cs" />
@@ -129,7 +132,7 @@
     <Compile Include="Infrastructure\FileSystem.cs" />
     <Compile Include="Infrastructure\IFileSystem.cs" />
     <Compile Include="IMetricReceiver.cs" />
-    <Compile Include="DataPointEventArgs.cs" />
+    <Compile Include="DataPointEvent.cs" />
     <Compile Include="Management\ManagementAppHost.cs" />
     <Compile Include="Management\ManagementBootstrapper.cs" />
     <Compile Include="Management\ManagementInstaller.cs" />
@@ -142,7 +145,7 @@
     <Compile Include="Routing\LastValueAggregationStrategy.cs" />
     <Compile Include="Bucket.cs" />
     <Compile Include="Routing\AggregatedMetric.cs" />
-    <Compile Include="Routing\IDataPointSubscriber.cs" />
+    <Compile Include="Routing\IDataPointStream.cs" />
     <Compile Include="Routing\IMetricRouteFactory.cs" />
     <Compile Include="Routing\IMetricRouter.cs" />
     <Compile Include="Routing\IMetricRoute.cs" />
@@ -178,7 +181,8 @@
     <Compile Include="Storage\StorageSlice.cs" />
     <Compile Include="Storage\StorageTree.cs" />
     <Compile Include="Storage\StorageTreeConfiguration.cs" />
-    <Compile Include="Storage\TimeSeriesData.cs" />
+    <Compile Include="Storage\Strategies\ImmediateStorageStrategy.cs" />
+    <Compile Include="Storage\IStorageStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

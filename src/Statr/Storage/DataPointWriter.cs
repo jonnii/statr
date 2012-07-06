@@ -1,6 +1,7 @@
 ﻿namespace Statr.Storage
 {
-    public class TimeSeriesData
+    public class DataPointWriter
     {
+
     }
 }

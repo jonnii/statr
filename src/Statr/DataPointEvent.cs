@@ -1,10 +1,8 @@
-using System;
-
 namespace Statr
 {
-    public class DataPointEventArgs : EventArgs
+    public class DataPointEvent
     {
-        public DataPointEventArgs(BucketReference bucket, DataPoint dataPoint)
+        public DataPointEvent(BucketReference bucket, DataPoint dataPoint)
         {
             Bucket = bucket;
             DataPoint = dataPoint;

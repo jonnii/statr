@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Logging;
@@ -6,28 +7,42 @@ using Statr.Routing;
 
 namespace Statr.Storage
 {
-    public class DataPointCache : IDataPointCache, IDataPointSubscriber
+    public class DataPointCache : IDataPointCache, IDisposable
     {
+        private readonly IDataPointStream dataPointStream;
+
         private readonly ConcurrentDictionary<BucketReference, DataPointCollection> dataPoints =
             new ConcurrentDictionary<BucketReference, DataPointCollection>();
 
-        public DataPointCache()
+        private IDisposable subscription;
+
+        public DataPointCache(IDataPointStream dataPointStream)
         {
+            this.dataPointStream = dataPointStream;
+
             Logger = NullLogger.Instance;
         }
 
         public ILogger Logger { get; set; }
 
-        public void Push(BucketReference bucket, DataPoint dataPoint)
+        public void Start()
         {
-            var pushedDataPoint = dataPoint;
+            Logger.DebugFormat("Starting data point cache, subscribing to data point stream");
 
-            Logger.InfoFormat("Received data point: {0}", pushedDataPoint);
+            subscription = this.dataPointStream.DataPoints.Subscribe(Push);
+        }
+
+        public void Push(DataPointEvent dataPointEvent)
+        {
+            var bucket = dataPointEvent.Bucket;
+            var dataPoint = dataPointEvent.DataPoint;
+
+            Logger.InfoFormat("Received data point: {0}", dataPoint);
 
             dataPoints.AddOrUpdate(
                 bucket,
                 key => CreateDataPointCacheEntry(key, dataPoint),
-                (key, list) => list.Add(pushedDataPoint));
+                (key, list) => list.Add(dataPoint));
         }
 
         public DataPointCollection CreateDataPointCacheEntry(BucketReference key, DataPoint point)
@@ -44,6 +59,14 @@ namespace Statr.Storage
             return dataPoints.TryGetValue(bucket, out collection)
                        ? collection
                        : Enumerable.Empty<DataPoint>();
+        }
+
+        public void Dispose()
+        {
+            if (subscription != null)
+            {
+                subscription.Dispose();
+            }
         }
     }
 }

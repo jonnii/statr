@@ -1,6 +1,7 @@
 using System;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using Castle.Core.Logging;
 using Statr.Extensions;
 
@@ -10,9 +11,11 @@ namespace Statr.Routing
     {
         private readonly IAggregationStrategy aggregationStrategy;
 
-        private IDisposable subscription;
+        private readonly Subject<DataPointEvent> dataPoints = new Subject<DataPointEvent>();
 
         private IObservable<AggregatedMetric> aggregatedWindows;
+
+        private IDisposable subscription;
 
         public MetricRoute(
             BucketReference bucketReference,
@@ -29,7 +32,10 @@ namespace Statr.Routing
 
         public event EventHandler<MetricEventArgs> MetricReceived;
 
-        public event EventHandler<DataPointEventArgs> DataPointGenerated;
+        public IObservable<DataPointEvent> DataPoints
+        {
+            get { return dataPoints; }
+        }
 
         public ILogger Logger { get; set; }
 
@@ -72,7 +78,8 @@ namespace Statr.Routing
                 return;
             }
 
-            DataPointGenerated.Raise(this, new DataPointEventArgs(Bucket, aggregatedMetrics.ToDataPoint()));
+            dataPoints.OnNext(new DataPointEvent(Bucket, aggregatedMetrics.ToDataPoint()));
+
             ++NumPublishedDataPoints;
         }
 

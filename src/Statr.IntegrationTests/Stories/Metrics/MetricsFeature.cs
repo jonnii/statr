@@ -31,5 +31,14 @@ namespace Statr.IntegrationTests.Stories.Metrics
                 And(TheMetrics.AreFlushed).
             Then(QueryFor.Metrics("stats.application.metric", MetricType.Count, m => m.Count() == 1));
         }
+
+        [Test, Ignore]
+        public void Should()
+        {
+            Given(TheApplication.IsStarted).
+            When(TheMetric.IsRouted(Metric.Count("stats.application.metric", 500))).
+                And(TheMetrics.AreFlushed).
+            Then(TheStorageEngine.ShouldHaveCreatedDirectory(@"stats\application\metric"));
+        }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reactive.Subjects;
 using Machine.Fakes;
 using Machine.Specifications;
+using Statr.Routing;
 using Statr.Storage;
 
 namespace Statr.Specifications.Storage
@@ -40,7 +42,15 @@ namespace Statr.Specifications.Storage
         public class with_points : WithSubject<DataPointCache>
         {
             Establish context = () =>
-                Subject.Push(new BucketReference("metric.name", MetricType.Count), new DataPoint(DateTime.Now, 500));
+            {
+                The<IDataPointStream>().WhenToldTo(g => g.DataPoints).Return(new Subject<DataPointEvent>());
+
+                Subject.Start();
+                Subject.Push(
+                    new DataPointEvent(
+                        new BucketReference("metric.name", MetricType.Count),
+                        new DataPoint(DateTime.Now, 500)));
+            };
         }
     }
 }

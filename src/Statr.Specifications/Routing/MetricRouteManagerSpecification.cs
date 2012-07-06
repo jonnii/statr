@@ -84,15 +84,13 @@ namespace Statr.Specifications.Routing
 
                 metricRouteFactory.WhenToldTo(f => f.Build(Param.IsAny<BucketReference>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
                     .Return(route.Object);
-
-                Subject.BuildRoute(bucket, new Retention(1, 60));
             };
 
             Because of = () =>
-                route.Raise(r => r.DataPointGenerated += null, new DataPointEventArgs(bucket, new DataPoint(1, 1)));
+               Subject.BuildRoute(bucket, new Retention(1, 60));
 
-            It should_notify_all_data_point_subscribers = () =>
-                dataPointSubscriber.WasToldTo(r => r.Push(bucket, Param.IsAny<DataPoint>()));
+            It should_register_route_with_data_point_generator = () =>
+                dataPointStream.WasToldTo(s => s.Register(Param.IsAny<IDataPointGenerator>()));
 
             static Moq.Mock<IMetricRoute> route;
 
@@ -121,7 +119,7 @@ namespace Statr.Specifications.Routing
             {
                 metricRouteFactory = An<IMetricRouteFactory>();
                 configRepository = An<IConfigRepository>();
-                dataPointSubscriber = An<IDataPointSubscriber>();
+                dataPointStream = An<IDataPointStream>();
                 bucketRepository = An<IBucketRepository>();
 
                 bucketRepository.WhenToldTo(r => r.Get(Param.IsAny<BucketReference>())).Return(new Bucket("bucket", MetricType.Count));
@@ -130,7 +128,7 @@ namespace Statr.Specifications.Routing
                     metricRouteFactory,
                     bucketRepository,
                     configRepository,
-                    new[] { dataPointSubscriber });
+                    dataPointStream);
             };
 
             protected static MetricRouteManager Subject;
@@ -139,7 +137,7 @@ namespace Statr.Specifications.Routing
 
             protected static IConfigRepository configRepository;
 
-            protected static IDataPointSubscriber dataPointSubscriber;
+            protected static IDataPointStream dataPointStream;
 
             private static IBucketRepository bucketRepository;
         }

@@ -2,14 +2,12 @@ using System;
 
 namespace Statr.Routing
 {
-    public interface IMetricRoute : IDisposable
+    /// <summary>
+    /// A metric route is responsible for taking metrics, processing them
+    /// and then ultimately produce data points
+    /// </summary>
+    public interface IMetricRoute : IDisposable, IDataPointGenerator
     {
-        /// <summary>
-        /// The data point generated event is raised when metrics have been 
-        /// aggregated.
-        /// </summary>
-        event EventHandler<DataPointEventArgs> DataPointGenerated;
-
         /// <summary>
         /// The bucket for this metric route
         /// </summary>

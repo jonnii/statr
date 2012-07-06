@@ -116,6 +116,7 @@
     <Compile Include="MetricParserSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\AccumulateAggregationStrategySpecification.cs" />
+    <Compile Include="Routing\DataPointStreamSpecification.cs" />
     <Compile Include="Routing\LastValueAggregationStrategySpecification.cs" />
     <Compile Include="Routing\MetricRouteManagerSpecification.cs" />
     <Compile Include="Routing\MetricRouterSpecification.cs" />
