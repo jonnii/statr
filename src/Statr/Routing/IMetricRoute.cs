@@ -30,5 +30,10 @@ namespace Statr.Routing
         /// Pushes a metric into this metric route
         /// </summary>
         void Push(Metric metric);
+
+        /// <summary>
+        /// Flushes the current aggregated metrics into a data point
+        /// </summary>
+        void Flush();
     }
 }

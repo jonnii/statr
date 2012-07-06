@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using NUnit.Framework;
 using Statr.IntegrationTests.Stories.Steps;
 
 namespace Statr.IntegrationTests.Stories.Metrics
@@ -10,7 +11,7 @@ namespace Statr.IntegrationTests.Stories.Metrics
         public void ShouldRouteCountMetric()
         {
             Given(TheApplication.IsStarted).
-            When(TheMetric.IsRouted(new Metric("stats.application.metric", 500, MetricType.Count))).
+            When(TheMetric.IsRouted(Metric.Count("stats.application.metric", 500))).
             Then(TheMetricRouter.ShouldHaveRoutedNumMetrics(1));
         }
 
@@ -18,8 +19,17 @@ namespace Statr.IntegrationTests.Stories.Metrics
         public void ShouldRouteGaugeMetric()
         {
             Given(TheApplication.IsStarted).
-            When(TheMetric.IsRouted(new Metric("stats.application.gauge", 500, MetricType.Gauge))).
+            When(TheMetric.IsRouted(Metric.Gauge("stats.application.gauge", 500))).
             Then(TheMetricRouter.ShouldHaveRoutedNumMetrics(1));
+        }
+
+        [Test]
+        public void ShouldGetMetricsAfterRouting()
+        {
+            Given(TheApplication.IsStarted).
+            When(TheMetric.IsRouted(Metric.Count("stats.application.metric", 500))).
+                And(TheMetrics.AreFlushed).
+            Then(QueryFor.Metrics("stats.application.metric", MetricType.Count, m => m.Count() == 1));
         }
     }
 }

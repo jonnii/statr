@@ -11,7 +11,7 @@ namespace Statr.Routing
 
         private readonly IConfigRepository configRepository;
 
-        private readonly IDataPointSubscriber dataPointSubscriber;
+        private readonly IDataPointSubscriber[] dataPointSubscribers;
 
         private readonly ConcurrentDictionary<RouteKey, IMetricRoute> registeredRoutes =
             new ConcurrentDictionary<RouteKey, IMetricRoute>();
@@ -19,11 +19,11 @@ namespace Statr.Routing
         public MetricRouteManager(
             IMetricRouteFactory metricRouteFactory,
             IConfigRepository configRepository,
-            IDataPointSubscriber dataPointSubscriber)
+            IDataPointSubscriber[] dataPointSubscribers)
         {
             this.metricRouteFactory = metricRouteFactory;
             this.configRepository = configRepository;
-            this.dataPointSubscriber = dataPointSubscriber;
+            this.dataPointSubscribers = dataPointSubscribers;
 
             Logger = NullLogger.Instance;
         }
@@ -38,6 +38,16 @@ namespace Statr.Routing
         public IMetricRoute GetRoute(Metric metric)
         {
             return registeredRoutes.GetOrAdd(metric.ToRouteKey(), BuildRoute);
+        }
+
+        public void FlushAll()
+        {
+            var routes = registeredRoutes.Values;
+
+            foreach (var route in routes)
+            {
+                route.Flush();
+            }
         }
 
         public IMetricRoute BuildRoute(RouteKey routeKey)
@@ -77,7 +87,10 @@ namespace Statr.Routing
         {
             Logger.InfoFormat("Notifying data point subscribers");
 
-            dataPointSubscriber.Push(args.DataPoint);
+            foreach (var dataPointSubscriber in dataPointSubscribers)
+            {
+                dataPointSubscriber.Push(args.RouteKey, args.DataPoint);
+            }
         }
     }
 }

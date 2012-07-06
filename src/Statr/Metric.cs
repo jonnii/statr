@@ -29,6 +29,16 @@ namespace Statr
             throw new NotSupportedException("metric not yet supported");
         }
 
+        public static Metric Count(string name, float value)
+        {
+            return new Metric(name, value, MetricType.Count);
+        }
+
+        public static Metric Gauge(string name, float value)
+        {
+            return new Metric(name, value, MetricType.Gauge);
+        }
+
         public Metric(string name, float value, MetricType metricType)
         {
             Name = name;

@@ -79,20 +79,23 @@ namespace Statr.Specifications.Routing
             Establish context = () =>
             {
                 route = new Moq.Mock<IMetricRoute>();
+                routeKey = new RouteKey("stats.awesome", MetricType.Count);
 
                 metricRouteFactory.WhenToldTo(f => f.Build(Param.IsAny<RouteKey>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
                     .Return(route.Object);
 
-                Subject.BuildRoute(new RouteKey("stats.awesome", MetricType.Count), new Retention(1, 60));
+                Subject.BuildRoute(routeKey, new Retention(1, 60));
             };
 
             Because of = () =>
-                route.Raise(r => r.DataPointGenerated += null, new DataPointEventArgs(new DataPoint(1, 1)));
+                route.Raise(r => r.DataPointGenerated += null, new DataPointEventArgs(routeKey, new DataPoint(1, 1)));
 
             It should_notify_all_data_point_subscribers = () =>
-                dataPointSubscriber.WasToldTo(r => r.Push(Param.IsAny<DataPoint>()));
+                dataPointSubscriber.WasToldTo(r => r.Push(routeKey, Param.IsAny<DataPoint>()));
 
             static Moq.Mock<IMetricRoute> route;
+
+            static RouteKey routeKey;
         }
 
         [Subject(typeof(MetricRouteManager))]
@@ -122,7 +125,7 @@ namespace Statr.Specifications.Routing
                 Subject = new MetricRouteManager(
                     metricRouteFactory,
                     configRepository,
-                    dataPointSubscriber);
+                    new[] { dataPointSubscriber });
             };
 
             protected static MetricRouteManager Subject;

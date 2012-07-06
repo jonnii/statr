@@ -72,7 +72,7 @@ namespace Statr.Routing
                 return;
             }
 
-            DataPointGenerated.Raise(this, new DataPointEventArgs(aggregatedMetrics.ToDataPoint()));
+            DataPointGenerated.Raise(this, new DataPointEventArgs(RouteKey, aggregatedMetrics.ToDataPoint()));
             ++NumPublishedDataPoints;
         }
 
@@ -80,6 +80,11 @@ namespace Statr.Routing
         {
             MetricReceived.Raise(this, new MetricEventArgs(metric));
             ++NumProcessedMetrics;
+        }
+
+        public void Flush()
+        {
+            OnMetricsAggregated(aggregationStrategy.Current);
         }
 
         public void Dispose()
@@ -93,7 +98,7 @@ namespace Statr.Routing
 
             subscription.Dispose();
 
-            OnMetricsAggregated(aggregationStrategy.Current);
+            Flush();
         }
     }
 }

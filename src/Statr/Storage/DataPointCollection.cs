@@ -6,11 +6,23 @@ namespace Statr.Storage
 {
     public class DataPointCollection : IEnumerable<DataPoint>
     {
-        private readonly IEnumerable<DataPoint> dataPoints;
+        private readonly IList<DataPoint> dataPoints;
 
-        public DataPointCollection(IEnumerable<DataPoint> dataPoints)
+        public DataPointCollection()
+        {
+            dataPoints = new List<DataPoint>();
+        }
+
+        public DataPointCollection(IList<DataPoint> dataPoints)
         {
             this.dataPoints = dataPoints;
+        }
+
+        public DataPointCollection Add(DataPoint point)
+        {
+            dataPoints.Add(point);
+
+            return this;
         }
 
         public IEnumerator<DataPoint> GetEnumerator()

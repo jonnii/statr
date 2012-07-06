@@ -2,6 +2,7 @@ using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using Statr.Routing;
 using Statr.Storage;
 
 namespace Statr.Installers
@@ -12,7 +13,10 @@ namespace Statr.Installers
         {
             container.Register(
                 Component.For<IStorageEngineFactory>().AsFactory(),
-                Component.For<IStorageEngine>().ImplementedBy<StorageEngine>());
+                Component.For<IStorageEngine>().ImplementedBy<StorageEngine>(),
+
+                Component.For<IDataPointRepository>().ImplementedBy<DataPointRepository>(),
+                Component.For<IDataPointCache>().ImplementedBy<DataPointCache>().Forward<IDataPointSubscriber>());
         }
     }
 }

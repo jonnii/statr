@@ -86,10 +86,12 @@
     <Compile Include="Stories\ScenarioContext.cs" />
     <Compile Include="Stories\StatrContext.cs" />
     <Compile Include="Stories\StatrStory.cs" />
+    <Compile Include="Stories\Steps\QueryFor.cs" />
     <Compile Include="Stories\Steps\TheApplication.cs" />
     <Compile Include="Stories\Steps\TheConfigFile.cs" />
     <Compile Include="Stories\Steps\TheMetric.cs" />
     <Compile Include="Stories\Steps\TheMetricRouter.cs" />
+    <Compile Include="Stories\Steps\TheMetrics.cs" />
     <Compile Include="Stories\Steps\TheStorageEngine.cs" />
     <Compile Include="Stories\Storage\StorageFeature.cs" />
   </ItemGroup>

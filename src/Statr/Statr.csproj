@@ -104,6 +104,9 @@
     </Compile>
     <Compile Include="Api\IStatrApi.cs" />
     <Compile Include="Api\StatrApi.cs" />
+    <Compile Include="Storage\DataPointCache.cs" />
+    <Compile Include="Storage\DataPointRepository.cs" />
+    <Compile Include="Storage\IDataPointCache.cs" />
     <Compile Include="Configuration\ConfigException.cs" />
     <Compile Include="Configuration\ConfigInstaller.cs" />
     <Compile Include="Configuration\ConfigValidator.cs" />
@@ -132,7 +135,6 @@
     <Compile Include="Routing\LastValueAggregationStrategy.cs" />
     <Compile Include="Routing\RouteKey.cs" />
     <Compile Include="Routing\AggregatedMetric.cs" />
-    <Compile Include="Routing\DataPointSubscriber.cs" />
     <Compile Include="Routing\IDataPointSubscriber.cs" />
     <Compile Include="Routing\IMetricRouteFactory.cs" />
     <Compile Include="Routing\IMetricRouter.cs" />
@@ -154,6 +156,7 @@
     <Compile Include="StatrServerApplication.cs" />
     <Compile Include="DataPoint.cs" />
     <Compile Include="Storage\DataPointCollection.cs" />
+    <Compile Include="Storage\IDataPointRepository.cs" />
     <Compile Include="Storage\IStorageEngine.cs" />
     <Compile Include="Storage\IStorageEngineFactory.cs" />
     <Compile Include="Storage\IStorageNode.cs" />

@@ -2,6 +2,6 @@
 {
     public interface IDataPointSubscriber
     {
-        void Push(DataPoint dataPoint);
+        void Push(RouteKey routeKey, DataPoint dataPoint);
     }
 }
