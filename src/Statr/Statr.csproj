@@ -154,7 +154,6 @@
     <Compile Include="Installers\InfrastructureInstaller.cs" />
     <Compile Include="Installers\StorageInstaller.cs" />
     <Compile Include="Metric.cs" />
-    <Compile Include="MetricEventArgs.cs" />
     <Compile Include="MetricReceiver.cs" />
     <Compile Include="Routing\IMetricRouteManager.cs" />
     <Compile Include="Routing\MetricRouter.cs" />

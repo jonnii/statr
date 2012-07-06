@@ -1,9 +1,7 @@
 using System;
-using System.Reactive;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Castle.Core.Logging;
-using Statr.Extensions;
 
 namespace Statr.Routing
 {
@@ -12,6 +10,8 @@ namespace Statr.Routing
         private readonly IAggregationStrategy aggregationStrategy;
 
         private readonly Subject<DataPointEvent> dataPoints = new Subject<DataPointEvent>();
+
+        private readonly Subject<Metric> metrics = new Subject<Metric>();
 
         private IObservable<AggregatedMetric> aggregatedWindows;
 
@@ -29,8 +29,6 @@ namespace Statr.Routing
 
             Logger = NullLogger.Instance;
         }
-
-        public event EventHandler<MetricEventArgs> MetricReceived;
 
         public IObservable<DataPointEvent> DataPoints
         {
@@ -51,12 +49,8 @@ namespace Statr.Routing
         {
             Logger.InfoFormat("Starting route {0}", Bucket);
 
-            var observable = Observable.FromEventPattern<EventHandler<MetricEventArgs>, MetricEventArgs>(
-                h => MetricReceived += h,
-                h => MetricReceived -= h);
-
             // create windows for the frequency of this route
-            var windows = observable.Window(TimeSpan.FromSeconds(FrequencyInSeconds));
+            var windows = metrics.Window(TimeSpan.FromSeconds(FrequencyInSeconds));
 
             // aggregate all the metrics in the windows
             aggregatedWindows = windows.SelectMany(
@@ -66,9 +60,9 @@ namespace Statr.Routing
             subscription = aggregatedWindows.Subscribe(OnMetricsAggregated);
         }
 
-        public AggregatedMetric AggregateMetrics(AggregatedMetric original, EventPattern<MetricEventArgs> newMetric)
+        public AggregatedMetric AggregateMetrics(AggregatedMetric original, Metric newMetric)
         {
-            return aggregationStrategy.Aggregate(original, newMetric.EventArgs.Metric);
+            return aggregationStrategy.Aggregate(original, newMetric);
         }
 
         public void OnMetricsAggregated(AggregatedMetric aggregatedMetrics)
@@ -85,7 +79,8 @@ namespace Statr.Routing
 
         public void Push(Metric metric)
         {
-            MetricReceived.Raise(this, new MetricEventArgs(metric));
+            metrics.OnNext(metric);
+
             ++NumProcessedMetrics;
         }
 
