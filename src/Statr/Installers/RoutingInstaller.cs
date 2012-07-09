@@ -11,6 +11,8 @@ namespace Statr.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
+                Component.For<IMetricParser>().ImplementedBy<MetricParser>(),
+
                 Component.For<IMetricRouter>().ImplementedBy<MetricRouter>(),
                 Component.For<IMetricRouteManager>().ImplementedBy<MetricRouteManager>(),
                 Component.For<IMetricRouteFactory>().AsFactory(),

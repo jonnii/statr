@@ -9,7 +9,7 @@ namespace Statr.Interactive.Specifications
         public class when_parsing_simple : WithSubject<MetricsGenerator>
         {
             Because of = () =>
-                request = Subject.BuildGeneratorRequest("s stats.fribble count 500 100 50");
+                request = Subject.BuildGeneratorRequest("stats.fribble count 500 100 50");
 
             It should_parse_interval = () =>
             {
@@ -24,7 +24,7 @@ namespace Statr.Interactive.Specifications
         public class when_parsing_with_ranges : WithSubject<MetricsGenerator>
         {
             Because of = () =>
-                request = Subject.BuildGeneratorRequest("s stats.fribble count 500 100-200 50-150");
+                request = Subject.BuildGeneratorRequest("stats.fribble count 500 100-200 50-150");
 
             It should_parse_interval = () =>
             {

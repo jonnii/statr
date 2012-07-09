@@ -72,6 +72,7 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Fixtures\DataPoints.cs" />
+    <Compile Include="Installers\IntegrationInstaller.cs" />
     <Compile Include="IntegrationApplication.cs" />
     <Compile Include="Manual\BuildConfiguration.cs" />
     <Compile Include="ContainerTest.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Stories\Steps\TheMetrics.cs" />
     <Compile Include="Stories\Steps\TheStorageEngine.cs" />
     <Compile Include="Stories\Storage\StorageFeature.cs" />
+    <Compile Include="Support\DirectClientTransport.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="performance.nlog.config">
@@ -110,6 +112,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Statr.Client\Statr.Client.csproj">
+      <Project>{DB46D981-4677-4171-AA69-DF34CAB3C555}</Project>
+      <Name>Statr.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Statr.Interactive\Statr.Interactive.csproj">
+      <Project>{DF3D2680-ECE6-494D-B789-0AB226BC8CE9}</Project>
+      <Name>Statr.Interactive</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Statr\Statr.csproj">
       <Project>{1C603537-F3BE-4F0C-8933-85EE2DA2906D}</Project>
       <Name>Statr</Name>

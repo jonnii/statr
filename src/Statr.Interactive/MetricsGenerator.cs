@@ -6,81 +6,25 @@ using Statr.Client;
 
 namespace Statr.Interactive
 {
-    public class MetricsGenerator
+    public class MetricsGenerator : IMetricsGenerator
     {
-        public void Go()
+        private readonly IStatrClient client;
+
+        public MetricsGenerator(IStatrClient client)
         {
-            ShowWelcomeBanner();
-
-            using (var client = StatrClient.Build("127.0.0.1"))
-            {
-                Console.WriteLine("!!! Created client {0}", client);
-
-                while (true)
-                {
-                    ShowInstructions();
-
-                    var currentLine = Console.ReadLine();
-
-                    if (string.IsNullOrEmpty(currentLine))
-                    {
-                        continue;
-                    }
-
-                    if (currentLine.StartsWith("q"))
-                    {
-                        break;
-                    }
-
-                    if (currentLine.StartsWith("s"))
-                    {
-                        try
-                        {
-                            SendMetrics(client, currentLine);
-                        }
-                        catch (FormatException fe)
-                        {
-                            Console.WriteLine("oops, you did something wrong...");
-                            Console.WriteLine(fe.Message);
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Unknown command: {0}", currentLine);
-                    }
-                }
-            }
-
-            Console.WriteLine("Thanks for playing! Bye!");
-
+            this.client = client;
         }
 
-        private void ShowInstructions()
+        public Task SendMetrics(string line)
         {
-            Console.WriteLine("Instructions");
-            Console.WriteLine("------------");
-            Console.WriteLine();
-            Console.WriteLine("send metrics \t\t s <name> <type> <num> <interval-range> <value-range>");
-            Console.WriteLine("q - quit");
-            Console.WriteLine();
-            Console.WriteLine();
+            var request = BuildGeneratorRequest(line);
+
+            return SendMetrics(request);
         }
 
-        private void ShowWelcomeBanner()
+        public Task SendMetrics(GeneratorRequest request)
         {
-            Console.WriteLine("--------------------------------------------");
-            Console.WriteLine("| Welcome to the Statr Interactive Console |");
-            Console.WriteLine("--------------------------------------------");
-
-            Console.WriteLine();
-            Console.WriteLine();
-        }
-
-        private void SendMetrics(IStatrClient client, string currentLine)
-        {
-            var request = BuildGeneratorRequest(currentLine);
-
-            Console.WriteLine(request);
+            var completionSource = new TaskCompletionSource<bool>();
 
             Action sendMetricsAction = () =>
             {
@@ -90,7 +34,7 @@ namespace Statr.Interactive
                     x => x + 1,
                     x => x,
                     x => TimeSpan.FromMilliseconds(request.GetNextInterval()))
-                    .Finally(() => Console.WriteLine("Finished sending stats: {0}", request.Name));
+                    .Finally(() => completionSource.SetResult(true));
 
                 Action sendMetric;
 
@@ -109,19 +53,14 @@ namespace Statr.Interactive
                 generator.Subscribe(i => sendMetric());
             };
 
-            if (currentLine.Contains("!"))
-            {
-                Task.Factory.StartNew(sendMetricsAction);
-            }
-            else
-            {
-                sendMetricsAction();
-            }
+            Task.Factory.StartNew(sendMetricsAction);
+
+            return completionSource.Task;
         }
 
         public GeneratorRequest BuildGeneratorRequest(string line)
         {
-            var match = Regex.Match(line, @"s ([a-zA-Z-_\.]+) (\w+) (\d+) ([\d-]+) ([\d-]+)");
+            var match = Regex.Match(line, @"^([a-zA-Z-_\.]+) (\w+) (\d+) ([\d-]+) ([\d-]+)$");
 
             var name = match.Groups[1].Value;
             var type = match.Groups[2].Value;
