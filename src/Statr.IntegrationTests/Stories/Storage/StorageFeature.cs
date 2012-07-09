@@ -10,7 +10,7 @@ namespace Statr.IntegrationTests.Stories.Storage
         public void CreatingTree()
         {
             Given(TheApplication.IsStarted).
-            When(TheStorageEngine.Executes(s => s.CreateTree("storage-tree"))).
+            When(TheStorageEngine.Executes(s => s.GetOrCreateTree("storage-tree"))).
             Then(TheStorageEngine.ShouldHaveCreatedDirectory("storage-tree"));
         }
     }

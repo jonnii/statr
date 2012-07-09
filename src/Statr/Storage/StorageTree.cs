@@ -23,12 +23,12 @@ namespace Statr.Storage
 
         public string FilePath { get; private set; }
 
-        public IStorageNode CreateNode(string name)
+        public IStorageNode GetOrCreateNode(string name)
         {
-            return CreateNode(name, c => { });
+            return GetOrCreateNode(name, c => { });
         }
 
-        public IStorageNode CreateNode(string name, Action<IStorageNodeConfiguration> configuration)
+        public IStorageNode GetOrCreateNode(string name, Action<IStorageNodeConfiguration> configuration)
         {
             var nodeConfiguration = StorageNodeConfiguration.Default;
             configuration(nodeConfiguration);

@@ -9,8 +9,8 @@ namespace Statr.IntegrationTests
     {
         protected override IEnumerable<IWindsorInstaller> GetInstallers()
         {
-            yield return new StorageInstaller();
             yield return new RoutingInstaller();
+            yield return new StorageInstaller();
             yield return new IntegrationInstaller();
         }
     }

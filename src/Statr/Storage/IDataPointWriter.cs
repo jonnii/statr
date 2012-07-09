@@ -1,4 +1,6 @@
 namespace Statr.Storage
 {
-    public interface IDataPointWriter { }
+    public interface IDataPointWriter
+    {
+    }
 }

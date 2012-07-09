@@ -10,9 +10,7 @@ namespace Statr.IntegrationTests.Stories.Steps
             context.Application.Initialize();
             context.Container = context.Application.Container;
 
-            var storageEngineFactory = context.Container.Resolve<IStorageEngineFactory>();
-
-            context.StorageEngine = storageEngineFactory.Create(@"c:\dev\tmp\integration-tests");
+            context.StorageEngine = context.Container.Resolve<IStorageEngine>();
         }
     }
 }

@@ -6,8 +6,8 @@ namespace Statr.Storage
     {
         string RootFilePath { get; }
 
-        IStorageTree CreateTree(string name);
+        IStorageTree GetOrCreateTree(string name);
 
-        IStorageTree CreateTree(string name, Action<IStorageTreeConfiguration> configuration);
+        IStorageTree GetOrCreateTree(string name, Action<IStorageTreeConfiguration> configuration);
     }
 }

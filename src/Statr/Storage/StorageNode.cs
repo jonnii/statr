@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Statr.Storage
@@ -30,9 +31,13 @@ namespace Statr.Storage
             File.WriteAllText(Path.Combine(FilePath, ".metadata"), metaData);
         }
 
-        public void Store(IEnumerable<DataPoint> points)
+        public void Store(DataPointCollection points)
         {
+            var firstPoint = points.First();
+            var firstStamp = firstPoint.TimeStamp;
 
+            var slice = CreateSlice(firstStamp, 1);
+            slice.Write(points.ToSliceData());
         }
 
         public IStorageSlice CreateSlice(long startTime, int timeStep)

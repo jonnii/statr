@@ -18,6 +18,12 @@
         <RootUrl>http://localhost:17891</RootUrl>
       </parameters>
     </component>
+
+    <component id="Statr.Storage.StorageEngine">
+      <parameters>
+        <RootFilePath>c:\dev\tmp\storage</RootFilePath>
+      </parameters>
+    </component>
   </components>
 
 </configuration>

@@ -33,16 +33,21 @@ namespace Statr.Storage
             File.Create(SlicePath).Dispose();
         }
 
-        public async void Write(SliceData sliceData)
+        public void Write(SliceData sliceData)
         {
             var dataPoints = sliceData.DataPoints;
 
-            var result = new byte[dataPoints.Length * sizeof(long)];
+            if (dataPoints.Length == 0)
+            {
+                throw new ArgumentException("There are no data points to write down", "sliceData");
+            }
+
+            var result = new byte[dataPoints.Length * sizeof(float)];
             Buffer.BlockCopy(dataPoints, 0, result, 0, result.Length);
 
             using (var file = File.OpenWrite(SlicePath))
             {
-                await file.WriteAsync(result, 0, result.Length);
+                file.Write(result, 0, result.Length);
             }
         }
 

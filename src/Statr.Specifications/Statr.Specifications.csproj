@@ -125,6 +125,7 @@
     <Compile Include="Storage\BucketRepositorySpecification.cs" />
     <Compile Include="Storage\DataPointCacheSpecification.cs" />
     <Compile Include="Storage\DataPointRepositorySpecification.cs" />
+    <Compile Include="Storage\DataPointWriterSpecification.cs" />
     <Compile Include="Storage\StorageEngineSpecification.cs" />
   </ItemGroup>
   <ItemGroup>

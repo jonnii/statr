@@ -168,10 +168,10 @@
     <Compile Include="Storage\IDataPointRepository.cs" />
     <Compile Include="Storage\IDataPointWriter.cs" />
     <Compile Include="Storage\IStorageEngine.cs" />
-    <Compile Include="Storage\IStorageEngineFactory.cs" />
     <Compile Include="Storage\IStorageNode.cs" />
     <Compile Include="Storage\IStorageNodeConfiguration.cs" />
     <Compile Include="Storage\IStorageSlice.cs" />
+    <Compile Include="Storage\IStorageStrategyFactory.cs" />
     <Compile Include="Storage\IStorageTree.cs" />
     <Compile Include="Storage\IStorageTreeConfiguration.cs" />
     <Compile Include="Storage\SliceData.cs" />
@@ -179,6 +179,7 @@
     <Compile Include="Storage\StorageNode.cs" />
     <Compile Include="Storage\StorageNodeConfiguration.cs" />
     <Compile Include="Storage\StorageSlice.cs" />
+    <Compile Include="Storage\StorageStrategyFactory.cs" />
     <Compile Include="Storage\StorageTree.cs" />
     <Compile Include="Storage\StorageTreeConfiguration.cs" />
     <Compile Include="Storage\Strategies\ImmediateStorageStrategy.cs" />

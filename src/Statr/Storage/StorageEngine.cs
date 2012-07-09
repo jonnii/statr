@@ -5,23 +5,21 @@ namespace Statr.Storage
 {
     public class StorageEngine : IStorageEngine
     {
-        public StorageEngine(string rootFilePath)
+        public StorageEngine()
         {
-            RootFilePath = rootFilePath;
-
             Logger = NullLogger.Instance;
         }
 
         public ILogger Logger { get; set; }
 
-        public string RootFilePath { get; private set; }
+        public string RootFilePath { get; set; }
 
-        public IStorageTree CreateTree(string name)
+        public IStorageTree GetOrCreateTree(string name)
         {
-            return CreateTree(name, c => { });
+            return GetOrCreateTree(name, c => { });
         }
 
-        public IStorageTree CreateTree(string name, Action<IStorageTreeConfiguration> configuration)
+        public IStorageTree GetOrCreateTree(string name, Action<IStorageTreeConfiguration> configuration)
         {
             Logger.DebugFormat("Creating storage tree: {0}", name);
 

@@ -1,5 +1,4 @@
 using Castle.Facilities.Startable;
-using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
@@ -12,7 +11,8 @@ namespace Statr.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
-                Component.For<IStorageEngineFactory>().AsFactory(),
+                Component.For<IStorageStrategyFactory>().ImplementedBy<StorageStrategyFactory>(),
+
                 Component.For<IStorageEngine>().ImplementedBy<StorageEngine>(),
                 Component.For<IBucketRepository>().ImplementedBy<BucketRepository>(),
                 Component.For<IDataPointRepository>().ImplementedBy<DataPointRepository>(),

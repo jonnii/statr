@@ -13,12 +13,11 @@ namespace Statr.IntegrationTests.Manual
         {
             var container = GetContainer();
 
-            var storageEngineFactory = container.Resolve<IStorageEngineFactory>();
-            var storageEngine = storageEngineFactory.Create(@"c:\dev\tmp\storage");
+            var storageEngine = container.Resolve<IStorageEngine>();
 
-            var storageTree = storageEngine.CreateTree("tree");
+            var storageTree = storageEngine.GetOrCreateTree("tree");
 
-            var node = storageTree.CreateNode("bucket", k =>
+            var node = storageTree.GetOrCreateNode("bucket", k =>
             {
                 k.TimeStep = 1;
             });

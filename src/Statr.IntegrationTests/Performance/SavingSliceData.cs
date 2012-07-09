@@ -15,11 +15,10 @@ namespace Statr.IntegrationTests.Performance
             application.Initialize();
             var container = application.Container;
 
-            var storageEngineFactory = container.Resolve<IStorageEngineFactory>();
-            var storageEngine = storageEngineFactory.Create(@"c:\dev\tmp\storage");
+            var storageEngine = container.Resolve<IStorageEngine>();
 
-            var storageTree = storageEngine.CreateTree("performance");
-            var node = storageTree.CreateNode("bucket", k =>
+            var storageTree = storageEngine.GetOrCreateTree("performance");
+            var node = storageTree.GetOrCreateNode("bucket", k =>
             {
                 k.TimeStep = 1;
             });

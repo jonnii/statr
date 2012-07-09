@@ -6,8 +6,8 @@ namespace Statr.Storage
     {
         string FilePath { get; }
 
-        IStorageNode CreateNode(string node);
+        IStorageNode GetOrCreateNode(string node);
 
-        IStorageNode CreateNode(string node, Action<IStorageNodeConfiguration> action);
+        IStorageNode GetOrCreateNode(string node, Action<IStorageNodeConfiguration> action);
     }
 }

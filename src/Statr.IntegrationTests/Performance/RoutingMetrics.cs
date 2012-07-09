@@ -25,7 +25,7 @@ namespace Statr.IntegrationTests.Performance
                 var watch = new Stopwatch();
                 watch.Start();
 
-                var requests = GenerateMetrics();
+                var requests = GenerateMetrics(200);
                 var tasks = requests.Select(generator.SendMetrics);
 
                 Task.WaitAll(tasks.ToArray());
@@ -39,20 +39,15 @@ namespace Statr.IntegrationTests.Performance
             }
         }
 
-        private IEnumerable<GeneratorRequest> GenerateMetrics()
+        private IEnumerable<GeneratorRequest> GenerateMetrics(int numMetrics)
         {
-            yield return new GeneratorRequest("stats.dogs", "count", 1000, new Range(5, 10), new Range(500, 1000));
-            yield return new GeneratorRequest("stats.dogs", "count", 1000, new Range(5, 10), new Range(500, 1000));
-            yield return new GeneratorRequest("stats.dogs", "count", 1000, new Range(5, 10), new Range(500, 1000));
-            yield return new GeneratorRequest("stats.dogs", "count", 1000, new Range(5, 10), new Range(500, 1000));
-            yield return new GeneratorRequest("stats.dogs", "count", 100, new Range(50, 100), new Range(500, 1000));
-
-            yield return new GeneratorRequest("stats.cats", "count", 1000, new Range(5, 10), new Range(500, 1000));
-            yield return new GeneratorRequest("stats.cats", "count", 1000, new Range(5, 10), new Range(500, 1000));
-            yield return new GeneratorRequest("stats.cats", "count", 1000, new Range(5, 10), new Range(500, 1000));
-            yield return new GeneratorRequest("stats.cats", "count", 100, new Range(50, 100), new Range(500, 1000));
-
-            yield return new GeneratorRequest("stats.horses", "count", 100, new Range(50, 100), new Range(500, 1000));
+            for (int i = 0; i < 60; ++i)
+            {
+                yield return new GeneratorRequest("stats.dogs", "count", numMetrics, new Range(1, 1), new Range(500, 1000));
+                yield return new GeneratorRequest("stats.cats", "count", numMetrics, new Range(1, 1), new Range(500, 1000));
+                yield return new GeneratorRequest("stats.horses", "count", numMetrics, new Range(1, 1), new Range(500, 1000));
+                yield return new GeneratorRequest("stats.cakes", "count", numMetrics, new Range(1, 1), new Range(500, 1000));
+            }
         }
     }
 }

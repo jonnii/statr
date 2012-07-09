@@ -1,60 +1,81 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using Castle.Core.Logging;
 using Statr.Routing;
-using Statr.Storage.Strategies;
 
 namespace Statr.Storage
 {
-    public class DataPointWriter : IDataPointWriter
+    public class DataPointWriter : IDataPointWriter, IDisposable
     {
         private readonly IDataPointStream dataPointStream;
 
-        private readonly IStorageEngineFactory storageEngineFactory;
+        private readonly IStorageStrategyFactory storageStrategyFactory;
+
+        private readonly IStorageEngine storageEngine;
+
+        private IDisposable eventBucketSubscription;
 
         public DataPointWriter(
             IDataPointStream dataPointStream,
-            IStorageEngineFactory storageEngineFactory)
+            IStorageStrategyFactory storageStrategyFactory,
+            IStorageEngine storageEngine)
         {
             this.dataPointStream = dataPointStream;
-            this.storageEngineFactory = storageEngineFactory;
+            this.storageStrategyFactory = storageStrategyFactory;
+            this.storageEngine = storageEngine;
+
+            StorageTreeName = "default";
 
             Logger = NullLogger.Instance;
         }
 
         public ILogger Logger { get; set; }
 
+        public string StorageTreeName { get; set; }
+
         public void Start()
         {
-            var storageEngine = storageEngineFactory.Create(@"c:\dev\tmp\integration-tests");
-
-            Logger.Debug("Starting data point writer");
+            Logger.Info("Starting Data Point Writer");
 
             var eventsByBucket = dataPointStream.DataPoints
                 .GroupBy(e => e.Bucket);
 
-            eventsByBucket.Subscribe(s =>
+            eventBucketSubscription = eventsByBucket.Subscribe(s =>
             {
-                var strategy = GetStorageStrategy(s.Key);
-                var observable = strategy.Apply(s);
+                var bucketReference = s.Key;
+                var dataPoints = s.Select(e => e.DataPoint);
 
-                observable.Subscribe(e =>
-                {
-                    Logger.DebugFormat("Writing down {0} events", e.Count());
+                var storageStrategy = storageStrategyFactory.Build();
+                var observable = storageStrategy.Apply(dataPoints);
 
-                    var tree = storageEngine.CreateTree("default");
-                    var node = tree.CreateNode(s.Key.Name);
-                    var dataPoints = e.Select(k => k.DataPoint);
-
-                    node.Store(dataPoints);
-                });
+                observable.Subscribe(e => PersistEvents(bucketReference, e));
             });
         }
 
-        private IStorageStrategy GetStorageStrategy(BucketReference key)
+        private void PersistEvents(
+            BucketReference bucketReference,
+            IEnumerable<DataPoint> dataPoints)
         {
-            return new ImmediateStorageStrategy();
+            Logger.DebugFormat("Writing down {0} data points", dataPoints.Count());
+
+            var tree = storageEngine.GetOrCreateTree(StorageTreeName);
+            var node = tree.GetOrCreateNode(bucketReference.Name);
+
+            var collection = new DataPointCollection(dataPoints.ToList());
+
+            node.Store(collection);
+        }
+
+        public void Dispose()
+        {
+            Logger.Info("Disposing data point writer");
+
+            if (eventBucketSubscription != null)
+            {
+                eventBucketSubscription.Dispose();
+            }
         }
     }
 }
