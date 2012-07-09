@@ -4,7 +4,7 @@ using Castle.Core.Logging;
 
 namespace Statr.Routing
 {
-    public class DataPointStream : IDataPointStream
+    public class DataPointStream : IDataPointStream, IDisposable
     {
         private readonly Subject<DataPointEvent> root;
 
@@ -28,6 +28,14 @@ namespace Statr.Routing
 
             var observable = dataPointGenerator.DataPoints;
             observable.Subscribe(c => root.OnNext(c));
+        }
+
+        public void Dispose()
+        {
+            Logger.InfoFormat("Disposing of DataPointStream");
+
+            root.OnCompleted();
+            root.Dispose();
         }
     }
 }

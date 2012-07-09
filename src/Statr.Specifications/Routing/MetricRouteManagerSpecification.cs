@@ -113,6 +113,29 @@ namespace Statr.Specifications.Routing
             static IMetricRoute route;
         }
 
+        [Subject(typeof(MetricRouteManager))]
+        public class when_flushing_routes : with_configuration
+        {
+            Establish context = () =>
+            {
+                metricRouteFactory.WhenToldTo(f => f.Build(Param.IsAny<BucketReference>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
+                    .Return(An<IMetricRoute>());
+
+                route = Subject.GetRoute(Metric.Count("stats.awesome", 60));
+            };
+
+            Because of = () =>
+                Subject.FlushAll();
+
+            It should_release_route = () =>
+                metricRouteFactory.WasToldTo(f => f.Release(Param.IsAny<IMetricRoute>()));
+
+            It should_clear_out_routes = () =>
+                Subject.NumRoutes.ShouldEqual(0);
+
+            static IMetricRoute route;
+        }
+
         public class with_metric_route_manager : WithFakes
         {
             Establish context = () =>

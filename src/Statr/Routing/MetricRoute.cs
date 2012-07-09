@@ -84,23 +84,17 @@ namespace Statr.Routing
             ++NumProcessedMetrics;
         }
 
-        public void Flush()
-        {
-            OnMetricsAggregated(aggregationStrategy.Current);
-        }
-
         public void Dispose()
         {
             Logger.InfoFormat("Disposing of metric route: {0}", Bucket);
 
-            if (subscription == null)
+            metrics.OnCompleted();
+            dataPoints.OnCompleted();
+
+            if (subscription != null)
             {
-                return;
+                subscription.Dispose();
             }
-
-            subscription.Dispose();
-
-            Flush();
         }
     }
 }

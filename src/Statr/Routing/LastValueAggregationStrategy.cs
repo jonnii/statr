@@ -2,20 +2,16 @@ namespace Statr.Routing
 {
     public class LastValueAggregationStrategy : IAggregationStrategy
     {
-        public AggregatedMetric Current { get; private set; }
-
         public AggregatedMetric Aggregate(AggregatedMetric original, Metric metric)
         {
             var countMetric = metric;
 
-            Current = new AggregatedMetric
+            return new AggregatedMetric
             {
                 LastValue = countMetric.Value,
                 NumMetrics = ++original.NumMetrics,
                 Value = countMetric.Value
             };
-
-            return Current;
         }
     }
 }

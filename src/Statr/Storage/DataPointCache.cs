@@ -29,7 +29,7 @@ namespace Statr.Storage
         {
             Logger.DebugFormat("Starting data point cache, subscribing to data point stream");
 
-            subscription = this.dataPointStream.DataPoints.Subscribe(Push);
+            subscription = dataPointStream.DataPoints.Subscribe(Push);
         }
 
         public void Push(DataPointEvent dataPointEvent)
@@ -63,6 +63,8 @@ namespace Statr.Storage
 
         public void Dispose()
         {
+            Logger.Info("Disposing of DataPointCache");
+
             if (subscription != null)
             {
                 subscription.Dispose();

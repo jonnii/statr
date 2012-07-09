@@ -28,8 +28,19 @@ namespace Statr.IntegrationTests.Stories.Metrics
         {
             Given(TheApplication.IsStarted).
             When(TheMetric.IsRouted(Metric.Count("stats.application.metric", 500))).
-                And(TheMetrics.AreFlushed).
+                And(TheMetrics.AreFlushed);
             Then(QueryFor.Metrics("stats.application.metric", MetricType.Count, m => m.Count() == 1));
+        }
+
+        [Test]
+        public void ShouldGetMetricsAfterFlushing()
+        {
+            Given(TheApplication.IsStarted).
+            When(TheMetric.IsRouted(Metric.Count("stats.application.metric", 500))).
+                And(TheMetrics.AreFlushed).
+                And(TheMetric.IsRouted(Metric.Count("stats.application.metric", 600))).
+                And(TheMetrics.AreFlushed).
+            Then(QueryFor.Metrics("stats.application.metric", MetricType.Count, m => m.Count() == 2));
         }
 
         [Test]

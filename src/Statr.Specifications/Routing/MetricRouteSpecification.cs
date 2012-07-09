@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Machine.Specifications;
 using Statr.Routing;
@@ -73,6 +75,43 @@ namespace Statr.Specifications.Routing
                 Subject.NumPublishedDataPoints.ShouldEqual<ulong>(1L);
 
             static DataPoint dataPoint;
+        }
+
+        [Subject(typeof(MetricRouteManager))]
+        public class with_long_running_route
+        {
+            Establish context = () =>
+            {
+                route = new MetricRoute(
+                    new BucketReference("key", MetricType.Count),
+                    120,
+                    new AccumulateAggregationStrategy());
+
+                route.Start();
+
+                dataPoints = new List<DataPointEvent>();
+                route.DataPoints.Subscribe(dataPoints.Add);
+
+                route.Push(Metric.Count("key", 10));
+                route.Push(Metric.Count("key", 10));
+                route.Push(Metric.Count("key", 10));
+            };
+
+            Because of = () =>
+                route.Dispose();
+
+            It should_have_processed_metrics = () =>
+                route.NumProcessedMetrics.ShouldEqual<ulong>(3);
+
+            It should_have_published_data_points = () =>
+                route.NumPublishedDataPoints.ShouldEqual<ulong>(1);
+
+            It should_publish_data_point_with_values_aggregated_thus_far = () =>
+                dataPoints.Single().DataPoint.Value.ShouldEqual(30);
+
+            static MetricRoute route;
+
+            static List<DataPointEvent> dataPoints;
         }
 
         public class with_route

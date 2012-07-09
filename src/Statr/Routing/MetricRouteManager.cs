@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Logging;
 using Statr.Configuration;
@@ -40,6 +41,11 @@ namespace Statr.Routing
             get { return registeredRoutes.Count; }
         }
 
+        public IEnumerable<IMetricRoute> Routes
+        {
+            get { return registeredRoutes.Values; }
+        }
+
         public IMetricRoute GetRoute(Metric metric)
         {
             return registeredRoutes.GetOrAdd(metric.ToBucket(), BuildRoute);
@@ -49,12 +55,15 @@ namespace Statr.Routing
         {
             Logger.DebugFormat("Flushing all routes");
 
-            var routes = registeredRoutes.Values;
+            var routes = Routes;
+            registeredRoutes.Clear();
 
             foreach (var route in routes)
             {
-                route.Flush();
+                metricRouteFactory.Release(route);
             }
+
+            registeredRoutes.Clear();
         }
 
         public IMetricRoute BuildRoute(BucketReference bucketReference)

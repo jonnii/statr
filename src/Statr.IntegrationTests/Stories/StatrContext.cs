@@ -13,5 +13,12 @@ namespace Statr.IntegrationTests.Stories
         public IStorageEngine StorageEngine { get; set; }
 
         public Config Config { get; set; }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+
+            Application.Dispose();
+        }
     }
 }

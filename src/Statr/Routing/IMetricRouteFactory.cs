@@ -13,5 +13,11 @@ namespace Statr.Routing
         /// <param name="aggregationStrategy">The aggregation strategy for this metric route</param>
         /// <returns>A metric route</returns>
         IMetricRoute Build(BucketReference bucketReference, int frequencyInSeconds, IAggregationStrategy aggregationStrategy);
+
+        /// <summary>
+        /// Releases the metric route, this will clean up the route.
+        /// </summary>
+        /// <param name="metricRoute">The metric route to release</param>
+        void Release(IMetricRoute metricRoute);
     }
 }
