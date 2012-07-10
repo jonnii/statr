@@ -7,7 +7,7 @@ using Statr.Routing;
 
 namespace Statr.Storage
 {
-    public class DataPointWriter : IDataPointWriter, IDisposable
+    public class DataPointWriter : IDisposable
     {
         private readonly IDataPointStream dataPointStream;
 
@@ -47,7 +47,7 @@ namespace Statr.Storage
                 var bucketReference = s.Key;
                 var dataPoints = s.Select(e => e.DataPoint);
 
-                var storageStrategy = storageStrategyFactory.Build();
+                var storageStrategy = storageStrategyFactory.Build(bucketReference);
                 var observable = storageStrategy.Apply(dataPoints);
 
                 observable.Subscribe(e => PersistEvents(bucketReference, e));

@@ -89,6 +89,7 @@
     <Compile Include="Stories\StatrStory.cs" />
     <Compile Include="Stories\Steps\QueryFor.cs" />
     <Compile Include="Stories\Steps\TheApplication.cs" />
+    <Compile Include="Stories\Steps\TheBucket.cs" />
     <Compile Include="Stories\Steps\TheConfigFile.cs" />
     <Compile Include="Stories\Steps\TheMetric.cs" />
     <Compile Include="Stories\Steps\TheMetricRouter.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Stories\Steps\TheStorageEngine.cs" />
     <Compile Include="Stories\Storage\StorageFeature.cs" />
     <Compile Include="Support\DirectClientTransport.cs" />
+    <Compile Include="Windsor\StorageStrategyFactoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="performance.nlog.config">

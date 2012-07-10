@@ -19,6 +19,12 @@ namespace Statr.Configuration
 
         public string Pattern { get; set; }
 
+        public StorageConfig Storage
+        {
+            get;
+            set;
+        }
+
         public List<string> Retentions { get; set; }
 
         public bool Matches(string metricName)

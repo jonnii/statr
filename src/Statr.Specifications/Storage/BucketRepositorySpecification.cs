@@ -1,18 +1,17 @@
 using System.Collections.Generic;
 using Machine.Fakes;
 using Machine.Specifications;
+using Statr.Configuration;
 using Statr.Storage;
+using Statr.Storage.Strategies;
 
 namespace Statr.Specifications.Storage
 {
     public class BucketRepositorySpecification
     {
         [Subject(typeof(BucketRepository))]
-        public class when_getting_buckets : WithSubject<BucketRepository>
+        public class when_getting_buckets : with_buckets
         {
-            Establish context = () =>
-                Subject.Get(new BucketReference("bucket.name", MetricType.Count));
-
             Because of = () =>
                 buckets = Subject.List();
 
@@ -20,6 +19,12 @@ namespace Statr.Specifications.Storage
                 buckets.ShouldNotBeEmpty();
 
             static IEnumerable<Bucket> buckets;
+        }
+
+        public class with_buckets : WithSubject<BucketRepository>
+        {
+            Establish context = () =>
+                Subject.Get(new BucketReference("bucket.name", MetricType.Count));
         }
     }
 }

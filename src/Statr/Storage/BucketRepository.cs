@@ -30,7 +30,9 @@ namespace Statr.Storage
         {
             Logger.DebugFormat("Building new bucket for {0}", bucketReference);
 
-            return new Bucket(bucketReference.Name, bucketReference.MetricType);
+            return new Bucket(
+                bucketReference.Name,
+                bucketReference.MetricType);
         }
     }
 }

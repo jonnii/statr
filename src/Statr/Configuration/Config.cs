@@ -27,7 +27,7 @@ namespace Statr.Configuration
 
         public IEnumerable<Retention> GetRetentions(string metricName)
         {
-            var entry = Entries.FirstOrDefault(e => e.Matches(metricName));
+            var entry = GetEntryMaching(metricName);
 
             if (entry == null)
             {
@@ -40,11 +40,25 @@ namespace Statr.Configuration
             return entry.Retentions.Select(RetentionParser.Parse);
         }
 
+        private Entry GetEntryMaching(string name)
+        {
+            return Entries.FirstOrDefault(e => e.Matches(name));
+        }
+
         public Entry AddEntry(string name, string pattern, params string[] retentions)
         {
             var entry = new Entry(name, pattern, retentions);
             Entries.Add(entry);
             return entry;
+        }
+
+        public StorageConfig GetStorage(string name)
+        {
+            var entry = GetEntryMaching(name);
+
+            return entry == null
+                ? StorageConfig.Default
+                : entry.Storage ?? StorageConfig.Default;
         }
     }
 }

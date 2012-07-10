@@ -43,7 +43,7 @@ namespace Statr.Specifications.Storage
         {
             Establish context = () =>
             {
-                The<IStorageStrategyFactory>().WhenToldTo(r => r.Build()).Return(new ImmediateStorageStrategy());
+                The<IStorageStrategyFactory>().WhenToldTo(r => r.Build(Param.IsAny<BucketReference>())).Return(new ImmediateStorageStrategy());
 
                 storageTree = An<IStorageTree>();
                 storageNode = An<IStorageNode>();
