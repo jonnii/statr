@@ -11,7 +11,7 @@ namespace Statr.Specifications.Storage
     public class DataPointCacheSpecification
     {
         [Subject(typeof(DataPointCache))]
-        public class when_getting_bucket : with_empty_cache
+        public class when_getting_bucket : WithSubject<DataPointCache>
         {
             Because of = () =>
                 points = Subject.Get(new BucketReference("metric.name", MetricType.Count));
@@ -34,11 +34,6 @@ namespace Statr.Specifications.Storage
             static IEnumerable<DataPoint> points;
         }
 
-        public class with_empty_cache : WithSubject<DataPointCache>
-        {
-
-        }
-
         public class with_points : WithSubject<DataPointCache>
         {
             Establish context = () =>
@@ -46,6 +41,7 @@ namespace Statr.Specifications.Storage
                 The<IDataPointStream>().WhenToldTo(g => g.DataPoints).Return(new Subject<DataPointEvent>());
 
                 Subject.Start();
+
                 Subject.Push(
                     new DataPointEvent(
                         new BucketReference("metric.name", MetricType.Count),
