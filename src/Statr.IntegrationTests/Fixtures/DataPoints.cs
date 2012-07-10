@@ -10,7 +10,7 @@ namespace Statr.IntegrationTests.Fixtures
         {
             var points = Enumerable.Range(0, numPoints)
                 .Reverse()
-                .Select(i => new DataPoint(DateTime.Now.AddSeconds(-i), i))
+                .Select(i => new DataPoint(DateTime.Now.AddSeconds(-i), i, 1))
                 .ToArray();
 
             return new DataPointCollection(points);

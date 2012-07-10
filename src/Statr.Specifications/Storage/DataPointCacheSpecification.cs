@@ -49,7 +49,7 @@ namespace Statr.Specifications.Storage
                 Subject.Push(
                     new DataPointEvent(
                         new BucketReference("metric.name", MetricType.Count),
-                        new DataPoint(DateTime.Now, 500)));
+                        new DataPoint(DateTime.Now, 500, 1)));
             };
         }
     }

@@ -14,7 +14,7 @@ namespace Statr.Specifications.Routing
             {
                 var args = new DataPointEvent(
                     new BucketReference("name", MetricType.Count),
-                    new DataPoint(DateTime.Now, 500));
+                    new DataPoint(DateTime.Now, 500, 1));
 
                 Subject.DataPoints.Subscribe(d => ++raised);
 

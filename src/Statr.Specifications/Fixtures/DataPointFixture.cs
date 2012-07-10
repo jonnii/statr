@@ -7,7 +7,7 @@ namespace Statr.Specifications.Fixtures
     {
         public static DataPoint Create(params Action<DataPoint>[] builders)
         {
-            var config = new DataPoint(DateTime.Now, 500);
+            var config = new DataPoint(DateTime.Now, 500, 1);
 
             foreach (var builder in builders)
             {

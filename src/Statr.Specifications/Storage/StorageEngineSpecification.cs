@@ -13,7 +13,7 @@ namespace Statr.Specifications.Storage
             Establish context = () =>
                 dataPoints = new[]
                 {
-                    new DataPoint(DateTime.Now.Ticks, 500)    
+                    new DataPoint(DateTime.Now.Ticks, 500, 1)    
                 };
 
             static DataPoint[] dataPoints;

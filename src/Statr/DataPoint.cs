@@ -4,25 +4,27 @@ namespace Statr
 {
     public class DataPoint
     {
-        public DataPoint(DateTime timeStamp, float? value)
+        public DataPoint(DateTime timeStamp, float? value, uint numMetrics)
+            : this(timeStamp.Ticks, value, numMetrics)
         {
-            TimeStamp = timeStamp.Ticks;
-            Value = value;
         }
 
-        public DataPoint(long timeStamp, float? value)
+        public DataPoint(long timeStamp, float? value, uint numMetrics)
         {
             TimeStamp = timeStamp;
             Value = value;
+            NumMetrics = numMetrics;
         }
 
         public long TimeStamp { get; set; }
+
+        public uint NumMetrics { get; set; }
 
         public float? Value { get; set; }
 
         public override string ToString()
         {
-            return string.Concat("[DataPoint TimeStamp=", TimeStamp, " Value=", Value, "]");
+            return string.Concat("[DataPoint TimeStamp=", TimeStamp, " Value=", Value, " NumMetrics=", NumMetrics, "]");
         }
     }
 }

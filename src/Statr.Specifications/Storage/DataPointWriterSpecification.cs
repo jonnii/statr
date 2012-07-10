@@ -26,7 +26,7 @@ namespace Statr.Specifications.Storage
                     {
                         new DataPointEvent(
                             new BucketReference("bucket", MetricType.Count), 
-                            new DataPoint(DateTime.Now, 500))
+                            new DataPoint(DateTime.Now, 500, 1))
                     }.ToObservable());
 
             Because of = () =>

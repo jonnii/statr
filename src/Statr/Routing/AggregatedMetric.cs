@@ -4,7 +4,7 @@ namespace Statr.Routing
 {
     public class AggregatedMetric
     {
-        public int NumMetrics { get; set; }
+        public uint NumMetrics { get; set; }
 
         public float LastValue { get; set; }
 
@@ -17,7 +17,7 @@ namespace Statr.Routing
 
         public DataPoint ToDataPoint()
         {
-            return new DataPoint(DateTime.UtcNow, Value);
+            return new DataPoint(DateTime.UtcNow, Value, NumMetrics);
         }
     }
 }
