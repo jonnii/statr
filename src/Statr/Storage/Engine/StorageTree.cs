@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Statr.Storage
+namespace Statr.Storage.Engine
 {
     public class StorageTree : IStorageTree
     {
         private readonly IStorageEngine storageEngine;
 
         public StorageTree(
-            IStorageEngine storageEngine,
+            StorageEngine storageEngine,
             string name,
             IStorageTreeConfiguration treeConfiguration)
         {

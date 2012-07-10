@@ -11,8 +11,8 @@ namespace Statr.Storage
     {
         private readonly IDataPointStream dataPointStream;
 
-        private readonly ConcurrentDictionary<BucketReference, DataPointCollection> dataPoints =
-            new ConcurrentDictionary<BucketReference, DataPointCollection>();
+        private readonly ConcurrentDictionary<BucketReference, List<DataPoint>> dataPoints =
+            new ConcurrentDictionary<BucketReference, List<DataPoint>>();
 
         private IDisposable subscription;
 
@@ -42,19 +42,23 @@ namespace Statr.Storage
             dataPoints.AddOrUpdate(
                 bucket,
                 key => CreateDataPointCacheEntry(key, dataPoint),
-                (key, list) => list.Add(dataPoint));
+                (key, list) =>
+                {
+                    list.Add(dataPoint);
+                    return list;
+                });
         }
 
-        public DataPointCollection CreateDataPointCacheEntry(BucketReference key, DataPoint point)
+        public List<DataPoint> CreateDataPointCacheEntry(BucketReference key, DataPoint point)
         {
             Logger.DebugFormat("Creating data point cache entry for {0}", key);
 
-            return new DataPointCollection { point };
+            return new List<DataPoint> { point };
         }
 
         public IEnumerable<DataPoint> Get(BucketReference bucket)
         {
-            DataPointCollection collection;
+            List<DataPoint> collection;
 
             return dataPoints.TryGetValue(bucket, out collection)
                        ? collection

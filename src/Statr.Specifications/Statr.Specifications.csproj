@@ -127,7 +127,7 @@
     <Compile Include="Storage\DataPointCacheSpecification.cs" />
     <Compile Include="Storage\DataPointRepositorySpecification.cs" />
     <Compile Include="Storage\DataPointWriterSpecification.cs" />
-    <Compile Include="Storage\StorageEngineSpecification.cs" />
+    <Compile Include="Storage\Engine\StorageEngineSpecification.cs" />
     <Compile Include="Storage\Strategies\BufferedStorageStrategySpecification.cs" />
   </ItemGroup>
   <ItemGroup>

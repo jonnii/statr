@@ -2,6 +2,7 @@
 using System.IO;
 using NUnit.Framework;
 using Statr.Storage;
+using Statr.Storage.Engine;
 
 namespace Statr.IntegrationTests.Stories.Steps
 {
@@ -16,7 +17,7 @@ namespace Statr.IntegrationTests.Stories.Steps
         {
             return context =>
             {
-                var rootPath = context.StorageEngine.RootFilePath;
+                var rootPath = ((StorageEngine)context.StorageEngine).RootFilePath;
                 var fullDirectoryPath = Path.Combine(rootPath, directory);
 
                 Assert.That(

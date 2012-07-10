@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reactive.Linq;
 using Machine.Fakes;
 using Machine.Specifications;
@@ -10,13 +11,6 @@ namespace Statr.Specifications.Storage
 {
     public class DataPointWriterSpecification
     {
-        [Subject(typeof(DataPointWriter))]
-        public class in_general : WithSubject<DataPointWriter>
-        {
-            It should_have_default_tree_name = () =>
-                Subject.StorageTreeName.ShouldEqual("default");
-        }
-
         [Subject(typeof(DataPointWriter))]
         public class when_starting : with_storage_engine
         {
@@ -32,31 +26,24 @@ namespace Statr.Specifications.Storage
             Because of = () =>
                 Subject.Start();
 
-            It should_get_or_create_node_for_bucket = () =>
-                storageTree.WasToldTo(s => s.GetOrCreateNode("bucket"));
-
             It should_save_points_in_storage_node = () =>
-                storageNode.WasToldTo(s => s.Store(Param.IsAny<DataPointCollection>()));
+                writer.WasToldTo(s => s.Write(Param.IsAny<IEnumerable<DataPoint>>()));
         }
 
         public class with_storage_engine : WithSubject<DataPointWriter>
         {
             Establish context = () =>
             {
-                The<IStorageStrategyFactory>().WhenToldTo(r => r.Build(Param.IsAny<BucketReference>())).Return(new ImmediateStorageStrategy());
+                The<IStorageStrategyFactory>().WhenToldTo(
+                    r => r.Build(Param.IsAny<BucketReference>())).Return(new ImmediateStorageStrategy());
 
-                storageTree = An<IStorageTree>();
-                storageNode = An<IStorageNode>();
+                writer = An<IDataPointWriter>();
 
-                The<IStorageEngine>().WhenToldTo(e => e.GetOrCreateTree(Param.IsAny<string>()))
-                    .Return(storageTree);
-
-                storageTree.WhenToldTo(t => t.GetOrCreateNode(Param.IsAny<string>())).Return(storageNode);
+                The<IStorageEngine>().WhenToldTo(e => e.GetWriter(new BucketReference("bucket", MetricType.Count)))
+                    .Return(writer);
             };
 
-            protected static IStorageTree storageTree;
-
-            protected static IStorageNode storageNode;
+            protected static IDataPointWriter writer;
         }
     }
 }

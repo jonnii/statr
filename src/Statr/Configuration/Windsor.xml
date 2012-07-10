@@ -19,7 +19,7 @@
       </parameters>
     </component>
 
-    <component id="Statr.Storage.StorageEngine">
+    <component id="Statr.Storage.Engine.StorageEngine">
       <parameters>
         <RootFilePath>c:\dev\tmp\storage</RootFilePath>
       </parameters>

@@ -5,6 +5,7 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Statr.Installers.Factories;
 using Statr.Storage;
+using Statr.Storage.Engine;
 
 namespace Statr.Installers
 {

@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Statr.Storage
+namespace Statr.Storage.Engine
 {
     public class StorageNode : IStorageNode
     {
@@ -31,13 +31,18 @@ namespace Statr.Storage
             File.WriteAllText(Path.Combine(FilePath, ".metadata"), metaData);
         }
 
-        public void Store(DataPointCollection points)
+        public void Store(IEnumerable<DataPoint> dataPoints)
         {
-            var firstPoint = points.First();
+            var firstPoint = dataPoints.First();
             var firstStamp = firstPoint.TimeStamp;
 
             var slice = CreateSlice(firstStamp, 1);
-            slice.Write(points.ToSliceData());
+
+            var startTime = dataPoints.First().TimeStamp;
+            var dataPointValues = dataPoints.Select(d => d.Value.Value).ToArray();
+            var sliceData = new SliceData(startTime, dataPointValues);
+
+            slice.Write(sliceData);
         }
 
         public IStorageSlice CreateSlice(long startTime, int timeStep)

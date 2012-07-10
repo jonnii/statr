@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using Machine.Fakes;
 using Machine.Specifications;
-using Statr.Storage;
+using Statr.Storage.Engine;
 
-namespace Statr.Specifications.Storage
+namespace Statr.Specifications.Storage.Engine
 {
     public class StorageEngineSpecification
     {

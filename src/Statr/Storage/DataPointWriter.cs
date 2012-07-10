@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reactive.Linq;
 using Castle.Core.Logging;
 using Statr.Routing;
@@ -26,14 +24,10 @@ namespace Statr.Storage
             this.storageStrategyFactory = storageStrategyFactory;
             this.storageEngine = storageEngine;
 
-            StorageTreeName = "default";
-
             Logger = NullLogger.Instance;
         }
 
         public ILogger Logger { get; set; }
-
-        public string StorageTreeName { get; set; }
 
         public void Start()
         {
@@ -45,27 +39,16 @@ namespace Statr.Storage
             eventBucketSubscription = eventsByBucket.Subscribe(s =>
             {
                 var bucketReference = s.Key;
-                var dataPoints = s.Select(e => e.DataPoint);
 
                 var storageStrategy = storageStrategyFactory.Build(bucketReference);
-                var observable = storageStrategy.Apply(dataPoints);
 
-                observable.Subscribe(e => PersistEvents(bucketReference, e));
+                var dataPoints = s.Select(e => e.DataPoint);
+                var storableDataPoints = storageStrategy.Apply(dataPoints);
+
+                var bucketWriter = storageEngine.GetWriter(bucketReference);
+
+                storableDataPoints.Subscribe(bucketWriter.Write);
             });
-        }
-
-        private void PersistEvents(
-            BucketReference bucketReference,
-            IEnumerable<DataPoint> dataPoints)
-        {
-            Logger.DebugFormat("Writing down {0} data points", dataPoints.Count());
-
-            var tree = storageEngine.GetOrCreateTree(StorageTreeName);
-            var node = tree.GetOrCreateNode(bucketReference.Name);
-
-            var collection = new DataPointCollection(dataPoints.ToList());
-
-            node.Store(collection);
         }
 
         public void Dispose()

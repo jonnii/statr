@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace Statr.Storage
+namespace Statr.Storage.Engine
 {
     public class StorageSlice : IStorageSlice
     {
