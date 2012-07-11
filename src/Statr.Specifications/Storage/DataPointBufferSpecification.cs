@@ -9,9 +9,9 @@ using Statr.Storage.Strategies;
 
 namespace Statr.Specifications.Storage
 {
-    public class DataPointWriterSpecification
+    public class DataPointBufferSpecification
     {
-        [Subject(typeof(DataPointWriter))]
+        [Subject(typeof(DataPointBuffer))]
         public class when_starting : with_storage_engine
         {
             Establish context = () =>
@@ -30,12 +30,12 @@ namespace Statr.Specifications.Storage
                 writer.WasToldTo(s => s.Write(Param.IsAny<IEnumerable<DataPoint>>()));
         }
 
-        public class with_storage_engine : WithSubject<DataPointWriter>
+        public class with_storage_engine : WithSubject<DataPointBuffer>
         {
             Establish context = () =>
             {
-                The<IStorageStrategyFactory>().WhenToldTo(
-                    r => r.Build(Param.IsAny<BucketReference>())).Return(new ImmediateStorageStrategy());
+                The<IBufferStrategyFactory>().WhenToldTo(
+                    r => r.Build(Param.IsAny<BucketReference>())).Return(new ImmediateStrategy());
 
                 writer = An<IDataPointWriter>();
 

@@ -5,23 +5,23 @@ using Statr.Routing;
 
 namespace Statr.Storage
 {
-    public class DataPointWriter : IDisposable
+    public class DataPointBuffer : IDisposable
     {
         private readonly IDataPointStream dataPointStream;
 
-        private readonly IStorageStrategyFactory storageStrategyFactory;
+        private readonly IBufferStrategyFactory bufferStrategyFactory;
 
         private readonly IStorageEngine storageEngine;
 
-        private IDisposable eventBucketSubscription;
+        private IDisposable bucketSubscription;
 
-        public DataPointWriter(
+        public DataPointBuffer(
             IDataPointStream dataPointStream,
-            IStorageStrategyFactory storageStrategyFactory,
+            IBufferStrategyFactory bufferStrategyFactory,
             IStorageEngine storageEngine)
         {
             this.dataPointStream = dataPointStream;
-            this.storageStrategyFactory = storageStrategyFactory;
+            this.bufferStrategyFactory = bufferStrategyFactory;
             this.storageEngine = storageEngine;
 
             Logger = NullLogger.Instance;
@@ -31,16 +31,16 @@ namespace Statr.Storage
 
         public void Start()
         {
-            Logger.Info("Starting Data Point Writer");
+            Logger.Info("Starting Data Point Buffer");
 
-            var eventsByBucket = dataPointStream.DataPoints
+            var bucketedEvents = dataPointStream.DataPoints
                 .GroupBy(e => e.Bucket);
 
-            eventBucketSubscription = eventsByBucket.Subscribe(s =>
+            bucketSubscription = bucketedEvents.Subscribe(s =>
             {
                 var bucketReference = s.Key;
 
-                var storageStrategy = storageStrategyFactory.Build(bucketReference);
+                var storageStrategy = bufferStrategyFactory.Build(bucketReference);
 
                 var dataPoints = s.Select(e => e.DataPoint);
                 var storableDataPoints = storageStrategy.Apply(dataPoints);
@@ -53,11 +53,11 @@ namespace Statr.Storage
 
         public void Dispose()
         {
-            Logger.Info("Disposing data point writer");
+            Logger.Info("Disposing Data Point Buffer");
 
-            if (eventBucketSubscription != null)
+            if (bucketSubscription != null)
             {
-                eventBucketSubscription.Dispose();
+                bucketSubscription.Dispose();
             }
         }
     }

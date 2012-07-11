@@ -19,7 +19,7 @@ namespace Statr.Configuration
 
         public string Pattern { get; set; }
 
-        public StorageConfig Storage
+        public BufferConfig Buffer
         {
             get;
             set;

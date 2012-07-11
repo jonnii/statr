@@ -7,7 +7,7 @@ namespace Statr.Storage
     /// A storage strategy is used to transform the data point stream into
     /// something that can be written to the storage engine
     /// </summary>
-    public interface IStorageStrategy
+    public interface IBufferStrategy
     {
         /// <summary>
         /// Applies the storage strategy to the given data points

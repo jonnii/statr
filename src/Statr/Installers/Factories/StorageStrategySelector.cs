@@ -27,7 +27,7 @@ namespace Statr.Installers.Factories
             return storage.Properties;
         }
 
-        private StorageConfig GetStorageConfig(IList<object> arguments)
+        private BufferConfig GetStorageConfig(IList<object> arguments)
         {
             var bucketReference = (BucketReference)arguments[0];
             var config = configRepository.GetConfiguration();

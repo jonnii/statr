@@ -105,7 +105,7 @@
     <Compile Include="Api\IStatrApi.cs" />
     <Compile Include="Api\StatrApi.cs" />
     <Compile Include="BucketReference.cs" />
-    <Compile Include="Configuration\StorageConfig.cs" />
+    <Compile Include="Configuration\BufferConfig.cs" />
     <Compile Include="IMetricParser.cs" />
     <Compile Include="Installers\Factories\StorageStrategySelector.cs" />
     <Compile Include="Management\Buckets\BucketsRequest.cs" />
@@ -116,7 +116,7 @@
     <Compile Include="Storage\BucketRepository.cs" />
     <Compile Include="Storage\DataPointCache.cs" />
     <Compile Include="Storage\DataPointRepository.cs" />
-    <Compile Include="Storage\DataPointWriter.cs" />
+    <Compile Include="Storage\DataPointBuffer.cs" />
     <Compile Include="Storage\Engine\StorageEngineDataPointWriter.cs" />
     <Compile Include="Storage\IBucketRepository.cs" />
     <Compile Include="Storage\IDataPointWriter.cs" />
@@ -173,7 +173,7 @@
     <Compile Include="Storage\Engine\IStorageNode.cs" />
     <Compile Include="Storage\Engine\IStorageNodeConfiguration.cs" />
     <Compile Include="Storage\Engine\IStorageSlice.cs" />
-    <Compile Include="Storage\IStorageStrategyFactory.cs" />
+    <Compile Include="Storage\IBufferStrategyFactory.cs" />
     <Compile Include="Storage\Engine\IStorageTree.cs" />
     <Compile Include="Storage\Engine\IStorageTreeConfiguration.cs" />
     <Compile Include="Storage\Engine\SliceData.cs" />
@@ -183,9 +183,9 @@
     <Compile Include="Storage\Engine\StorageSlice.cs" />
     <Compile Include="Storage\Engine\StorageTree.cs" />
     <Compile Include="Storage\Engine\StorageTreeConfiguration.cs" />
-    <Compile Include="Storage\Strategies\BufferedStorageStrategy.cs" />
-    <Compile Include="Storage\Strategies\ImmediateStorageStrategy.cs" />
-    <Compile Include="Storage\IStorageStrategy.cs" />
+    <Compile Include="Storage\Strategies\BufferedStrategy.cs" />
+    <Compile Include="Storage\Strategies\ImmediateStrategy.cs" />
+    <Compile Include="Storage\IBufferStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

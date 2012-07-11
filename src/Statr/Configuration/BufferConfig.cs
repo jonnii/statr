@@ -1,16 +1,17 @@
 using System.Collections.Generic;
+using Statr.Storage.Strategies;
 
 namespace Statr.Configuration
 {
-    public class StorageConfig
+    public class BufferConfig
     {
-        public static StorageConfig Default
+        public static BufferConfig Default
         {
             get
             {
-                return new StorageConfig
+                return new BufferConfig
                 {
-                    Type = "BufferedStorageStrategy"
+                    Type = typeof(BufferedStrategy).Name
                 };
             }
         }
@@ -21,7 +22,7 @@ namespace Statr.Configuration
 
         public override string ToString()
         {
-            return string.Concat("[StorageConfig Type=", Type, "]");
+            return string.Concat("[BufferConfig Type=", Type, "]");
         }
     }
 }

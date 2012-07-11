@@ -52,13 +52,13 @@ namespace Statr.Configuration
             return entry;
         }
 
-        public StorageConfig GetStorage(string name)
+        public BufferConfig GetStorage(string name)
         {
             var entry = GetEntryMaching(name);
 
             return entry == null
-                ? StorageConfig.Default
-                : entry.Storage ?? StorageConfig.Default;
+                ? BufferConfig.Default
+                : entry.Buffer ?? BufferConfig.Default;
         }
     }
 }

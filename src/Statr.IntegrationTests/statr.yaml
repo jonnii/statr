@@ -4,11 +4,11 @@
   - 2s:10d
 
 - Pattern: ^immedate.bucket
-  Storage:
-    Type: ImmediateStorageStrategy
+  Buffer:
+    Type: ImmediateStrategy
 
 - Pattern: ^buffered.with.properties
-  Storage:
-    Type: BufferedStorageStrategy
+  Buffer:
+    Type: BufferedStrategy
     Properties:
       BufferSize: 10000
