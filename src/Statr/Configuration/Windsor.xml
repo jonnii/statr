@@ -7,7 +7,7 @@
       </parameters>
     </component>
 
-    <component id="Statr.Management.ManagementBootstrapper">
+    <component id="Statr.Management.HttpConfigurationFactory">
       <parameters>
         <Port>17891</Port>
       </parameters>

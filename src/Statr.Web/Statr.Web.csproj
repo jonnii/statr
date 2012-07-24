@@ -192,7 +192,9 @@
       <DependentUpon>bootstrap.js</DependentUpon>
     </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\ember-data-latest.min.js" />
     <Content Include="Scripts\ember-latest.min.js" />
+    <Content Include="Scripts\handlebars-1.0.0.beta.6.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.min.js">
       <DependentUpon>jquery-ui-1.8.11.js</DependentUpon>

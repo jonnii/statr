@@ -1,17 +1,17 @@
 ﻿using Machine.Fakes;
 using Machine.Specifications;
 using Statr.Configuration;
-using Statr.Management.Config;
+using Statr.Management.Controllers;
 
-namespace Statr.Specifications.Management.Config
+namespace Statr.Specifications.Management.Controllers
 {
-    public class ConfigServiceSpecification
+    public class ConfigCSpecification
     {
-        [Subject(typeof(ConfigService))]
-        public class on_get : WithSubject<ConfigService>
+        [Subject(typeof(ConfigController))]
+        public class on_get : WithSubject<ConfigController>
         {
             Because of = () =>
-                Subject.OnGet(new ConfigRequest());
+                Subject.Get();
 
             It should_get_configuration = () =>
                 The<IConfigRepository>().WasToldTo(r => r.GetConfiguration());

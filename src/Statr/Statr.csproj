@@ -54,40 +54,30 @@
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack">
-      <HintPath>..\packages\ServiceStack.3.8.3\lib\net35\ServiceStack.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Common">
-      <HintPath>..\packages\ServiceStack.Common.3.8.3\lib\net35\ServiceStack.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\packages\ServiceStack.Common.3.8.3\lib\net35\ServiceStack.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.OrmLite">
-      <HintPath>..\packages\ServiceStack.OrmLite.SqlServer.3.8.3\lib\ServiceStack.OrmLite.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.OrmLite.SqlServer">
-      <HintPath>..\packages\ServiceStack.OrmLite.SqlServer.3.8.3\lib\ServiceStack.OrmLite.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.RazorEngine">
-      <HintPath>..\packages\ServiceStack.3.8.3\lib\net35\ServiceStack.RazorEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Redis">
-      <HintPath>..\packages\ServiceStack.Redis.3.8.4\lib\net35\ServiceStack.Redis.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.ServiceInterface">
-      <HintPath>..\packages\ServiceStack.3.8.3\lib\net35\ServiceStack.ServiceInterface.dll</HintPath>
-    </Reference>
-    <Reference Include="ServiceStack.Text">
-      <HintPath>..\packages\ServiceStack.Text.3.8.3\lib\net35\ServiceStack.Text.dll</HintPath>
-    </Reference>
     <Reference Include="SpeakEasy">
       <HintPath>..\packages\SpeakEasy.0.1.6\lib\net40\SpeakEasy.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20505.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
     <Reference Include="System.Reactive">
       <HintPath>..\packages\Rx-Main.1.0.11226\lib\Net4\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20505.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.SelfHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.SelfHost.4.0.20505.0\lib\net40\System.Web.Http.SelfHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="YamlDotNet.Core, Version=0.2.4453.29938, Culture=neutral, PublicKeyToken=2b53052c5884d7a1, processorArchitecture=MSIL">
@@ -108,8 +98,10 @@
     <Compile Include="Configuration\BufferConfig.cs" />
     <Compile Include="IMetricParser.cs" />
     <Compile Include="Installers\Factories\StorageStrategySelector.cs" />
-    <Compile Include="Management\Buckets\BucketsRequest.cs" />
-    <Compile Include="Management\Buckets\BucketsService.cs" />
+    <Compile Include="Management\Controllers\BucketsController.cs" />
+    <Compile Include="Management\HttpConfigurationFactory.cs" />
+    <Compile Include="Management\Windsor\ReleasingDependencyScope.cs" />
+    <Compile Include="Management\Windsor\WindsorDependencyResolver.cs" />
     <Compile Include="MetricParser.cs" />
     <Compile Include="Routing\DataPointStream.cs" />
     <Compile Include="Routing\IDataPointGenerator.cs" />
@@ -137,12 +129,9 @@
     <Compile Include="Infrastructure\IFileSystem.cs" />
     <Compile Include="IMetricReceiver.cs" />
     <Compile Include="DataPointEvent.cs" />
-    <Compile Include="Management\ManagementAppHost.cs" />
     <Compile Include="Management\ManagementBootstrapper.cs" />
     <Compile Include="Management\ManagementInstaller.cs" />
-    <Compile Include="Management\Config\ConfigRequest.cs" />
-    <Compile Include="Management\Config\ConfigService.cs" />
-    <Compile Include="Management\WindsorContainerAdapter.cs" />
+    <Compile Include="Management\Controllers\ConfigController.cs" />
     <Compile Include="MetricType.cs" />
     <Compile Include="Routing\AccumulateAggregationStrategy.cs" />
     <Compile Include="Routing\IAggregationStrategy.cs" />

@@ -1,38 +1,35 @@
 using System;
+using System.Web.Http.SelfHost;
 using Castle.Core.Logging;
-using Castle.Windsor;
 
 namespace Statr.Management
 {
-    public class ManagementBootstrapper
+    public class ManagementBootstrapper : IDisposable
     {
-        private readonly ManagementAppHost managementAppHost;
+        private readonly HttpSelfHostConfiguration httpSelfHostConfiguration;
 
-        private readonly IWindsorContainer container;
+        private HttpSelfHostServer selfHostServer;
 
         public ManagementBootstrapper(
-            ManagementAppHost managementAppHost,
-            IWindsorContainer container)
+            HttpSelfHostConfiguration httpSelfHostConfiguration)
         {
-            this.managementAppHost = managementAppHost;
-            this.container = container;
+            this.httpSelfHostConfiguration = httpSelfHostConfiguration;
         }
 
         public ILogger Logger { get; set; }
 
-        public int Port { get; set; }
-
         public void Start()
         {
-            var listeningOn = string.Format("http://127.0.0.1:{0}/", Port);
-
-            Logger.InfoFormat("Starting management app host on: {0}", listeningOn);
-
-            managementAppHost.Init();
-            managementAppHost.Container.Adapter = new WindsorContainerAdapter(container);
-            managementAppHost.Start(listeningOn);
+            selfHostServer = new HttpSelfHostServer(httpSelfHostConfiguration);
+            selfHostServer.OpenAsync();
 
             Logger.Info("Started management app host");
+        }
+
+        public void Dispose()
+        {
+            Logger.Info("Stopping management app host");
+            selfHostServer.CloseAsync().Wait();
         }
     }
 }

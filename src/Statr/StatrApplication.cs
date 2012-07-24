@@ -24,7 +24,7 @@ namespace Statr
             var defaultInstallers = new IWindsorInstaller[]
             {
                 new InfrastructureInstaller(LogFileName),
-                new ConfigInstaller(), 
+                new ConfigInstaller() 
             };
 
             var installers = defaultInstallers.Concat(GetInstallers()).ToArray();
@@ -38,7 +38,10 @@ namespace Statr
 
         public void Dispose()
         {
-            Container.Dispose();
+            if (Container != null)
+            {
+                Container.Dispose();
+            }
         }
 
         private string WhereAmI(Assembly assembly)

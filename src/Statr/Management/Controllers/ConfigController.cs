@@ -1,14 +1,14 @@
-﻿using Castle.Core.Logging;
-using ServiceStack.ServiceInterface;
+﻿using System.Web.Http;
+using Castle.Core.Logging;
 using Statr.Configuration;
 
-namespace Statr.Management.Config
+namespace Statr.Management.Controllers
 {
-    public class ConfigService : RestServiceBase<ConfigRequest>
+    public class ConfigController : ApiController
     {
         private readonly IConfigRepository configRepository;
 
-        public ConfigService(IConfigRepository configRepository)
+        public ConfigController(IConfigRepository configRepository)
         {
             this.configRepository = configRepository;
 
@@ -17,7 +17,7 @@ namespace Statr.Management.Config
 
         public ILogger Logger { get; set; }
 
-        public override object OnGet(ConfigRequest request)
+        public Config Get()
         {
             Logger.Info("Getting configuration");
 

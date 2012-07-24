@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using SpeakEasy;
 using Statr.Configuration;
-using Statr.Routing;
 
 namespace Statr.Api
 {
