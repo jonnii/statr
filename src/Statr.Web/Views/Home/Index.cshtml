@@ -52,4 +52,8 @@
 
 <script type="text/x-handlebars" data-template-name="buckets">
     buckets
+    
+    {{#each bucket in controller}}
+        {{bucket.name}}
+    {{/each}}
 </script>

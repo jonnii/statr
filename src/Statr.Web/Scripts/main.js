@@ -1,5 +1,14 @@
 ﻿$(document).ready(function () {
     var App = Em.Application.create();
+
+    App.store = DS.Store.create({
+        revision: 4,
+        adapter: DS.RESTAdapter.create({
+            bulkCommit: false,
+            namespace: "api"
+        })
+    });
+
     App.ApplicationController = Em.Controller.extend();
     App.ApplicationView = Em.View.extend({
         templateName: 'application'
@@ -24,12 +33,17 @@
         templateName: 'configuration'
     });
 
-    App.BucketsController = Em.Controller.extend();
+    App.BucketsController = Em.ArrayController.extend();
     App.BucketsView = Em.View.extend({
         templateName: 'buckets'
     });
+    App.Bucket = DS.Model.extend({
+        
+    });
 
     App.Router = Em.Router.extend({
+        enableLogging: true,
+
         goHome: Ember.Route.transitionTo('home'),
         goConfiguration: Ember.Route.transitionTo('configuration'),
         goBuckets: Ember.Route.transitionTo('buckets'),
@@ -72,10 +86,13 @@
                     router.get('applicationController').connectOutlet({
                         name: 'buckets'
                     });
+
+                    router.get('bucketsController').set('content', App.Bucket.find());
                 },
                 enter: function () {
                     $('ul.nav li').removeClass('active');
                     $('#nav-buckets').addClass('active');
+                    console.log('navigating to buckets');
                 }
             })
         })
