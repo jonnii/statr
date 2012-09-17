@@ -111,7 +111,7 @@
             }),
 
             bucket: Em.Route.extend({
-                route: '/buckets/:bucket_id',
+                route: '/bucket/:bucket_id',
                 connectOutlets: function (router, bucket) {
                     router.get('applicationController').connectOutlet('bucket', bucket);
                 }

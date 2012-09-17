@@ -14,6 +14,7 @@ namespace Statr.Web.App_Start
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
+                //constraints: new { id = @"([a-zA-Z\.]+)" } // anything but a period
             );
 
             routes.MapRoute(

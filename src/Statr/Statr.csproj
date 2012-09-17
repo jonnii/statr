@@ -66,25 +66,19 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Net.Http">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20505.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.WebRequest">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Reactive">
       <HintPath>..\packages\Rx-Main.1.0.11226\lib\Net4\System.Reactive.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20505.0\lib\net40\System.Web.Http.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.SelfHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.SelfHost.4.0.20505.0\lib\net40\System.Web.Http.SelfHost.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.SelfHost.4.0.20710.0\lib\net40\System.Web.Http.SelfHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="YamlDotNet.Core, Version=0.2.4453.29938, Culture=neutral, PublicKeyToken=2b53052c5884d7a1, processorArchitecture=MSIL">
