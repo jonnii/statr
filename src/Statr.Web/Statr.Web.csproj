@@ -243,6 +243,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Statr.Api\Statr.Api.csproj">
+      <Project>{CA2462A6-B083-426F-B0E6-1BF1863CF4DF}</Project>
+      <Name>Statr.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Statr\Statr.csproj">
       <Project>{1C603537-F3BE-4F0C-8933-85EE2DA2906D}</Project>
       <Name>Statr</Name>

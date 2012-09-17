@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
+﻿using System.Web.Http;
 using Statr.Api;
 
 namespace Statr.Web.Controllers.api

@@ -99,6 +99,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Statr.Api\Statr.Api.csproj">
+      <Project>{CA2462A6-B083-426F-B0E6-1BF1863CF4DF}</Project>
+      <Name>Statr.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Statr.Web\Statr.Web.csproj">
       <Project>{FB75C894-0697-4BEB-A281-97BD23A5F458}</Project>
       <Name>Statr.Web</Name>

@@ -1,7 +1,6 @@
 using System;
-using System.Collections.Generic;
 using SpeakEasy;
-using Statr.Configuration;
+using Statr.Api.Models;
 
 namespace Statr.Api
 {

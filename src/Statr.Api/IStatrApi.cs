@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Statr.Configuration;
+﻿using Statr.Api.Models;
 
 namespace Statr.Api
 {
