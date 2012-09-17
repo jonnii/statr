@@ -52,12 +52,24 @@
 
 <script type="text/x-handlebars" data-template-name="buckets">
     buckets
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Bucket</th>
+                <th>Type</th>    
+            </tr>
+        </thead>
+        <tbody>
+            {{#each bucket in content}}
+                <tr>    
+                    <td><a {{action showBucket bucket href=true}}>{{bucket.name}}</a></td>
+                    <td>{{bucket.metricType}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
 
-    {{#each bucket in content}}
-        <div>    
-            <a {{action showBucket bucket href=true}}>{{bucket.name}}</a>
-        </div>
-    {{/each}}
 </script>
 
 <script type="text/x-handlebars" data-template-name="bucket">
