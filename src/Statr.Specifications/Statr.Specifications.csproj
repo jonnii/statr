@@ -106,8 +106,6 @@
     <Compile Include="Configuration\StorageConfigurationSpecification.cs" />
     <Compile Include="Fixtures\ConfigFixture.cs" />
     <Compile Include="Fixtures\DataPointFixture.cs" />
-    <Compile Include="Management\Controllers\BucketsServiceSpecification.cs" />
-    <Compile Include="Management\Controllers\ConfigServiceSpecification.cs" />
     <Compile Include="MetricParserSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\AccumulateAggregationStrategySpecification.cs" />

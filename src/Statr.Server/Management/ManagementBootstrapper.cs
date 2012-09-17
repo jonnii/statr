@@ -2,7 +2,7 @@ using System;
 using System.Web.Http.SelfHost;
 using Castle.Core.Logging;
 
-namespace Statr.Management
+namespace Statr.Server.Management
 {
     public class ManagementBootstrapper : IDisposable
     {

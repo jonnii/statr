@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Web.Http;
@@ -7,15 +8,15 @@ using Castle.Core.Logging;
 using Castle.Windsor;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Statr.Management.Windsor;
+using Statr.Server.Management.Windsor;
 
-namespace Statr.Management
+namespace Statr.Server.Management
 {
-    public class HttpConfigurationFactory
+    public class SelfHostHttpConfigurationFactory
     {
         private readonly IWindsorContainer container;
 
-        public HttpConfigurationFactory(IWindsorContainer container)
+        public SelfHostHttpConfigurationFactory(IWindsorContainer container)
         {
             this.container = container;
 
@@ -28,6 +29,12 @@ namespace Statr.Management
 
         public HttpSelfHostConfiguration Create()
         {
+            if (Port == 0)
+            {
+                throw new StatrException(
+                    "Cannot start the self host http configuration factory without the port being set, was it set in the windsor config?");
+            }
+
             var listeningOn = string.Format("http://127.0.0.1:{0}/", Port);
 
             Logger.InfoFormat("Starting management app host on: {0}", listeningOn);
@@ -46,7 +53,7 @@ namespace Statr.Management
 
         public void ConfigureWebApi(HttpConfiguration configuration)
         {
-            configuration.DependencyResolver = new WindsorDependencyResolver(container);
+            configuration.DependencyResolver = new WindsorWebApiDependencyResolver(container);
 
             configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
 

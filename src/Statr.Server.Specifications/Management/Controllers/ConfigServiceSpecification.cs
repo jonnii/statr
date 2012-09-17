@@ -1,9 +1,9 @@
 ﻿using Machine.Fakes;
 using Machine.Specifications;
 using Statr.Configuration;
-using Statr.Management.Controllers;
+using Statr.Server.Management.Controllers;
 
-namespace Statr.Specifications.Management.Controllers
+namespace Statr.Server.Specifications.Management.Controllers
 {
     public class ConfigCSpecification
     {

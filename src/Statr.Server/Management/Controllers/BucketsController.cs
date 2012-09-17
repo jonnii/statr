@@ -2,7 +2,7 @@
 using System.Web.Http;
 using Statr.Storage;
 
-namespace Statr.Management.Controllers
+namespace Statr.Server.Management.Controllers
 {
     public class BucketsController : ApiController
     {

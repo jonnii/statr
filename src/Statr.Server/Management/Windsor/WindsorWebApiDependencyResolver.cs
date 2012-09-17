@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web.Http.Dependencies;
 using Castle.Windsor;
 
-namespace Statr.Management.Windsor
+namespace Statr.Server.Management.Windsor
 {
-    public class WindsorDependencyResolver : IDependencyResolver
+    public class WindsorWebApiDependencyResolver : IDependencyResolver
     {
         private readonly IWindsorContainer container;
 
-        public WindsorDependencyResolver(IWindsorContainer container)
+        public WindsorWebApiDependencyResolver(IWindsorContainer container)
         {
             if (container == null)
             {

@@ -1,9 +1,9 @@
 ﻿using Machine.Fakes;
 using Machine.Specifications;
-using Statr.Management.Controllers;
+using Statr.Server.Management.Controllers;
 using Statr.Storage;
 
-namespace Statr.Specifications.Management.Controllers
+namespace Statr.Server.Specifications.Management.Controllers
 {
     public class BucketsControllerSpecification
     {

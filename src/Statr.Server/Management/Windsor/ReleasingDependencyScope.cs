@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http.Dependencies;
 
-namespace Statr.Management.Windsor
+namespace Statr.Server.Management.Windsor
 {
     internal class ReleasingDependencyScope : IDependencyScope
     {

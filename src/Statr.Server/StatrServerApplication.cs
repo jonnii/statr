@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Castle.MicroKernel.Registration;
 using Statr.Installers;
-using Statr.Management;
+using Statr.Server.Management;
 
-namespace Statr
+namespace Statr.Server
 {
     public class StatrServerApplication : StatrApplication
     {

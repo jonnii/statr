@@ -8,7 +8,7 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 
-namespace Statr.Management
+namespace Statr.Server.Management
 {
     public class ManagementInstaller : IWindsorInstaller
     {
@@ -23,13 +23,13 @@ namespace Statr.Management
                 Component.For<IHttpActionSelector>().ImplementedBy<ApiControllerActionSelector>().LifeStyle.Transient,
                 Component.For<IActionValueBinder>().ImplementedBy<DefaultActionValueBinder>().LifeStyle.Transient,
                 Component.For<IHttpActionInvoker>().ImplementedBy<ApiControllerActionInvoker>().LifeStyle.Transient,
-                Component.For<HttpConfigurationFactory>().DependsOn(new { container }),
+                Component.For<SelfHostHttpConfigurationFactory>().DependsOn(new { container }),
 
                 // http configuration needs to be registered with the container otherwise we can't
                 // create controllers
                 Component.For<HttpConfiguration>()
                     .Forward<HttpSelfHostConfiguration>()
-                    .UsingFactoryMethod(k => k.Resolve<HttpConfigurationFactory>().Create()),
+                    .UsingFactoryMethod(k => k.Resolve<SelfHostHttpConfigurationFactory>().Create()),
 
                 Component.For<ManagementBootstrapper>().StartUsingMethod("Start"));
         }

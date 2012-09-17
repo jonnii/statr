@@ -2,7 +2,7 @@
 using Castle.Core.Logging;
 using Statr.Configuration;
 
-namespace Statr.Management.Controllers
+namespace Statr.Server.Management.Controllers
 {
     public class ConfigController : ApiController
     {
