@@ -1,4 +1,5 @@
-﻿using Statr.Api.Models;
+﻿using System.Collections.Generic;
+using Statr.Api.Models;
 
 namespace Statr.Api
 {
@@ -6,6 +7,6 @@ namespace Statr.Api
     {
         Config GetConfig();
 
-        //IEnumerable<Bucket> GetBuckets();
+        IEnumerable<Bucket> GetBuckets();
     }
 }

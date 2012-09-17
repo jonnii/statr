@@ -1,5 +1,7 @@
-﻿using System.Web.Http;
+﻿using System.Collections.Generic;
+using System.Web.Http;
 using Statr.Api;
+using Statr.Api.Models;
 
 namespace Statr.Web.Controllers.api
 {
@@ -12,9 +14,9 @@ namespace Statr.Web.Controllers.api
             this.api = api;
         }
 
-        //public IEnumerable<Bucket> Get()
-        //{
-        //    return api.GetBuckets();
-        //}
+        public IEnumerable<Bucket> Get()
+        {
+            return api.GetBuckets();
+        }
     }
 }

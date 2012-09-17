@@ -51,6 +51,7 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="IStatrApi.cs" />
+    <Compile Include="Models\Bucket.cs" />
     <Compile Include="Models\BufferConfig.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\Entry.cs" />

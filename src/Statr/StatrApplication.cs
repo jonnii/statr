@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Statr.Configuration;
 using Statr.Installers;
 
 namespace Statr

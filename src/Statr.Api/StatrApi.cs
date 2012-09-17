@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using SpeakEasy;
 using Statr.Api.Models;
 
@@ -30,9 +31,9 @@ namespace Statr.Api
             return Client.Get("config").OnOk().As<Config>();
         }
 
-        //public IEnumerable<Bucket> GetBuckets()
-        //{
-        //    return Client.Get("buckets").OnOk().As<List<Bucket>>();
-        //}
+        public IEnumerable<Bucket> GetBuckets()
+        {
+            return Client.Get("buckets").OnOk().As<List<Bucket>>();
+        }
     }
 }
