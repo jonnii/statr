@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace Statr.Web
+namespace Statr.Web.App_Start
 {
     public class BundleConfig
     {

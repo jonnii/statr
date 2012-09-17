@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Statr.Web
+namespace Statr.Web.App_Start
 {
     public class RouteConfig
     {

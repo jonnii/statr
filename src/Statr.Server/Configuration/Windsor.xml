@@ -1,7 +1,7 @@
 ﻿<configuration>
 
   <components>
-    <component id="Statr.MetricReceiver">
+    <component id="Statr.Server.MetricReceiver">
       <parameters>
         <Port>17890</Port>
       </parameters>
@@ -19,7 +19,7 @@
       </parameters>
     </component>
 
-    <component id="Statr.Storage.Engine.StorageEngine">
+    <component id="Statr.Server.Storage.Engine.StorageEngine">
       <parameters>
         <RootFilePath>c:\dev\tmp\storage</RootFilePath>
       </parameters>

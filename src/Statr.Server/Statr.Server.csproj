@@ -95,7 +95,7 @@
     </Compile>
     <Compile Include="Bucket.cs" />
     <Compile Include="BucketReference.cs" />
-    <Compile Include="Configuration\ConfigInstaller.cs" />
+    <Compile Include="Installers\ConfigInstaller.cs" />
     <Compile Include="Configuration\ConfigValidator.cs" />
     <Compile Include="Configuration\EntryValidator.cs" />
     <Compile Include="Configuration\IConfigRepository.cs" />

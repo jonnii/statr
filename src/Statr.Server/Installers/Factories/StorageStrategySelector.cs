@@ -19,7 +19,7 @@ namespace Statr.Server.Installers.Factories
         protected override Type GetComponentType(MethodInfo method, object[] arguments)
         {
             var storage = GetStorageConfig(arguments);
-            return Type.GetType("Statr.Storage.Strategies." + storage.Type, true);
+            return Type.GetType("Statr.Server.Storage.Strategies." + storage.Type, true);
         }
 
         protected override System.Collections.IDictionary GetArguments(MethodInfo method, object[] arguments)

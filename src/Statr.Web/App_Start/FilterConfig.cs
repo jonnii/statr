@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Statr.Web
+namespace Statr.Web.App_Start
 {
     public class FilterConfig
     {

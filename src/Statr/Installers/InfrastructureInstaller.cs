@@ -6,7 +6,6 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using FluentValidation;
 using Statr.Infrastructure;
 
 namespace Statr.Installers
@@ -35,8 +34,7 @@ namespace Statr.Installers
             container.AddFacility<TypedFactoryFacility>();
 
             container.Register(
-                Component.For<IFileSystem>().ImplementedBy<FileSystem>(),
-                Classes.FromThisAssembly().BasedOn(typeof(IValidator<>)).WithService.FromInterface(typeof(IValidator<>)));
+                Component.For<IFileSystem>().ImplementedBy<FileSystem>());
         }
     }
 }
