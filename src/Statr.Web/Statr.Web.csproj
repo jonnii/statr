@@ -236,7 +236,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Configuration\Index.cshtml" />
     <Content Include="Views\Configuration\Create.cshtml" />
-    <Content Include="Views\Bucket\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
