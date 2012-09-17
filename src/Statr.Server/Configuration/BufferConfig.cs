@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Statr.Configuration
+namespace Statr.Server.Configuration
 {
     public class BufferConfig
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Statr.Configuration
+namespace Statr.Server.Configuration
 {
     public class Config
     {

@@ -99,12 +99,6 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Configuration\BufferConfig.cs" />
-    <Compile Include="Configuration\Config.cs" />
-    <Compile Include="Configuration\ConfigException.cs" />
-    <Compile Include="Configuration\Entry.cs" />
-    <Compile Include="Configuration\Retention.cs" />
-    <Compile Include="Configuration\RetentionParser.cs" />
     <Compile Include="Extensions\EventExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Infrastructure\FileSystem.cs" />

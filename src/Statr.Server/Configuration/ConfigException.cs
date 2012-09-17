@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Statr.Configuration
+namespace Statr.Server.Configuration
 {
     [Serializable]
     public class ConfigException : Exception

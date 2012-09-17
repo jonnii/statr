@@ -97,9 +97,6 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Configuration\ConfigSpecification.cs" />
-    <Compile Include="Configuration\RetentionParserSpecification.cs" />
-    <Compile Include="Configuration\BufferConfigSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

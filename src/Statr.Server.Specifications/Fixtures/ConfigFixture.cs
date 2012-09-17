@@ -1,5 +1,5 @@
 ﻿using System;
-using Statr.Configuration;
+using Statr.Server.Configuration;
 
 namespace Statr.Server.Specifications.Fixtures
 {

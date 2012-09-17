@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using Statr.Configuration;
 
 namespace Statr.Server.Configuration
 {

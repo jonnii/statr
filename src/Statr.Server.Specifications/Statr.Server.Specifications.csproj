@@ -95,8 +95,11 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BucketSpecification.cs" />
+    <Compile Include="Configuration\BufferConfigSpecification.cs" />
+    <Compile Include="Configuration\ConfigSpecification.cs" />
     <Compile Include="Configuration\ConfigValidatorSpecification.cs" />
     <Compile Include="Configuration\EntryValidatorSpecification.cs" />
+    <Compile Include="Configuration\RetentionParserSpecification.cs" />
     <Compile Include="Configuration\YamlConfigRepositorySpecification.cs" />
     <Compile Include="Fixtures\ConfigFixture.cs" />
     <Compile Include="Fixtures\DataPointFixture.cs" />

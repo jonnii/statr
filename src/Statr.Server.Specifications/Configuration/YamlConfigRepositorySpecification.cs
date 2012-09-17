@@ -2,7 +2,6 @@
 using FluentValidation.Results;
 using Machine.Fakes;
 using Machine.Specifications;
-using Statr.Configuration;
 using Statr.Infrastructure;
 using Statr.Server.Configuration;
 using Statr.Server.Specifications.Fixtures;

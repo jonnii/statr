@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Castle.Facilities.TypedFactory;
-using Statr.Configuration;
 using Statr.Server.Configuration;
 
 namespace Statr.Server.Installers.Factories

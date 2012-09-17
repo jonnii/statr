@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Castle.MicroKernel.Registration;
-using Statr.Configuration;
 using Statr.Installers;
 using Statr.IntegrationTests.Installers;
 using Statr.Server.Configuration;
