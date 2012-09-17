@@ -13,9 +13,9 @@ namespace Statr.Web.Controllers.api
             this.api = api;
         }
 
-        public IEnumerable<Bucket> Get()
-        {
-            return api.GetBuckets();
-        }
+        //public IEnumerable<Bucket> Get()
+        //{
+        //    return api.GetBuckets();
+        //}
     }
 }

@@ -120,6 +120,10 @@
       <Project>{DF3D2680-ECE6-494D-B789-0AB226BC8CE9}</Project>
       <Name>Statr.Interactive</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Statr.Server\Statr.Server.csproj">
+      <Project>{F2A4DB92-CFCD-4264-978B-2C725943912D}</Project>
+      <Name>Statr.Server</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Statr\Statr.csproj">
       <Project>{1C603537-F3BE-4F0C-8933-85EE2DA2906D}</Project>
       <Name>Statr</Name>

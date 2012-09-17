@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Statr.Storage.Strategies;
 
 namespace Statr.Configuration
 {
@@ -11,7 +10,7 @@ namespace Statr.Configuration
             {
                 return new BufferConfig
                 {
-                    Type = typeof(BufferedStrategy).Name
+                    Type = "BufferedStrategy"
                 };
             }
         }

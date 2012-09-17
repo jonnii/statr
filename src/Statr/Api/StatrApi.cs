@@ -31,9 +31,9 @@ namespace Statr.Api
             return Client.Get("config").OnOk().As<Config>();
         }
 
-        public IEnumerable<Bucket> GetBuckets()
-        {
-            return Client.Get("buckets").OnOk().As<List<Bucket>>();
-        }
+        //public IEnumerable<Bucket> GetBuckets()
+        //{
+        //    return Client.Get("buckets").OnOk().As<List<Bucket>>();
+        //}
     }
 }

@@ -43,6 +43,10 @@
     <Reference Include="Castle.Windsor">
       <HintPath>..\packages\Castle.Windsor.3.1.0\lib\net40\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation, Version=3.4.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FluentValidation.3.4.6.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.9\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -53,6 +57,18 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.0.20823\lib\Net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.0.20823\lib\Net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\packages\Rx-Linq.2.0.20823\lib\Net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\packages\Rx-PlatformServices.2.0.20823\lib\Net45\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
     </Reference>
@@ -64,11 +80,34 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="YamlDotNet.Core, Version=0.2.4453.29938, Culture=neutral, PublicKeyToken=2b53052c5884d7a1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\YamlDotNet.Core.1.1.15\lib\YamlDotNet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="YamlDotNet.RepresentationModel, Version=0.2.4453.29939, Culture=neutral, PublicKeyToken=2b53052c5884d7a1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\YamlDotNet.RepresentationModel.1.1.15\lib\YamlDotNet.RepresentationModel.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Bucket.cs" />
+    <Compile Include="BucketReference.cs" />
+    <Compile Include="Configuration\ConfigInstaller.cs" />
+    <Compile Include="Configuration\ConfigValidator.cs" />
+    <Compile Include="Configuration\EntryValidator.cs" />
+    <Compile Include="Configuration\IConfigRepository.cs" />
+    <Compile Include="Configuration\YamlConfigRepository.cs" />
+    <Compile Include="DataPoint.cs" />
+    <Compile Include="DataPointEvent.cs" />
+    <Compile Include="IMetricParser.cs" />
+    <Compile Include="IMetricReceiver.cs" />
+    <Compile Include="Installers\Factories\StorageStrategySelector.cs" />
+    <Compile Include="Installers\RoutingInstaller.cs" />
+    <Compile Include="Installers\ServerInstaller.cs" />
+    <Compile Include="Installers\StorageInstaller.cs" />
     <Compile Include="Management\Controllers\BucketsController.cs" />
     <Compile Include="Management\Controllers\ConfigController.cs" />
     <Compile Include="Management\ManagementBootstrapper.cs" />
@@ -76,8 +115,52 @@
     <Compile Include="Management\SelfHostHttpConfigurationFactory.cs" />
     <Compile Include="Management\Windsor\ReleasingDependencyScope.cs" />
     <Compile Include="Management\Windsor\WindsorWebApiDependencyResolver.cs" />
+    <Compile Include="Metric.cs" />
+    <Compile Include="MetricParser.cs" />
+    <Compile Include="MetricReceiver.cs" />
+    <Compile Include="MetricType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Routing\AccumulateAggregationStrategy.cs" />
+    <Compile Include="Routing\AggregatedMetric.cs" />
+    <Compile Include="Routing\DataPointStream.cs" />
+    <Compile Include="Routing\IAggregationStrategy.cs" />
+    <Compile Include="Routing\IDataPointGenerator.cs" />
+    <Compile Include="Routing\IDataPointStream.cs" />
+    <Compile Include="Routing\IMetricRoute.cs" />
+    <Compile Include="Routing\IMetricRouteFactory.cs" />
+    <Compile Include="Routing\IMetricRouteManager.cs" />
+    <Compile Include="Routing\IMetricRouter.cs" />
+    <Compile Include="Routing\LastValueAggregationStrategy.cs" />
+    <Compile Include="Routing\MetricRoute.cs" />
+    <Compile Include="Routing\MetricRouteManager.cs" />
+    <Compile Include="Routing\MetricRouter.cs" />
     <Compile Include="StatrServerApplication.cs" />
+    <Compile Include="Storage\BucketRepository.cs" />
+    <Compile Include="Storage\DataPointBuffer.cs" />
+    <Compile Include="Storage\DataPointCache.cs" />
+    <Compile Include="Storage\DataPointRepository.cs" />
+    <Compile Include="Storage\Engine\IStorageNode.cs" />
+    <Compile Include="Storage\Engine\IStorageNodeConfiguration.cs" />
+    <Compile Include="Storage\Engine\IStorageSlice.cs" />
+    <Compile Include="Storage\Engine\IStorageTree.cs" />
+    <Compile Include="Storage\Engine\IStorageTreeConfiguration.cs" />
+    <Compile Include="Storage\Engine\SliceData.cs" />
+    <Compile Include="Storage\Engine\StorageEngine.cs" />
+    <Compile Include="Storage\Engine\StorageEngineDataPointWriter.cs" />
+    <Compile Include="Storage\Engine\StorageNode.cs" />
+    <Compile Include="Storage\Engine\StorageNodeConfiguration.cs" />
+    <Compile Include="Storage\Engine\StorageSlice.cs" />
+    <Compile Include="Storage\Engine\StorageTree.cs" />
+    <Compile Include="Storage\Engine\StorageTreeConfiguration.cs" />
+    <Compile Include="Storage\IBucketRepository.cs" />
+    <Compile Include="Storage\IBufferStrategy.cs" />
+    <Compile Include="Storage\IBufferStrategyFactory.cs" />
+    <Compile Include="Storage\IDataPointCache.cs" />
+    <Compile Include="Storage\IDataPointRepository.cs" />
+    <Compile Include="Storage\IDataPointWriter.cs" />
+    <Compile Include="Storage\IStorageEngine.cs" />
+    <Compile Include="Storage\Strategies\BufferedStrategy.cs" />
+    <Compile Include="Storage\Strategies\ImmediateStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -88,6 +171,11 @@
       <Project>{1C603537-F3BE-4F0C-8933-85EE2DA2906D}</Project>
       <Name>Statr</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Configuration\Windsor.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

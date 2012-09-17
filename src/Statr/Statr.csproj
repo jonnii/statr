@@ -101,87 +101,23 @@
     </Compile>
     <Compile Include="Api\IStatrApi.cs" />
     <Compile Include="Api\StatrApi.cs" />
-    <Compile Include="BucketReference.cs" />
     <Compile Include="Configuration\BufferConfig.cs" />
-    <Compile Include="IMetricParser.cs" />
-    <Compile Include="Installers\Factories\StorageStrategySelector.cs" />
-    <Compile Include="MetricParser.cs" />
-    <Compile Include="Routing\DataPointStream.cs" />
-    <Compile Include="Routing\IDataPointGenerator.cs" />
-    <Compile Include="Storage\BucketRepository.cs" />
-    <Compile Include="Storage\DataPointCache.cs" />
-    <Compile Include="Storage\DataPointRepository.cs" />
-    <Compile Include="Storage\DataPointBuffer.cs" />
-    <Compile Include="Storage\Engine\StorageEngineDataPointWriter.cs" />
-    <Compile Include="Storage\IBucketRepository.cs" />
-    <Compile Include="Storage\IDataPointWriter.cs" />
-    <Compile Include="Storage\IDataPointCache.cs" />
-    <Compile Include="Configuration\ConfigException.cs" />
-    <Compile Include="Configuration\ConfigInstaller.cs" />
-    <Compile Include="Configuration\ConfigValidator.cs" />
-    <Compile Include="Configuration\EntryValidator.cs" />
-    <Compile Include="Configuration\RetentionParser.cs" />
-    <Compile Include="Configuration\YamlConfigRepository.cs" />
-    <Compile Include="Configuration\IConfigRepository.cs" />
-    <Compile Include="Configuration\Retention.cs" />
     <Compile Include="Configuration\Config.cs" />
+    <Compile Include="Configuration\ConfigException.cs" />
     <Compile Include="Configuration\Entry.cs" />
+    <Compile Include="Configuration\Retention.cs" />
+    <Compile Include="Configuration\RetentionParser.cs" />
     <Compile Include="Extensions\EventExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Infrastructure\FileSystem.cs" />
     <Compile Include="Infrastructure\IFileSystem.cs" />
-    <Compile Include="IMetricReceiver.cs" />
-    <Compile Include="DataPointEvent.cs" />
-    <Compile Include="MetricType.cs" />
-    <Compile Include="Routing\AccumulateAggregationStrategy.cs" />
-    <Compile Include="Routing\IAggregationStrategy.cs" />
-    <Compile Include="Routing\LastValueAggregationStrategy.cs" />
-    <Compile Include="Bucket.cs" />
-    <Compile Include="Routing\AggregatedMetric.cs" />
-    <Compile Include="Routing\IDataPointStream.cs" />
-    <Compile Include="Routing\IMetricRouteFactory.cs" />
-    <Compile Include="Routing\IMetricRouter.cs" />
-    <Compile Include="Routing\IMetricRoute.cs" />
-    <Compile Include="Installers\RoutingInstaller.cs" />
-    <Compile Include="Installers\ServerInstaller.cs" />
     <Compile Include="Installers\InfrastructureInstaller.cs" />
-    <Compile Include="Installers\StorageInstaller.cs" />
-    <Compile Include="Metric.cs" />
-    <Compile Include="MetricReceiver.cs" />
-    <Compile Include="Routing\IMetricRouteManager.cs" />
-    <Compile Include="Routing\MetricRouter.cs" />
-    <Compile Include="Routing\MetricRoute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Routing\MetricRouteManager.cs" />
     <Compile Include="StatrApplication.cs" />
     <Compile Include="StatrException.cs" />
-    <Compile Include="DataPoint.cs" />
-    <Compile Include="Storage\IDataPointRepository.cs" />
-    <Compile Include="Storage\IStorageEngine.cs" />
-    <Compile Include="Storage\Engine\IStorageNode.cs" />
-    <Compile Include="Storage\Engine\IStorageNodeConfiguration.cs" />
-    <Compile Include="Storage\Engine\IStorageSlice.cs" />
-    <Compile Include="Storage\IBufferStrategyFactory.cs" />
-    <Compile Include="Storage\Engine\IStorageTree.cs" />
-    <Compile Include="Storage\Engine\IStorageTreeConfiguration.cs" />
-    <Compile Include="Storage\Engine\SliceData.cs" />
-    <Compile Include="Storage\Engine\StorageEngine.cs" />
-    <Compile Include="Storage\Engine\StorageNode.cs" />
-    <Compile Include="Storage\Engine\StorageNodeConfiguration.cs" />
-    <Compile Include="Storage\Engine\StorageSlice.cs" />
-    <Compile Include="Storage\Engine\StorageTree.cs" />
-    <Compile Include="Storage\Engine\StorageTreeConfiguration.cs" />
-    <Compile Include="Storage\Strategies\BufferedStrategy.cs" />
-    <Compile Include="Storage\Strategies\ImmediateStrategy.cs" />
-    <Compile Include="Storage\IBufferStrategy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Configuration\Windsor.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

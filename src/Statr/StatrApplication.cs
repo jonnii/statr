@@ -24,7 +24,7 @@ namespace Statr
             var defaultInstallers = new IWindsorInstaller[]
             {
                 new InfrastructureInstaller(LogFileName),
-                new ConfigInstaller() 
+
             };
 
             var installers = defaultInstallers.Concat(GetInstallers()).ToArray();

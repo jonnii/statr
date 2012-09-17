@@ -7,6 +7,6 @@ namespace Statr.Api
     {
         Config GetConfig();
 
-        IEnumerable<Bucket> GetBuckets();
+        //IEnumerable<Bucket> GetBuckets();
     }
 }

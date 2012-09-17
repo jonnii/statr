@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation, Version=3.4.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FluentValidation.3.4.6.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Machine.Fakes">
       <HintPath>..\packages\Machine.Fakes.0.5.1\lib\net40\Machine.Fakes.dll</HintPath>
     </Reference>
@@ -62,6 +66,18 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.0.20823\lib\Net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.0.20823\lib\Net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\packages\Rx-Linq.2.0.20823\lib\Net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices">
+      <HintPath>..\packages\Rx-PlatformServices.2.0.20823\lib\Net45\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
     </Reference>
@@ -78,9 +94,28 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="BucketSpecification.cs" />
+    <Compile Include="Configuration\ConfigValidatorSpecification.cs" />
+    <Compile Include="Configuration\EntryValidatorSpecification.cs" />
+    <Compile Include="Configuration\YamlConfigRepositorySpecification.cs" />
+    <Compile Include="Fixtures\ConfigFixture.cs" />
+    <Compile Include="Fixtures\DataPointFixture.cs" />
     <Compile Include="Management\Controllers\BucketsServiceSpecification.cs" />
     <Compile Include="Management\Controllers\ConfigServiceSpecification.cs" />
+    <Compile Include="MetricParserSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Routing\AccumulateAggregationStrategySpecification.cs" />
+    <Compile Include="Routing\DataPointStreamSpecification.cs" />
+    <Compile Include="Routing\LastValueAggregationStrategySpecification.cs" />
+    <Compile Include="Routing\MetricRouteManagerSpecification.cs" />
+    <Compile Include="Routing\MetricRouterSpecification.cs" />
+    <Compile Include="Routing\MetricRouteSpecification.cs" />
+    <Compile Include="Storage\BucketRepositorySpecification.cs" />
+    <Compile Include="Storage\DataPointBufferSpecification.cs" />
+    <Compile Include="Storage\DataPointCacheSpecification.cs" />
+    <Compile Include="Storage\DataPointRepositorySpecification.cs" />
+    <Compile Include="Storage\Engine\StorageEngineSpecification.cs" />
+    <Compile Include="Storage\Strategies\BufferedStorageStrategySpecification.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

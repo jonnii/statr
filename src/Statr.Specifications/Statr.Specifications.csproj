@@ -98,29 +98,9 @@
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Configuration\ConfigSpecification.cs" />
-    <Compile Include="Configuration\ConfigValidatorSpecification.cs" />
-    <Compile Include="Configuration\EntryValidatorSpecification.cs" />
     <Compile Include="Configuration\RetentionParserSpecification.cs" />
     <Compile Include="Configuration\BufferConfigSpecification.cs" />
-    <Compile Include="Configuration\YamlConfigRepositorySpecification.cs" />
-    <Compile Include="Configuration\StorageConfigurationSpecification.cs" />
-    <Compile Include="Fixtures\ConfigFixture.cs" />
-    <Compile Include="Fixtures\DataPointFixture.cs" />
-    <Compile Include="MetricParserSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Routing\AccumulateAggregationStrategySpecification.cs" />
-    <Compile Include="Routing\DataPointStreamSpecification.cs" />
-    <Compile Include="Routing\LastValueAggregationStrategySpecification.cs" />
-    <Compile Include="Routing\MetricRouteManagerSpecification.cs" />
-    <Compile Include="Routing\MetricRouterSpecification.cs" />
-    <Compile Include="Routing\MetricRouteSpecification.cs" />
-    <Compile Include="BucketSpecification.cs" />
-    <Compile Include="Storage\BucketRepositorySpecification.cs" />
-    <Compile Include="Storage\DataPointCacheSpecification.cs" />
-    <Compile Include="Storage\DataPointRepositorySpecification.cs" />
-    <Compile Include="Storage\DataPointBufferSpecification.cs" />
-    <Compile Include="Storage\Engine\StorageEngineSpecification.cs" />
-    <Compile Include="Storage\Strategies\BufferedStorageStrategySpecification.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
