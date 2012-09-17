@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using System.Web.Http;
 using Statr.Api;
-using Statr.Api.Models;
 
 namespace Statr.Web.Controllers.api
 {
@@ -14,9 +13,22 @@ namespace Statr.Web.Controllers.api
             this.api = api;
         }
 
-        public IEnumerable<Bucket> Get()
+        public dynamic Get()
         {
-            return api.GetBuckets();
+            return new
+            {
+                buckets = api.Buckets()
+            };
+        }
+
+        public dynamic Get(string id)
+        {
+            var bucket = api.Buckets().Single(b => b.Name == id);
+
+            return new
+            {
+                bucket
+            };
         }
     }
 }

@@ -37,8 +37,18 @@
     App.BucketsView = Em.View.extend({
         templateName: 'buckets'
     });
+
+    App.BucketController = Em.Controller.extend();
+    App.BucketView = Em.View.extend({
+        templateName: 'bucket'
+    });
+
     App.Bucket = DS.Model.extend({
-        
+        primaryKey: 'Name',
+        name: DS.attr('string', { key: 'Name' })
+    });
+
+    App.Config = DS.Model.extend({
     });
 
     App.Router = Em.Router.extend({
@@ -73,6 +83,8 @@
                     router.get('applicationController').connectOutlet({
                         name: 'configuration'
                     });
+
+                    router.get('configurationController').set('content', App.Config.find('current'));
                 },
                 enter: function () {
                     $('ul.nav li').removeClass('active');
@@ -82,6 +94,7 @@
 
             buckets: Em.Route.extend({
                 route: '/buckets',
+                showBucket: Em.Route.transitionTo('bucket'),
                 connectOutlets: function (router, context) {
                     router.get('applicationController').connectOutlet({
                         name: 'buckets'
@@ -93,6 +106,13 @@
                     $('ul.nav li').removeClass('active');
                     $('#nav-buckets').addClass('active');
                     console.log('navigating to buckets');
+                }
+            }),
+
+            bucket: Em.Route.extend({
+                route: '/buckets/:bucket_id',
+                connectOutlets: function (router, bucket) {
+                    router.get('applicationController').connectOutlet('bucket', bucket);
                 }
             })
         })

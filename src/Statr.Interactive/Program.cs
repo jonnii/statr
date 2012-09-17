@@ -20,7 +20,7 @@ namespace Statr.Interactive
             Console.WriteLine("Instructions");
             Console.WriteLine("------------");
             Console.WriteLine();
-            Console.WriteLine("send metrics \t\t s <name> <type> <num> <interval-range> <value-range>");
+            Console.WriteLine("send metrics \t\t <name> <type> <num> <interval-range> <value-range>");
             Console.WriteLine("q - quit");
             Console.WriteLine();
             Console.WriteLine();
@@ -56,24 +56,17 @@ namespace Statr.Interactive
                     break;
                 }
 
-                if (currentLine.StartsWith("s"))
-                {
-                    Console.WriteLine(currentLine);
+                Console.WriteLine(currentLine);
 
-                    try
-                    {
-                        generator.SendMetrics(currentLine)
-                            .ContinueWith(_ => Console.WriteLine("Finished sending metrics: {0}", currentLine));
-                    }
-                    catch (FormatException fe)
-                    {
-                        Console.WriteLine("oops, you did something wrong...");
-                        Console.WriteLine(fe.Message);
-                    }
-                }
-                else
+                try
                 {
-                    Console.WriteLine("Unknown command: {0}", currentLine);
+                    generator.SendMetrics(currentLine)
+                        .ContinueWith(_ => Console.WriteLine("Finished sending metrics: {0}", currentLine));
+                }
+                catch (FormatException fe)
+                {
+                    Console.WriteLine("oops, you did something wrong...");
+                    Console.WriteLine(fe.Message);
                 }
             }
 

@@ -26,12 +26,12 @@ namespace Statr.Api
             return HttpClient.Create(RootUrl);
         }
 
-        public Config GetConfig()
+        public Config Config()
         {
             return Client.Get("config").OnOk().As<Config>();
         }
 
-        public IEnumerable<Bucket> GetBuckets()
+        public IEnumerable<Bucket> Buckets()
         {
             return Client.Get("buckets").OnOk().As<List<Bucket>>();
         }

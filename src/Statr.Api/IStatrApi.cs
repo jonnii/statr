@@ -5,8 +5,8 @@ namespace Statr.Api
 {
     public interface IStatrApi
     {
-        Config GetConfig();
+        Config Config();
 
-        IEnumerable<Bucket> GetBuckets();
+        IEnumerable<Bucket> Buckets();
     }
 }
