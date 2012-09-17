@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Statr.Storage.Engine
+namespace Statr.Server.Storage.Engine
 {
     public interface IStorageNode
     {

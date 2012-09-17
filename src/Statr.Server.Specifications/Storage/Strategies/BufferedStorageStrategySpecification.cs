@@ -1,8 +1,8 @@
 ﻿using Machine.Fakes;
 using Machine.Specifications;
-using Statr.Storage.Strategies;
+using Statr.Server.Storage.Strategies;
 
-namespace Statr.Specifications.Storage.Strategies
+namespace Statr.Server.Specifications.Storage.Strategies
 {
     public class BufferedStorageStrategySpecification
     {

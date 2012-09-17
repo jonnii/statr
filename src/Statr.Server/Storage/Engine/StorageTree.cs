@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Statr.Storage.Engine
+namespace Statr.Server.Storage.Engine
 {
     public class StorageTree : IStorageTree
     {

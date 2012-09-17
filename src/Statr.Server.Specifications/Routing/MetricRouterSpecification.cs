@@ -1,8 +1,8 @@
 ﻿using Machine.Fakes;
 using Machine.Specifications;
-using Statr.Routing;
+using Statr.Server.Routing;
 
-namespace Statr.Specifications.Routing
+namespace Statr.Server.Specifications.Routing
 {
     public class MetricRouterSpecification
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Statr.Storage
+namespace Statr.Server.Storage
 {
     /// <summary>
     /// A data point writer is a handle into a storage engine

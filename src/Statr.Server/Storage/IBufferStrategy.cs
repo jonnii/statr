@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Statr.Storage
+namespace Statr.Server.Storage
 {
     /// <summary>
     /// A storage strategy is used to transform the data point stream into

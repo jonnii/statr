@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Statr.Routing
+namespace Statr.Server.Routing
 {
     public interface IDataPointStream
     {

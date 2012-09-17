@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
 using NUnit.Framework;
-using Statr.Storage;
-using Statr.Storage.Engine;
+using Statr.Server.Storage;
+using Statr.Server.Storage.Engine;
 
 namespace Statr.IntegrationTests.Stories.Steps
 {

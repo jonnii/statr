@@ -1,7 +1,7 @@
 ﻿using Machine.Fakes;
 using Machine.Specifications;
 
-namespace Statr.Specifications
+namespace Statr.Server.Specifications
 {
     public class MetricParserSpecification
     {

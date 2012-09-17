@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace Statr.Storage.Engine
+namespace Statr.Server.Storage.Engine
 {
     public class StorageNode : IStorageNode
     {

@@ -1,4 +1,4 @@
-namespace Statr
+namespace Statr.Server
 {
     public class BucketReference
     {

@@ -1,6 +1,7 @@
 using FluentValidation;
+using Statr.Configuration;
 
-namespace Statr.Configuration
+namespace Statr.Server.Configuration
 {
     public class EntryValidator : AbstractValidator<Entry>
     {

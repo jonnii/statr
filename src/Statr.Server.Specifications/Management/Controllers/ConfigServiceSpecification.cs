@@ -1,6 +1,7 @@
 ﻿using Machine.Fakes;
 using Machine.Specifications;
 using Statr.Configuration;
+using Statr.Server.Configuration;
 using Statr.Server.Management.Controllers;
 
 namespace Statr.Server.Specifications.Management.Controllers

@@ -2,7 +2,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Castle.Core.Logging;
 
-namespace Statr.Storage
+namespace Statr.Server.Storage
 {
     public class BucketRepository : IBucketRepository
     {

@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace Statr.Specifications.Fixtures
+namespace Statr.Server.Specifications.Fixtures
 {
     public static class DataPointFixture
     {

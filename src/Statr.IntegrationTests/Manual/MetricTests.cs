@@ -1,5 +1,6 @@
 using NUnit.Framework;
-using Statr.Routing;
+using Statr.Server;
+using Statr.Server.Routing;
 
 namespace Statr.IntegrationTests.Manual
 {

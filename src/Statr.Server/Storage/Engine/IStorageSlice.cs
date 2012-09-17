@@ -1,4 +1,4 @@
-namespace Statr.Storage.Engine
+namespace Statr.Server.Storage.Engine
 {
     public interface IStorageSlice
     {

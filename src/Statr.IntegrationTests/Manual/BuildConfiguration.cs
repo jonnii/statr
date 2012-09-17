@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using Statr.Configuration;
+using Statr.Server.Configuration;
 
 namespace Statr.IntegrationTests.Manual
 {

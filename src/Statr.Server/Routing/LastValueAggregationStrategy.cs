@@ -1,4 +1,4 @@
-namespace Statr.Routing
+namespace Statr.Server.Routing
 {
     public class LastValueAggregationStrategy : IAggregationStrategy
     {

@@ -3,9 +3,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Logging;
-using Statr.Routing;
+using Statr.Server.Routing;
 
-namespace Statr.Storage
+namespace Statr.Server.Storage
 {
     public class DataPointCache : IDataPointCache, IDisposable
     {

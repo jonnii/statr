@@ -2,9 +2,9 @@
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Statr.Routing;
+using Statr.Server.Routing;
 
-namespace Statr.Installers
+namespace Statr.Server.Installers
 {
     public class RoutingInstaller : IWindsorInstaller
     {

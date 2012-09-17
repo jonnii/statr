@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using Statr.Storage;
+using Statr.Server.Storage;
 
 namespace Statr.Server.Management.Controllers
 {

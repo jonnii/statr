@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using Statr.Client;
 using Statr.Interactive;
-using Statr.Routing;
+using Statr.Server.Routing;
 
 namespace Statr.IntegrationTests.Performance
 {

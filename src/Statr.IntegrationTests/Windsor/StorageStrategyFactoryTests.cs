@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
-using Statr.Storage;
-using Statr.Storage.Strategies;
+using Statr.Server;
+using Statr.Server.Storage;
+using Statr.Server.Storage.Strategies;
 
 namespace Statr.IntegrationTests.Windsor
 {

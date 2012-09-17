@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Reactive.Linq;
 using Machine.Fakes;
 using Machine.Specifications;
-using Statr.Routing;
-using Statr.Storage;
-using Statr.Storage.Strategies;
+using Statr.Server.Routing;
+using Statr.Server.Storage;
+using Statr.Server.Storage.Strategies;
 
-namespace Statr.Specifications.Storage
+namespace Statr.Server.Specifications.Storage
 {
     public class DataPointBufferSpecification
     {

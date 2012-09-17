@@ -1,6 +1,7 @@
 ﻿using System.Web.Http;
 using Castle.Core.Logging;
 using Statr.Configuration;
+using Statr.Server.Configuration;
 
 namespace Statr.Server.Management.Controllers
 {

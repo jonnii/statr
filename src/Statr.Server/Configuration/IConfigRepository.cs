@@ -1,4 +1,6 @@
-﻿namespace Statr.Configuration
+﻿using Statr.Configuration;
+
+namespace Statr.Server.Configuration
 {
     public interface IConfigRepository
     {

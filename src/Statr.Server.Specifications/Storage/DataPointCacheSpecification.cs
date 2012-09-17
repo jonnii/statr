@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Reactive.Subjects;
 using Machine.Fakes;
 using Machine.Specifications;
-using Statr.Routing;
-using Statr.Storage;
+using Statr.Server.Routing;
+using Statr.Server.Storage;
 
-namespace Statr.Specifications.Storage
+namespace Statr.Server.Specifications.Storage
 {
     public class DataPointCacheSpecification
     {

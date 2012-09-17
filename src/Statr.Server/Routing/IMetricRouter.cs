@@ -1,4 +1,4 @@
-namespace Statr.Routing
+namespace Statr.Server.Routing
 {
     /// <summary>
     /// The metric router is responsible for taking a metric and routing it to

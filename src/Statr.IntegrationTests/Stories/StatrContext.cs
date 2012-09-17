@@ -1,6 +1,6 @@
 using Castle.Windsor;
 using Statr.Configuration;
-using Statr.Storage;
+using Statr.Server.Storage;
 
 namespace Statr.IntegrationTests.Stories
 {

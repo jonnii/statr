@@ -2,6 +2,8 @@
 using Castle.MicroKernel.Registration;
 using Statr.Configuration;
 using Statr.Installers;
+using Statr.Server.Configuration;
+using Statr.Server.Installers;
 using Statr.Server.Management;
 
 namespace Statr.Server

@@ -1,5 +1,6 @@
 ﻿using System;
-using Statr.Routing;
+using Statr.Server;
+using Statr.Server.Routing;
 
 namespace Statr.IntegrationTests.Stories.Steps
 {

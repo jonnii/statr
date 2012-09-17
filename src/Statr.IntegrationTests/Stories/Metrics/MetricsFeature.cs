@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using NUnit.Framework;
 using Statr.IntegrationTests.Stories.Steps;
+using Statr.Server;
 
 namespace Statr.IntegrationTests.Stories.Metrics
 {

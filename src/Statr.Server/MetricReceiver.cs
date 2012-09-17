@@ -3,9 +3,9 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using Castle.Core.Logging;
-using Statr.Routing;
+using Statr.Server.Routing;
 
-namespace Statr
+namespace Statr.Server
 {
     public class MetricReceiver : IMetricReceiver
     {

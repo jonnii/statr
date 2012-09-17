@@ -1,10 +1,11 @@
 ﻿using Machine.Fakes;
 using Machine.Specifications;
 using Statr.Configuration;
-using Statr.Routing;
-using Statr.Storage;
+using Statr.Server.Configuration;
+using Statr.Server.Routing;
+using Statr.Server.Storage;
 
-namespace Statr.Specifications.Routing
+namespace Statr.Server.Specifications.Routing
 {
     public class MetricRouteManagerSpecification
     {

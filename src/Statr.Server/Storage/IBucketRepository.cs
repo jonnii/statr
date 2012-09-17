@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Statr.Storage
+namespace Statr.Server.Storage
 {
     /// <summary>
     /// The bucket repository is responsible for managing the available buckets

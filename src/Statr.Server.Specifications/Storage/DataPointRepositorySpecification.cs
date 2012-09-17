@@ -2,10 +2,10 @@
 using System.Linq;
 using Machine.Fakes;
 using Machine.Specifications;
-using Statr.Specifications.Fixtures;
-using Statr.Storage;
+using Statr.Server.Specifications.Fixtures;
+using Statr.Server.Storage;
 
-namespace Statr.Specifications.Storage
+namespace Statr.Server.Specifications.Storage
 {
     public class DataPointRepositorySpecification
     {

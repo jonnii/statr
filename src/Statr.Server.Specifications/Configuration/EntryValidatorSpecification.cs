@@ -3,8 +3,9 @@ using FluentValidation.Results;
 using Machine.Fakes;
 using Machine.Specifications;
 using Statr.Configuration;
+using Statr.Server.Configuration;
 
-namespace Statr.Specifications.Configuration
+namespace Statr.Server.Specifications.Configuration
 {
     public class EntryValidatorSpecification
     {

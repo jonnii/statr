@@ -1,6 +1,6 @@
 using System;
 
-namespace Statr.Routing
+namespace Statr.Server.Routing
 {
     /// <summary>
     /// A data point generator creates data points, they can be

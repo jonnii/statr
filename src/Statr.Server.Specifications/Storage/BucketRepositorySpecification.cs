@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 using Machine.Fakes;
 using Machine.Specifications;
-using Statr.Configuration;
-using Statr.Storage;
-using Statr.Storage.Strategies;
+using Statr.Server.Storage;
 
-namespace Statr.Specifications.Storage
+namespace Statr.Server.Specifications.Storage
 {
     public class BucketRepositorySpecification
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Statr
+namespace Statr.Server
 {
     public interface IMetricReceiver : IDisposable
     {

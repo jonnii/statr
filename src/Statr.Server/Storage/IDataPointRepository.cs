@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Statr.Storage
+namespace Statr.Server.Storage
 {
     public interface IDataPointRepository
     {

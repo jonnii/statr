@@ -1,4 +1,4 @@
-using Statr.Storage;
+using Statr.Server.Storage;
 
 namespace Statr.IntegrationTests.Stories.Steps
 {

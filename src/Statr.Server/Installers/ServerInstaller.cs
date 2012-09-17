@@ -3,7 +3,7 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 
-namespace Statr.Installers
+namespace Statr.Server.Installers
 {
     public class ServerInstaller : IWindsorInstaller
     {

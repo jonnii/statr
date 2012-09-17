@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Logging;
 using Statr.Configuration;
-using Statr.Storage;
+using Statr.Server.Configuration;
+using Statr.Server.Storage;
 
-namespace Statr.Routing
+namespace Statr.Server.Routing
 {
     public class MetricRouteManager : IMetricRouteManager
     {

@@ -1,4 +1,4 @@
-namespace Statr.Routing
+namespace Statr.Server.Routing
 {
     /// <summary>
     /// The metric route factory is responsible for building metric routes

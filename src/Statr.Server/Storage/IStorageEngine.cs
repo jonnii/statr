@@ -1,4 +1,4 @@
-namespace Statr.Storage
+namespace Statr.Server.Storage
 {
     public interface IStorageEngine
     {

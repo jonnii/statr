@@ -1,7 +1,7 @@
 ﻿using System;
 using Statr.Configuration;
 
-namespace Statr.Specifications.Fixtures
+namespace Statr.Server.Specifications.Fixtures
 {
     public static class ConfigFixture
     {

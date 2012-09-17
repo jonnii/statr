@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
-using Statr.Storage;
+using Statr.Server;
+using Statr.Server.Storage;
 
 namespace Statr.IntegrationTests.Stories.Steps
 {

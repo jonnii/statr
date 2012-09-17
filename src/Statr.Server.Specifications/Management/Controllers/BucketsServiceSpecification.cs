@@ -1,7 +1,7 @@
 ﻿using Machine.Fakes;
 using Machine.Specifications;
 using Statr.Server.Management.Controllers;
-using Statr.Storage;
+using Statr.Server.Storage;
 
 namespace Statr.Server.Specifications.Management.Controllers
 {

@@ -2,7 +2,7 @@ using System;
 using System.Reactive.Subjects;
 using Castle.Core.Logging;
 
-namespace Statr.Routing
+namespace Statr.Server.Routing
 {
     public class DataPointStream : IDataPointStream, IDisposable
     {

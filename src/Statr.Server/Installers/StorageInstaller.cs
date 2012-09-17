@@ -3,11 +3,11 @@ using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using Statr.Installers.Factories;
-using Statr.Storage;
-using Statr.Storage.Engine;
+using Statr.Server.Installers.Factories;
+using Statr.Server.Storage;
+using Statr.Server.Storage.Engine;
 
-namespace Statr.Installers
+namespace Statr.Server.Installers
 {
     public class StorageInstaller : IWindsorInstaller
     {

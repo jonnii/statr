@@ -1,11 +1,10 @@
-﻿using System;
-using FluentValidation.Results;
+﻿using FluentValidation.Results;
 using Machine.Fakes;
 using Machine.Specifications;
-using Statr.Configuration;
-using Statr.Specifications.Fixtures;
+using Statr.Server.Configuration;
+using Statr.Server.Specifications.Fixtures;
 
-namespace Statr.Specifications.Configuration
+namespace Statr.Server.Specifications.Configuration
 {
     public class ConfigValidatorSpecification
     {

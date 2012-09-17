@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reactive.Linq;
 
-namespace Statr.Storage.Strategies
+namespace Statr.Server.Storage.Strategies
 {
     public class BufferedStrategy : IBufferStrategy
     {

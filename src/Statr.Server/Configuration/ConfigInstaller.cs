@@ -2,7 +2,7 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 
-namespace Statr.Configuration
+namespace Statr.Server.Configuration
 {
     public class ConfigInstaller : IWindsorInstaller
     {

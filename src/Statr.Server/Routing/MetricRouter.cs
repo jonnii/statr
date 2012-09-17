@@ -1,6 +1,6 @@
 using Castle.Core.Logging;
 
-namespace Statr.Routing
+namespace Statr.Server.Routing
 {
     public class MetricRouter : IMetricRouter
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Castle.Core.Logging;
 
-namespace Statr.Storage.Engine
+namespace Statr.Server.Storage.Engine
 {
     public class StorageEngine : IStorageEngine
     {

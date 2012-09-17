@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Reactive.Linq;
 using Castle.Core.Logging;
-using Statr.Routing;
+using Statr.Server.Routing;
 
-namespace Statr.Storage
+namespace Statr.Server.Storage
 {
     public class DataPointBuffer : IDisposable
     {

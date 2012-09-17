@@ -1,6 +1,6 @@
 using System;
 
-namespace Statr.Routing
+namespace Statr.Server.Routing
 {
     /// <summary>
     /// A metric route is responsible for taking metrics, processing them

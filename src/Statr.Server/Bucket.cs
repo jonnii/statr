@@ -1,7 +1,7 @@
 using System;
-using Statr.Routing;
+using Statr.Server.Routing;
 
-namespace Statr
+namespace Statr.Server
 {
     public class Bucket
     {

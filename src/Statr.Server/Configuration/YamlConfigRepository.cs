@@ -1,10 +1,11 @@
 using System;
 using System.IO;
 using FluentValidation;
+using Statr.Configuration;
 using Statr.Infrastructure;
 using YamlDotNet.RepresentationModel.Serialization;
 
-namespace Statr.Configuration
+namespace Statr.Server.Configuration
 {
     public class YamlConfigRepository : IConfigRepository
     {

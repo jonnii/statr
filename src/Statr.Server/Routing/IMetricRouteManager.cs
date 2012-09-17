@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Statr.Routing
+namespace Statr.Server.Routing
 {
     public interface IMetricRouteManager
     {
