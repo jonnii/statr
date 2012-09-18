@@ -10,12 +10,16 @@ namespace Statr.Server.Storage.Engine
     {
         public StorageEngine()
         {
+            Namespace = "default";
+
             Logger = NullLogger.Instance;
         }
 
         public ILogger Logger { get; set; }
 
         public string RootFilePath { get; set; }
+
+        public string Namespace { get; set; }
 
         public IStorageTree GetOrCreateTree(string name)
         {
@@ -26,7 +30,7 @@ namespace Statr.Server.Storage.Engine
         {
             Logger.DebugFormat("Creating storage tree: {0}", name);
 
-            EnsureRootFilePath();
+            EnsureAllPropertiesAreConfigured();
 
             var treeConfiguration = StorageTreeConfiguration.Default;
             configuration(treeConfiguration);
@@ -40,12 +44,17 @@ namespace Statr.Server.Storage.Engine
             return storageTree;
         }
 
-        public IEnumerable<BucketReference> ListBuckets(string tree)
+        public IEnumerable<BucketReference> ListBuckets()
         {
-            EnsureRootFilePath();
+            EnsureAllPropertiesAreConfigured();
 
-            var combine = Path.Combine(RootFilePath, tree);
+            var combine = Path.Combine(RootFilePath, Namespace);
             var info = new DirectoryInfo(combine);
+
+            if (!info.Exists)
+            {
+                yield break;
+            }
 
             foreach (var metricDirectory in info.GetDirectories())
             {
@@ -59,9 +68,9 @@ namespace Statr.Server.Storage.Engine
             }
         }
 
-        public IDataPointWriter GetWriter(string @namespace, BucketReference bucketReference)
+        public IDataPointWriter GetWriter(BucketReference bucketReference)
         {
-            var storageTreeName = string.Concat(@namespace, "/", bucketReference.MetricType);
+            var storageTreeName = string.Concat(Namespace, "/", bucketReference.MetricType.ToString().ToLower());
             var storageTree = GetOrCreateTree(storageTreeName);
             return new StorageEngineDataPointWriter(storageTree, bucketReference);
         }
@@ -69,17 +78,22 @@ namespace Statr.Server.Storage.Engine
         public void NotifyConfigChanged(Config config)
         {
             RootFilePath = config.Directory;
+            Namespace = config.Namespace;
         }
 
-        private void EnsureRootFilePath()
+        private void EnsureAllPropertiesAreConfigured()
         {
-            if (!string.IsNullOrEmpty(RootFilePath))
+            if (string.IsNullOrEmpty(RootFilePath))
             {
-                return;
+                throw new StatrException(
+                    "Cannot create a storage engine tree because the RootFilePath has not been specified");
             }
 
-            throw new StatrException(
-                "Cannot create a storage engine tree because the RootFilePath has not been specified");
+            if (string.IsNullOrEmpty(Namespace))
+            {
+                throw new StatrException(
+                    "Cannot create a storage engine tree because a Namespace has not been specified");
+            }
         }
     }
 }

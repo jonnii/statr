@@ -50,7 +50,7 @@ namespace Statr.IntegrationTests.Stories.Metrics
             Given(TheApplication.IsStarted).
             When(TheMetric.IsRouted(Metric.Count("stats.application.metric", 500))).
                 And(TheMetrics.AreFlushed).
-            Then(TheStorageEngine.ShouldHaveCreatedDirectory(@"default\stats.application.metric"));
+            Then(TheStorageEngine.ShouldHaveCreatedDirectory(@"default\count\stats.application.metric"));
         }
     }
 }

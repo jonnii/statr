@@ -39,7 +39,7 @@ namespace Statr.IntegrationTests.Stories.Steps
             return context =>
             {
                 var storageEngine = context.StorageEngine;
-                var writer = storageEngine.GetWriter("default", new BucketReference(bucketName, metricType));
+                var writer = storageEngine.GetWriter(new BucketReference(bucketName, metricType));
                 writer.Write(points);
             };
         }
@@ -49,7 +49,7 @@ namespace Statr.IntegrationTests.Stories.Steps
             return context =>
             {
                 var storageEngine = context.StorageEngine;
-                var buckets = storageEngine.ListBuckets("default");
+                var buckets = storageEngine.ListBuckets();
                 Assert.That(predicate(buckets));
             };
         }

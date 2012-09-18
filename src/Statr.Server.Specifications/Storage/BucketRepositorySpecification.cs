@@ -8,6 +8,23 @@ namespace Statr.Server.Specifications.Storage
     public class BucketRepositorySpecification
     {
         [Subject(typeof(BucketRepository))]
+        public class when_starting : WithSubject<BucketRepository>
+        {
+            Establish context = () =>
+                The<IStorageEngine>().WhenToldTo(e => e.ListBuckets()).Return(
+                    new[] { new BucketReference("bucket", MetricType.Count) });
+
+            Because of = () =>
+                Subject.FetchInitialBucketList();
+
+            It should_list_buckets = () =>
+                The<IStorageEngine>().WasToldTo(e => e.ListBuckets());
+
+            It should_have_loaded_bucket = () =>
+                Subject.Exists(new BucketReference("bucket", MetricType.Count)).ShouldBeTrue();
+        }
+
+        [Subject(typeof(BucketRepository))]
         public class when_getting_buckets : with_buckets
         {
             Because of = () =>

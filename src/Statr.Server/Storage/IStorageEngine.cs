@@ -11,11 +11,11 @@ namespace Statr.Server.Storage
         /// <summary>
         /// Lists the buckets that have already been persisted
         /// </summary>
-        IEnumerable<BucketReference> ListBuckets(string tree);
+        IEnumerable<BucketReference> ListBuckets();
 
         /// <summary>
-        /// Gets a data point writer for a tree and bucket reference
+        /// Gets a data point writer for a bucket reference
         /// </summary>
-        IDataPointWriter GetWriter(string @namespace, BucketReference bucketReference);
+        IDataPointWriter GetWriter(BucketReference bucketReference);
     }
 }

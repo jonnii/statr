@@ -25,12 +25,9 @@ namespace Statr.Server.Storage
             this.storageEngine = storageEngine;
 
             Logger = NullLogger.Instance;
-            Namespace = "default";
         }
 
         public ILogger Logger { get; set; }
-
-        public string Namespace { get; set; }
 
         public void Start()
         {
@@ -48,7 +45,7 @@ namespace Statr.Server.Storage
                 var dataPoints = s.Select(e => e.DataPoint);
                 var storableDataPoints = storageStrategy.Apply(dataPoints);
 
-                var bucketWriter = storageEngine.GetWriter(Namespace, bucketReference);
+                var bucketWriter = storageEngine.GetWriter(bucketReference);
 
                 storableDataPoints.Subscribe(bucketWriter.Write);
             });

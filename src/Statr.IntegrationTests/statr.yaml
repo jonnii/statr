@@ -1,4 +1,5 @@
 ﻿Directory: c:\dev\tmp\storage
+Namespace: integration
 
 Entries:
 - Pattern: ^stats

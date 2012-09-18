@@ -20,7 +20,7 @@ namespace Statr.Server.Installers
                 Component.For<StorageStrategySelector, ITypedFactoryComponentSelector>(),
 
                 Component.For<IStorageEngine>().ImplementedBy<StorageEngine>().Forward<IConfigWatcher>(),
-                Component.For<IBucketRepository>().ImplementedBy<BucketRepository>(),
+                Component.For<IBucketRepository>().ImplementedBy<BucketRepository>().StartUsingMethod("FetchInitialBucketList"),
                 Component.For<IDataPointRepository>().ImplementedBy<DataPointRepository>(),
                 Component.For<IDataPointCache>().ImplementedBy<DataPointCache>().StartUsingMethod("Start"),
                 Component.For<DataPointBuffer>().StartUsingMethod("Start"));
