@@ -38,9 +38,26 @@
         templateName: 'buckets'
     });
 
-    App.BucketController = Em.Controller.extend();
+    App.BucketController = Em.Controller.extend({
+        dataPoints: [1, 2],
+
+        loadDataPoints: function () {
+            console.log("load data points");
+
+            //var that = this;
+            //$.get('/api/datapoints/' + this.content.get('id') + '/' + 'Count', function (e) {
+            //    that.set('dataPoints', e);
+            //});
+        }
+    });
+
     App.BucketView = Em.View.extend({
-        templateName: 'bucket'
+        templateName: 'bucket',
+        didInsertElement: function () {
+            // this feels wrong
+            var controller = this.get("controller");
+            controller.loadDataPoints();
+        }
     });
 
     App.Bucket = DS.Model.extend({
