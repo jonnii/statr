@@ -23,6 +23,8 @@ namespace Statr.Server.Configuration
             Entries = new List<Entry>();
         }
 
+        public string Directory { get; set; }
+
         public List<Entry> Entries { get; set; }
 
         public IEnumerable<Retention> GetRetentions(string metricName)

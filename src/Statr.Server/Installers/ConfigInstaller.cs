@@ -1,4 +1,5 @@
-﻿using Castle.MicroKernel.Registration;
+﻿using Castle.Facilities.Startable;
+using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using FluentValidation;
@@ -12,6 +13,8 @@ namespace Statr.Server.Installers
         {
             container.Register(
                 Classes.FromThisAssembly().BasedOn(typeof(IValidator<>)).WithService.FromInterface(typeof(IValidator<>)),
+
+                Component.For<IConfigService>().ImplementedBy<ConfigService>().StartUsingMethod("Start"),
                 Component.For<IConfigRepository>().ImplementedBy<YamlConfigRepository>());
         }
     }

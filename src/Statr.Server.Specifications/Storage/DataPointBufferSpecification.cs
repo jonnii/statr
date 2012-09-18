@@ -12,6 +12,13 @@ namespace Statr.Server.Specifications.Storage
     public class DataPointBufferSpecification
     {
         [Subject(typeof(DataPointBuffer))]
+        public class in_general : WithSubject<DataPointBuffer>
+        {
+            It should_have_namespace = () =>
+                Subject.Namespace.ShouldEqual("default");
+        }
+
+        [Subject(typeof(DataPointBuffer))]
         public class when_starting : with_storage_engine
         {
             Establish context = () =>
@@ -39,7 +46,7 @@ namespace Statr.Server.Specifications.Storage
 
                 writer = An<IDataPointWriter>();
 
-                The<IStorageEngine>().WhenToldTo(e => e.GetWriter(new BucketReference("bucket", MetricType.Count)))
+                The<IStorageEngine>().WhenToldTo(e => e.GetWriter("default", new BucketReference("bucket", MetricType.Count)))
                     .Return(writer);
             };
 

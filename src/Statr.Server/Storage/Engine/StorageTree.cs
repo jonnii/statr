@@ -6,17 +6,12 @@ namespace Statr.Server.Storage.Engine
 {
     public class StorageTree : IStorageTree
     {
-        private readonly IStorageEngine storageEngine;
-
         public StorageTree(
-            StorageEngine storageEngine,
-            string name,
-            IStorageTreeConfiguration treeConfiguration)
+            string rootFilePath,
+            string name)
         {
-            this.storageEngine = storageEngine;
-
             Name = name;
-            FilePath = Path.Combine(storageEngine.RootFilePath, Name);
+            FilePath = Path.Combine(rootFilePath, Name);
         }
 
         public string Name { get; set; }

@@ -1,4 +1,6 @@
-﻿Entries:
+﻿Directory: c:\dev\tmp\storage
+
+Entries:
 - Pattern: ^stats
   Retentions:
   - 2s:10d

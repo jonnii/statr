@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="BucketSpecification.cs" />
     <Compile Include="Configuration\BufferConfigSpecification.cs" />
+    <Compile Include="Configuration\ConfigServiceSpecification.cs" />
     <Compile Include="Configuration\ConfigSpecification.cs" />
     <Compile Include="Configuration\ConfigValidatorSpecification.cs" />
     <Compile Include="Configuration\EntryValidatorSpecification.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Management\Controllers\ConfigServiceSpecification.cs" />
     <Compile Include="Management\Controllers\DataPointsControllerSpecification.cs" />
     <Compile Include="MetricParserSpecification.cs" />
+    <Compile Include="MetricTypeParserSpecification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\AccumulateAggregationStrategySpecification.cs" />
     <Compile Include="Routing\DataPointStreamSpecification.cs" />

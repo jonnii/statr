@@ -9,6 +9,8 @@ namespace Statr.Api.Models
             Entries = new List<Entry>();
         }
 
+        public string Directory { get; set; }
+
         public List<Entry> Entries { get; set; }
     }
 }

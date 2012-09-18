@@ -3,6 +3,7 @@ using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using Statr.Server.Configuration;
 using Statr.Server.Installers.Factories;
 using Statr.Server.Storage;
 using Statr.Server.Storage.Engine;
@@ -18,7 +19,7 @@ namespace Statr.Server.Installers
                 Component.For<IBufferStrategyFactory>().AsFactory(c => c.SelectedWith<StorageStrategySelector>()),
                 Component.For<StorageStrategySelector, ITypedFactoryComponentSelector>(),
 
-                Component.For<IStorageEngine>().ImplementedBy<StorageEngine>(),
+                Component.For<IStorageEngine>().ImplementedBy<StorageEngine>().Forward<IConfigWatcher>(),
                 Component.For<IBucketRepository>().ImplementedBy<BucketRepository>(),
                 Component.For<IDataPointRepository>().ImplementedBy<DataPointRepository>(),
                 Component.For<IDataPointCache>().ImplementedBy<DataPointCache>().StartUsingMethod("Start"),

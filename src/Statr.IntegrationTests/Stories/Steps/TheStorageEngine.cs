@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using Statr.Server;
 using Statr.Server.Storage;
@@ -29,11 +31,26 @@ namespace Statr.IntegrationTests.Stories.Steps
 
         public static Action<StatrContext> WritesDataPoints(string bucketName, MetricType metricType, params DataPoint[] points)
         {
+            if (!points.Any())
+            {
+                points = new[] { new DataPoint(DateTime.Now, 300f, 0) };
+            }
+
             return context =>
             {
                 var storageEngine = context.StorageEngine;
-                var writer = storageEngine.GetWriter(new BucketReference(bucketName, metricType));
+                var writer = storageEngine.GetWriter("default", new BucketReference(bucketName, metricType));
                 writer.Write(points);
+            };
+        }
+
+        public static Action<StatrContext> ShouldReadBuckets(Predicate<IEnumerable<BucketReference>> predicate)
+        {
+            return context =>
+            {
+                var storageEngine = context.StorageEngine;
+                var buckets = storageEngine.ListBuckets("default");
+                Assert.That(predicate(buckets));
             };
         }
     }

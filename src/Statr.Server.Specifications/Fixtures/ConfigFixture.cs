@@ -7,7 +7,11 @@ namespace Statr.Server.Specifications.Fixtures
     {
         public static Config Create(params Action<Config>[] builders)
         {
-            var config = new Config();
+            var config = new Config
+            {
+                Directory = @"c:\foo"
+            };
+
             config.AddEntry("default", ".+", "30d:1y");
 
             foreach (var builder in builders)
