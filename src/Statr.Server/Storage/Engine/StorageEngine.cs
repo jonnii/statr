@@ -3,7 +3,7 @@ using Castle.Core.Logging;
 
 namespace Statr.Server.Storage.Engine
 {
-    public class StorageEngine : IStorageEngine
+    public class StorageEngine : IStorageEngine, IStorageTreeRoot
     {
         public StorageEngine()
         {

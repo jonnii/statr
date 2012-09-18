@@ -4,21 +4,21 @@ namespace Statr.Server.Storage.Engine
 {
     public class StorageEngineDataPointWriter : IDataPointWriter
     {
-        private readonly StorageEngine storageEngine;
+        private readonly IStorageTreeRoot storageTreeRoot;
 
         private readonly BucketReference bucketReference;
 
         public StorageEngineDataPointWriter(
-            StorageEngine storageEngine,
+            IStorageTreeRoot storageTreeRoot,
             BucketReference bucketReference)
         {
-            this.storageEngine = storageEngine;
+            this.storageTreeRoot = storageTreeRoot;
             this.bucketReference = bucketReference;
         }
 
         public void Write(IEnumerable<DataPoint> dataPoints)
         {
-            var tree = storageEngine.GetOrCreateTree("default");
+            var tree = storageTreeRoot.GetOrCreateTree("default/" + bucketReference.MetricType);
             var node = tree.GetOrCreateNode(bucketReference.Name);
 
             node.Store(dataPoints);

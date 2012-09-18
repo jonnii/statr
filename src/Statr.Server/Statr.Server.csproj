@@ -151,6 +151,7 @@
     <Compile Include="Storage\Engine\IStorageSlice.cs" />
     <Compile Include="Storage\Engine\IStorageTree.cs" />
     <Compile Include="Storage\Engine\IStorageTreeConfiguration.cs" />
+    <Compile Include="Storage\Engine\IStorageTreeRoot.cs" />
     <Compile Include="Storage\Engine\SliceData.cs" />
     <Compile Include="Storage\Engine\StorageEngine.cs" />
     <Compile Include="Storage\Engine\StorageEngineDataPointWriter.cs" />

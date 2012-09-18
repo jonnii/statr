@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using NUnit.Framework;
+using Statr.Server;
 using Statr.Server.Storage;
 using Statr.Server.Storage.Engine;
 
@@ -23,6 +24,16 @@ namespace Statr.IntegrationTests.Stories.Steps
                 Assert.That(
                     Directory.Exists(fullDirectoryPath),
                     "Expected the storage engine to have created the directory: {0}", fullDirectoryPath);
+            };
+        }
+
+        public static Action<StatrContext> WritesDataPoints(string bucketName, MetricType metricType, params DataPoint[] points)
+        {
+            return context =>
+            {
+                var storageEngine = context.StorageEngine;
+                var writer = storageEngine.GetWriter(new BucketReference(bucketName, metricType));
+                writer.Write(points);
             };
         }
     }
