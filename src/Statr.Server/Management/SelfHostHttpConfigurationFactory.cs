@@ -48,6 +48,7 @@ namespace Statr.Server.Management
 
         private void ConfigureRoutes(HttpRouteCollection routes)
         {
+            routes.MapHttpRoute("dataPoints", "DataPoints/{id}/{metricType}", new { controller = "DataPoints" });
             routes.MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
         }
 

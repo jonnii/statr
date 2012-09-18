@@ -11,16 +11,21 @@ namespace Statr.Web.App_Start
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapHttpRoute(
-                name: "DefaultApi",
+                name: "DataPointsApi",
+                routeTemplate: "api/datapoints/{id}/{metricType}",
+                defaults: new { controller = "DataPoints" }
+            );
+
+            routes.MapHttpRoute(
+                name: "Api",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
-                //constraints: new { id = @"([a-zA-Z\.]+)" } // anything but a period
             );
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                "Default",
+                "{controller}/{action}/{id}",
+                new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

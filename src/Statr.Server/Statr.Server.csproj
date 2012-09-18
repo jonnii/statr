@@ -116,6 +116,7 @@
     <Compile Include="Installers\StorageInstaller.cs" />
     <Compile Include="Management\Controllers\BucketsController.cs" />
     <Compile Include="Management\Controllers\ConfigController.cs" />
+    <Compile Include="Management\Controllers\DataPointsController.cs" />
     <Compile Include="Management\ManagementBootstrapper.cs" />
     <Compile Include="Management\ManagementInstaller.cs" />
     <Compile Include="Management\SelfHostHttpConfigurationFactory.cs" />

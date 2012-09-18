@@ -28,12 +28,23 @@ namespace Statr.Api
 
         public Config Config()
         {
-            return Client.Get("config").OnOk().As<Config>();
+            return Client.Get("config")
+                .OnOk()
+                .As<Config>();
         }
 
         public IEnumerable<Bucket> Buckets()
         {
-            return Client.Get("buckets").OnOk().As<List<Bucket>>();
+            return Client.Get("buckets")
+                .OnOk()
+                .As<List<Bucket>>();
+        }
+
+        public IEnumerable<DataPoint> DataPoints(string bucket, string metricType)
+        {
+            return Client.Get("datapoints/:bucket/:metricType", new { bucket, metricType })
+                .OnOk()
+                .As<List<DataPoint>>();
         }
     }
 }

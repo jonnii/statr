@@ -54,6 +54,7 @@
     <Compile Include="Models\Bucket.cs" />
     <Compile Include="Models\BufferConfig.cs" />
     <Compile Include="Models\Config.cs" />
+    <Compile Include="Models\DataPoint.cs" />
     <Compile Include="Models\Entry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StatrApi.cs" />

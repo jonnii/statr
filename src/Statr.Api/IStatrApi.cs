@@ -8,5 +8,7 @@ namespace Statr.Api
         Config Config();
 
         IEnumerable<Bucket> Buckets();
+
+        IEnumerable<DataPoint> DataPoints(string bucket, string metricType);
     }
 }
