@@ -4,6 +4,6 @@ namespace Statr.Server.Storage.Engine
     {
         void Write(SliceData sliceData);
 
-        long[] Read();
+        SliceData Read();
     }
 }

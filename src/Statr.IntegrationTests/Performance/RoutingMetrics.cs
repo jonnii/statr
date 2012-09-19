@@ -41,7 +41,7 @@ namespace Statr.IntegrationTests.Performance
 
         private IEnumerable<GeneratorRequest> GenerateMetrics(int numMetrics)
         {
-            for (int i = 0; i < 60; ++i)
+            for (var i = 0; i < 60; ++i)
             {
                 yield return new GeneratorRequest("stats.dogs", "count", numMetrics, new Range(1, 1), new Range(500, 1000));
                 yield return new GeneratorRequest("stats.cats", "count", numMetrics, new Range(1, 1), new Range(500, 1000));

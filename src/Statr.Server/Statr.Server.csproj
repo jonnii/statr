@@ -162,6 +162,7 @@
     <Compile Include="Storage\Engine\IStorageTreeConfiguration.cs" />
     <Compile Include="Storage\Engine\SliceData.cs" />
     <Compile Include="Storage\Engine\StorageEngine.cs" />
+    <Compile Include="Storage\Engine\StorageEngineDataPointReader.cs" />
     <Compile Include="Storage\Engine\StorageEngineDataPointWriter.cs" />
     <Compile Include="Storage\Engine\StorageNode.cs" />
     <Compile Include="Storage\Engine\StorageNodeConfiguration.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Storage\IBufferStrategy.cs" />
     <Compile Include="Storage\IBufferStrategyFactory.cs" />
     <Compile Include="Storage\IDataPointCache.cs" />
+    <Compile Include="Storage\IDataPointReader.cs" />
     <Compile Include="Storage\IDataPointRepository.cs" />
     <Compile Include="Storage\IDataPointWriter.cs" />
     <Compile Include="Storage\IStorageEngine.cs" />

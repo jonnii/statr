@@ -123,6 +123,7 @@
     <Compile Include="Storage\DataPointRepositorySpecification.cs" />
     <Compile Include="Storage\Engine\StorageEngineDataPointWriterSpecification.cs" />
     <Compile Include="Storage\Engine\StorageEngineSpecification.cs" />
+    <Compile Include="Storage\Engine\StorageSliceSpecification.cs" />
     <Compile Include="Storage\Strategies\BufferedStorageStrategySpecification.cs" />
   </ItemGroup>
   <ItemGroup>

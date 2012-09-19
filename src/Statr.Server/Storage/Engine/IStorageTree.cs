@@ -9,5 +9,7 @@ namespace Statr.Server.Storage.Engine
         IStorageNode GetOrCreateNode(string node);
 
         IStorageNode GetOrCreateNode(string node, Action<IStorageNodeConfiguration> action);
+
+        void DeleteAllNodes();
     }
 }

@@ -14,6 +14,32 @@ namespace Statr.Server.Storage.Engine
             TimeStep = timeStep;
         }
 
+        public StorageSlice(IStorageNode storageNode, string name)
+        {
+            this.storageNode = storageNode;
+
+            var bits = name.Split(new[] { '@', '.' });
+
+            if (bits.Length != 3)
+            {
+                throw new ArgumentException("Was not formatted correctly", "name");
+            }
+
+            long startTime;
+            if (!long.TryParse(bits[0], out startTime))
+            {
+                throw new ArgumentException("Could not parse start time");
+            }
+            StartTime = startTime;
+
+            long timeStep;
+            if (!long.TryParse(bits[1], out timeStep))
+            {
+                throw new ArgumentException("Could not parse time step");
+            }
+            TimeStep = timeStep;
+        }
+
         public long StartTime { get; set; }
 
         public long TimeStep { get; set; }
@@ -35,7 +61,7 @@ namespace Statr.Server.Storage.Engine
 
         public void Write(SliceData sliceData)
         {
-            var dataPoints = sliceData.DataPoints;
+            var dataPoints = sliceData.Values;
 
             if (dataPoints.Length == 0)
             {
@@ -51,7 +77,7 @@ namespace Statr.Server.Storage.Engine
             }
         }
 
-        public long[] Read()
+        public SliceData Read()
         {
             using (var file = File.OpenRead(SlicePath))
             {
@@ -60,10 +86,10 @@ namespace Statr.Server.Storage.Engine
                 var buffer = new byte[length];
                 file.Read(buffer, 0, length);
 
-                var values = new long[length / sizeof(long)];
+                var values = new float[length / sizeof(float)];
                 Buffer.BlockCopy(buffer, 0, values, 0, length);
 
-                return values;
+                return new SliceData(StartTime, values);
             }
         }
     }

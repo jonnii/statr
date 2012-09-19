@@ -71,6 +71,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Components\StorageEngineTests.cs" />
     <Compile Include="Fixtures\DataPoints.cs" />
     <Compile Include="Installers\IntegrationInstaller.cs" />
     <Compile Include="IntegrationApplication.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Stories\Steps\TheBucket.cs" />
     <Compile Include="Stories\Steps\TheConfigFile.cs" />
     <Compile Include="Stories\Steps\TheLastQuery.cs" />
+    <Compile Include="Stories\Steps\TheLastRead.cs" />
     <Compile Include="Stories\Steps\TheMetric.cs" />
     <Compile Include="Stories\Steps\TheMetricRouter.cs" />
     <Compile Include="Stories\Steps\TheMetrics.cs" />

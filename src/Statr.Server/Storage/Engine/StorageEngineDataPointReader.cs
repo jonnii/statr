@@ -2,25 +2,22 @@ using System.Collections.Generic;
 
 namespace Statr.Server.Storage.Engine
 {
-    public class StorageEngineDataPointWriter : IDataPointWriter
+    public class StorageEngineDataPointReader : IDataPointReader
     {
         private readonly IStorageTree storageTree;
 
         private readonly BucketReference bucketReference;
 
-        public StorageEngineDataPointWriter(
-            IStorageTree storageTree,
-            BucketReference bucketReference)
+        public StorageEngineDataPointReader(IStorageTree storageTree, BucketReference bucketReference)
         {
             this.storageTree = storageTree;
             this.bucketReference = bucketReference;
         }
 
-        public void Write(IEnumerable<DataPoint> dataPoints)
+        public IEnumerable<DataPoint> Read()
         {
             var node = storageTree.GetOrCreateNode(bucketReference.Name);
-
-            node.Write(dataPoints);
+            return node.Read();
         }
     }
 }

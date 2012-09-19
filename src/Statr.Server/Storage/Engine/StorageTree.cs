@@ -18,6 +18,14 @@ namespace Statr.Server.Storage.Engine
 
         public string FilePath { get; private set; }
 
+        public void Initialize()
+        {
+            if (!Directory.Exists(FilePath))
+            {
+                Directory.CreateDirectory(FilePath);
+            }
+        }
+
         public IStorageNode GetOrCreateNode(string name)
         {
             return GetOrCreateNode(name, c => { });
@@ -28,28 +36,17 @@ namespace Statr.Server.Storage.Engine
             var nodeConfiguration = StorageNodeConfiguration.Default;
             configuration(nodeConfiguration);
 
-            var storageTree = new StorageNode(this, name, nodeConfiguration);
-
-            storageTree.Initialize();
-
-            return storageTree;
+            var storageNode = new StorageNode(this, name, nodeConfiguration);
+            storageNode.Initialize();
+            return storageNode;
         }
 
-        public IStorageNode GetNode(string name)
+        public void DeleteAllNodes()
         {
-            return null;
-        }
-
-        public void Store(string node, IEnumerable<DataPoint> dataPoints)
-        {
-
-        }
-
-        public void Initialize()
-        {
-            if (!Directory.Exists(FilePath))
+            var info = new DirectoryInfo(FilePath);
+            foreach (var i in info.GetDirectories())
             {
-                Directory.CreateDirectory(FilePath);
+                i.Delete(true);
             }
         }
     }

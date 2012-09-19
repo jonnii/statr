@@ -48,15 +48,15 @@ namespace Statr.Server.Storage.Engine
         {
             EnsureAllPropertiesAreConfigured();
 
-            var combine = Path.Combine(RootFilePath, Namespace);
-            var info = new DirectoryInfo(combine);
+            var namespaceDirectory = Path.Combine(RootFilePath, Namespace);
+            var bucketDirectory = new DirectoryInfo(namespaceDirectory);
 
-            if (!info.Exists)
+            if (!bucketDirectory.Exists)
             {
                 yield break;
             }
 
-            foreach (var metricDirectory in info.GetDirectories())
+            foreach (var metricDirectory in bucketDirectory.GetDirectories())
             {
                 var metric = metricDirectory.Name;
                 var metricType = MetricTypeParser.Parse(metric);
@@ -68,11 +68,33 @@ namespace Statr.Server.Storage.Engine
             }
         }
 
+        public void DeleteAllBuckets()
+        {
+            var namespaceDirectory = Path.Combine(RootFilePath, Namespace);
+            var bucketDirectory = new DirectoryInfo(namespaceDirectory);
+
+            if (bucketDirectory.Exists)
+            {
+                bucketDirectory.Delete(true);
+            }
+        }
+
         public IDataPointWriter GetWriter(BucketReference bucketReference)
         {
-            var storageTreeName = string.Concat(Namespace, "/", bucketReference.MetricType.ToString().ToLower());
-            var storageTree = GetOrCreateTree(storageTreeName);
+            var storageTree = GetStorageTree(bucketReference);
             return new StorageEngineDataPointWriter(storageTree, bucketReference);
+        }
+
+        public IDataPointReader GetReader(BucketReference bucketReference)
+        {
+            var storageTree = GetStorageTree(bucketReference);
+            return new StorageEngineDataPointReader(storageTree, bucketReference);
+        }
+
+        public IStorageTree GetStorageTree(BucketReference bucketReference)
+        {
+            var storageTreeName = string.Concat(Namespace, "/", bucketReference.MetricType.ToString().ToLower());
+            return GetOrCreateTree(storageTreeName);
         }
 
         public void NotifyConfigChanged(Config config)

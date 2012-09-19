@@ -7,6 +7,8 @@ namespace Statr.IntegrationTests.Stories.Steps
             context.Application = new IntegrationApplication();
             context.Application.Initialize();
             context.Container = context.Application.Container;
+
+            context.StorageEngine.DeleteAllBuckets();
         }
     }
 }

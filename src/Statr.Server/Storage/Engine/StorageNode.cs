@@ -31,7 +31,7 @@ namespace Statr.Server.Storage.Engine
             File.WriteAllText(Path.Combine(FilePath, ".metadata"), metaData);
         }
 
-        public void Store(IEnumerable<DataPoint> dataPoints)
+        public void Write(IEnumerable<DataPoint> dataPoints)
         {
             var firstPoint = dataPoints.First();
             var firstStamp = firstPoint.TimeStamp;
@@ -43,6 +43,19 @@ namespace Statr.Server.Storage.Engine
             var sliceData = new SliceData(startTime, dataPointValues);
 
             slice.Write(sliceData);
+        }
+
+        public IEnumerable<DataPoint> Read()
+        {
+            return GetSlices().Select(s => s.Read()).SelectMany(d => d.ToDataPoints());
+        }
+
+        public IEnumerable<IStorageSlice> GetSlices()
+        {
+            var info = new DirectoryInfo(FilePath);
+            var slicefiles = info.GetFiles("*.slice");
+
+            return slicefiles.Select(sliceFile => new StorageSlice(this, sliceFile.Name));
         }
 
         public IStorageSlice CreateSlice(long startTime, int timeStep)

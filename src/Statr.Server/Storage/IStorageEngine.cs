@@ -17,5 +17,15 @@ namespace Statr.Server.Storage
         /// Gets a data point writer for a bucket reference
         /// </summary>
         IDataPointWriter GetWriter(BucketReference bucketReference);
+
+        /// <summary>
+        /// Gets a data point reader for a bucket reference
+        /// </summary>
+        IDataPointReader GetReader(BucketReference bucketReference);
+
+        /// <summary>
+        /// Clears all the data in this storage engine
+        /// </summary>
+        void DeleteAllBuckets();
     }
 }

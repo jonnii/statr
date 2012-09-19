@@ -6,8 +6,10 @@ namespace Statr.Server.Storage.Engine
     {
         string FilePath { get; }
 
-        void Store(IEnumerable<DataPoint> dataPoints);
+        void Write(IEnumerable<DataPoint> dataPoints);
 
-        IStorageSlice CreateSlice(long startTime, int timeStep);
+        IEnumerable<DataPoint> Read();
+
+        IEnumerable<IStorageSlice> GetSlices();
     }
 }

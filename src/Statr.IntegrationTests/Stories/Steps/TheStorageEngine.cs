@@ -58,5 +58,16 @@ namespace Statr.IntegrationTests.Stories.Steps
                 Assert.That(predicate(buckets));
             };
         }
+
+        public static Action<StatrContext> ReadsDataPoints(string bucketName, MetricType metricType)
+        {
+            return context =>
+            {
+                var storageEngine = context.StorageEngine;
+                var reader = storageEngine.GetReader(new BucketReference(bucketName, metricType));
+                var points = reader.Read();
+                context.Add(points);
+            };
+        }
     }
 }
