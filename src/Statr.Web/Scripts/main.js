@@ -39,25 +39,25 @@
     });
 
     App.BucketController = Em.Controller.extend({
-        dataPoints: [1, 2],
+        dataPoints: [],
 
         loadDataPoints: function () {
-            console.log("load data points");
+            var id = this.content.get('id');
+            var metricType = this.content.get('metricType');
 
-            //var that = this;
-            //$.get('/api/datapoints/' + this.content.get('id') + '/' + 'Count', function (e) {
-            //    that.set('dataPoints', e);
-            //});
-        }
+            if (id === null || metricType === null) {
+                return;
+            }
+
+            var that = this;
+            Ember.$.get('/api/datapoints/' + id + '/' + metricType, function (e) {
+                that.set('dataPoints', e);
+            });
+        }.observes('content.isLoaded')
     });
 
     App.BucketView = Em.View.extend({
-        templateName: 'bucket',
-        didInsertElement: function () {
-            // this feels wrong
-            var controller = this.get("controller");
-            controller.loadDataPoints();
-        }
+        templateName: 'bucket'
     });
 
     App.Bucket = DS.Model.extend({

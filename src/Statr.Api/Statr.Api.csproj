@@ -35,8 +35,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.9\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="SpeakEasy">
-      <HintPath>..\packages\SpeakEasy.0.1.10\lib\net40\SpeakEasy.dll</HintPath>
+    <Reference Include="SpeakEasy, Version=0.1.11.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SpeakEasy.0.1.11\lib\net40\SpeakEasy.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

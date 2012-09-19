@@ -60,9 +60,9 @@
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.2.0.0.2000\lib\net40\NLog.dll</HintPath>
     </Reference>
-    <Reference Include="SpeakEasy, Version=0.1.10.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SpeakEasy, Version=0.1.11.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\SpeakEasy.0.1.10\lib\net40\SpeakEasy.dll</HintPath>
+      <HintPath>..\packages\SpeakEasy.0.1.11\lib\net40\SpeakEasy.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
