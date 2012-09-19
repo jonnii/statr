@@ -35,12 +35,8 @@ namespace Statr.Server.Storage.Engine
             var treeConfiguration = StorageTreeConfiguration.Default;
             configuration(treeConfiguration);
 
-            var storageTree = new StorageTree(
-                RootFilePath,
-                name);
-
+            var storageTree = new StorageTree(RootFilePath, name);
             storageTree.Initialize();
-
             return storageTree;
         }
 
