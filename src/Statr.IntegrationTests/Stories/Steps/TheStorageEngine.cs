@@ -36,6 +36,11 @@ namespace Statr.IntegrationTests.Stories.Steps
                 points = new[] { new DataPoint(DateTime.Now, 300f, 0) };
             }
 
+            return WritesDataPoints(bucketName, metricType, (IEnumerable<DataPoint>)points);
+        }
+
+        public static Action<StatrContext> WritesDataPoints(string bucketName, MetricType metricType, IEnumerable<DataPoint> points)
+        {
             return context =>
             {
                 var storageEngine = context.StorageEngine;

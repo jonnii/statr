@@ -114,6 +114,7 @@
     <Compile Include="IMetricParser.cs" />
     <Compile Include="IMetricReceiver.cs" />
     <Compile Include="Installers\Factories\StorageStrategySelector.cs" />
+    <Compile Include="Installers\QueryingInstaller.cs" />
     <Compile Include="Installers\RoutingInstaller.cs" />
     <Compile Include="Installers\ServerInstaller.cs" />
     <Compile Include="Installers\StorageInstaller.cs" />
@@ -131,6 +132,10 @@
     <Compile Include="MetricType.cs" />
     <Compile Include="MetricTypeParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Querying\IQueryEngine.cs" />
+    <Compile Include="Querying\Query.cs" />
+    <Compile Include="Querying\QueryEngine.cs" />
+    <Compile Include="Querying\QueryResult.cs" />
     <Compile Include="Routing\AccumulateAggregationStrategy.cs" />
     <Compile Include="Routing\AggregatedMetric.cs" />
     <Compile Include="Routing\DataPointStream.cs" />

@@ -82,6 +82,7 @@
     <Compile Include="Stories\Configuration\ReadConfigurationFeature.cs" />
     <Compile Include="Stories\GivenWhenThenSupport.cs" />
     <Compile Include="Stories\Metrics\MetricsFeature.cs" />
+    <Compile Include="Stories\Metrics\QueryFeature.cs" />
     <Compile Include="Stories\ScenarioContext.cs" />
     <Compile Include="Stories\StatrContext.cs" />
     <Compile Include="Stories\StatrStory.cs" />
@@ -89,9 +90,11 @@
     <Compile Include="Stories\Steps\TheApplication.cs" />
     <Compile Include="Stories\Steps\TheBucket.cs" />
     <Compile Include="Stories\Steps\TheConfigFile.cs" />
+    <Compile Include="Stories\Steps\TheLastQuery.cs" />
     <Compile Include="Stories\Steps\TheMetric.cs" />
     <Compile Include="Stories\Steps\TheMetricRouter.cs" />
     <Compile Include="Stories\Steps\TheMetrics.cs" />
+    <Compile Include="Stories\Steps\TheQueryEngine.cs" />
     <Compile Include="Stories\Steps\TheStorageEngine.cs" />
     <Compile Include="Stories\Storage\StorageFeature.cs" />
     <Compile Include="Support\DirectClientTransport.cs" />

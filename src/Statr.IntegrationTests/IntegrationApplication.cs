@@ -13,6 +13,7 @@ namespace Statr.IntegrationTests
             yield return new RoutingInstaller();
             yield return new StorageInstaller();
             yield return new IntegrationInstaller();
+            yield return new QueryingInstaller();
         }
     }
 }
