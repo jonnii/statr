@@ -57,9 +57,10 @@ namespace Statr.Client.Subscriber
                             continue;
                         }
 
+                        var bucket = address.Substring("datapoints/".Length);
                         var dataPoint = JsonConvert.DeserializeObject<DataPoint>(contents);
 
-                        OnDataPointEvent(address, dataPoint);
+                        OnDataPointEvent(bucket, dataPoint);
 
                         ++NumReceivedDataPoints;
                     }

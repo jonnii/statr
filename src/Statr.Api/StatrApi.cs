@@ -40,9 +40,9 @@ namespace Statr.Api
                 .As<List<Bucket>>();
         }
 
-        public IEnumerable<DataPoint> DataPoints(string bucket, string metricType)
+        public IEnumerable<DataPoint> DataPoints(string metricType, string bucket)
         {
-            return Client.Get("datapoints/:bucket/:metricType", new { bucket, metricType })
+            return Client.Get("datapoints/:metricType/:bucket", new { metricType, bucket })
                 .OnOk()
                 .As<List<DataPoint>>();
         }

@@ -13,7 +13,7 @@ namespace Statr.Server.Management.Controllers
             this.dataPointCache = dataPointCache;
         }
 
-        public IEnumerable<DataPoint> Get(string id, string metricType)
+        public IEnumerable<DataPoint> Get(string metricType, string id)
         {
             var parsed = MetricTypeParser.Parse(metricType);
             return dataPointCache.Get(new BucketReference(parsed, id));

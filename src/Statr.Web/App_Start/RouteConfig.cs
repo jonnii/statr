@@ -12,7 +12,7 @@ namespace Statr.Web.App_Start
 
             routes.MapHttpRoute(
                 name: "DataPointsApi",
-                routeTemplate: "api/datapoints/{id}/{metricType}",
+                routeTemplate: "api/datapoints/{metricType}/{id}",
                 defaults: new { controller = "DataPoints" }
             );
 

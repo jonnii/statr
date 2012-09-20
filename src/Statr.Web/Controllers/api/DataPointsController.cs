@@ -14,9 +14,9 @@ namespace Statr.Web.Controllers.api
             this.api = api;
         }
 
-        public IEnumerable<DataPoint> Get(string id, string metricType)
+        public IEnumerable<DataPoint> Get(string metricType, string id)
         {
-            return api.DataPoints(id, metricType);
+            return api.DataPoints(metricType, id);
         }
     }
 }

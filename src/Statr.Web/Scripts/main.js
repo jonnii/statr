@@ -49,19 +49,29 @@
                 return;
             }
 
+            console.log("getting initial datapoints");
+
             var that = this;
-            Ember.$.get('/api/datapoints/' + id + '/' + metricType, function (e) {
+            Ember.$.get('/api/datapoints/' + metricType + '/' + id, function (e) {
                 that.set('dataPoints', e);
             });
 
-            var subscriber = $.connection.dataPointSubscriber;
+            console.log("setting up data point data subscription");
+
+            var subscriber = $.connection.dataPoints;
             subscriber.ack = function (message) {
+                console.log("confirming subscription to " + message);
+            };
+
+            subscriber.receive = function (message) {
                 console.log(message);
             };
 
+            console.log("registering for data points");
             $.connection.hub.start().done(function () {
-                var bucket = id + '/' + metricType;
-                subscriber.connect(bucket);
+                var dataPoints = metricType + '/' + id;
+                console.log("subscribing to data points " + dataPoints);
+                subscriber.connect(dataPoints);
             });
         }.observes('content.isLoaded')
     });
