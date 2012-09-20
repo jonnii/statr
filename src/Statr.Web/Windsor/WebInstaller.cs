@@ -6,7 +6,10 @@ using System.Web.Mvc;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using SignalR.Hubs;
 using Statr.Api;
+using Statr.Client.Subscriber;
+using Statr.Web.Hubs;
 
 namespace Statr.Web.Windsor
 {
@@ -25,6 +28,10 @@ namespace Statr.Web.Windsor
                 AllTypes.FromThisAssembly()
                     .BasedOn<IHttpController>().WithServiceSelf().LifestyleTransient(),
 
+                //AllTypes.FromThisAssembly().BasedOn<Hub>().WithServiceSelf(),
+
+                Component.For<DataPoints>(),
+
                 Component.For<IHttpControllerSelector>().ImplementedBy<DefaultHttpControllerSelector>(),
                 Component.For<IHttpControllerActivator>().ImplementedBy<DefaultHttpControllerActivator>().LifeStyle.Transient,
                 Component.For<IHttpActionSelector>().ImplementedBy<ApiControllerActionSelector>().LifeStyle.Transient,
@@ -36,6 +43,9 @@ namespace Statr.Web.Windsor
                 Component.For<HttpConfiguration>().Instance(httpConfiguration),
 
                 Component.For<IStatrApi>().ImplementedBy<StatrApi>(),
+                Component.For<IDataPointSubscriber>().ImplementedBy<DataPointSubscriber>()
+                    .DependsOn(new { server = "localhost", port = 17892 }).OnCreate(d => d.Start()),
+
                 Classes.FromThisAssembly().BasedOn<Controller>().LifestyleTransient());
 
             httpConfiguration.DependencyResolver = new WindsorWebApiDependencyResolver(container);

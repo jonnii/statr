@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="DataPointEventArgs.cs" />
     <Compile Include="DataPointSubscriber.cs" />
+    <Compile Include="IDataPointSubscriber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

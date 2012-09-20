@@ -5,11 +5,12 @@ namespace Statr.Web.Hubs
 {
     public class DataPoints : Hub
     {
-        public DataPoints()
+        private readonly IDataPointSubscriber dataPointSubscriber;
+
+        public DataPoints(IDataPointSubscriber dataPointSubscriber)
         {
-            var subscriber = new DataPointSubscriber("localhost", 17892);
-            subscriber.Start();
-            subscriber.DataPointReceived += SubscriberOnDataPointReceived;
+            this.dataPointSubscriber = dataPointSubscriber;
+            dataPointSubscriber.DataPointReceived += SubscriberOnDataPointReceived;
         }
 
         public void Connect(string bucket)

@@ -7,7 +7,7 @@ using ZMQ;
 
 namespace Statr.Client.Subscriber
 {
-    public class DataPointSubscriber : IDisposable
+    public class DataPointSubscriber : IDataPointSubscriber
     {
         private readonly string server;
 

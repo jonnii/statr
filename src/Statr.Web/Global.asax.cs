@@ -18,10 +18,6 @@ namespace Statr.Web
         {
             AreaRegistration.RegisterAllAreas();
 
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-
             var defaultFormatters = GlobalConfiguration.Configuration.Formatters
                 .Where(f => f.SupportedMediaTypes
                     .Any(m => m.MediaType.ToString(CultureInfo.InvariantCulture) == "application/xml"
@@ -44,7 +40,13 @@ namespace Statr.Web
             var container = application.Container;
 
             GlobalHost.DependencyResolver = new SignalResolver(container);
+
             DependencyResolver.SetResolver(new WindsorDependencyResolver(container));
+            RouteTable.Routes.MapHubs();
+
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }
