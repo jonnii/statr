@@ -4,4 +4,4 @@ Namespace: default
 Entries:
 - Pattern: ^stats
   Retentions:
-    - 30s:10d
+    - 5s:10d

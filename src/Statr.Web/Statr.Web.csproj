@@ -143,9 +143,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\api\BucketsController.cs" />
-    <Compile Include="Controllers\api\ConfigsController.cs" />
-    <Compile Include="Controllers\api\DataPointsController.cs" />
+    <Compile Include="Controllers\Api\BucketsController.cs" />
+    <Compile Include="Controllers\Api\ConfigsController.cs" />
+    <Compile Include="Controllers\Api\DataPointsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

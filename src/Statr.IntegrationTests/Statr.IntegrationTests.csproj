@@ -121,6 +121,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Statr.Api\Statr.Api.csproj">
+      <Project>{CA2462A6-B083-426F-B0E6-1BF1863CF4DF}</Project>
+      <Name>Statr.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Statr.Client.Subscriber\Statr.Client.Subscriber.csproj">
       <Project>{1A11FEDD-F1F2-4426-B813-6A2E674FB0FB}</Project>
       <Name>Statr.Client.Subscriber</Name>
