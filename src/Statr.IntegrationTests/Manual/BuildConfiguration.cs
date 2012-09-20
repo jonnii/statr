@@ -26,11 +26,13 @@ namespace Statr.IntegrationTests.Manual
                 }
             };
 
-            var configurationService = GetContainer().Resolve<IConfigRepository>();
+            using (var container = GetContainer())
+            {
+                var configurationService = container.Resolve<IConfigRepository>();
+                var serialized = configurationService.Serialize(config);
 
-            var serialized = configurationService.Serialize(config);
-
-            Console.WriteLine(serialized);
+                Console.WriteLine(serialized);
+            }
         }
     }
 }

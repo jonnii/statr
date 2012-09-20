@@ -53,6 +53,16 @@
             Ember.$.get('/api/datapoints/' + id + '/' + metricType, function (e) {
                 that.set('dataPoints', e);
             });
+
+            var subscriber = $.connection.dataPointSubscriber;
+            subscriber.ack = function (message) {
+                console.log(message);
+            };
+
+            $.connection.hub.start().done(function () {
+                var bucket = id + '/' + metricType;
+                subscriber.connect(bucket);
+            });
         }.observes('content.isLoaded')
     });
 

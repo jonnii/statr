@@ -6,6 +6,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using SignalR;
 using Statr.Web.App_Start;
 using Statr.Web.Windsor;
 
@@ -42,6 +43,7 @@ namespace Statr.Web
             application.Initialize();
             var container = application.Container;
 
+            GlobalHost.DependencyResolver = new SignalResolver(container);
             DependencyResolver.SetResolver(new WindsorDependencyResolver(container));
         }
     }

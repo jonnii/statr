@@ -14,6 +14,7 @@ namespace Statr.IntegrationTests
             yield return new StorageInstaller();
             yield return new IntegrationInstaller();
             yield return new QueryingInstaller();
+            yield return new PublishingInstaller();
         }
     }
 }

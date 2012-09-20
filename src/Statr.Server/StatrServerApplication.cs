@@ -15,6 +15,7 @@ namespace Statr.Server
             yield return new ServerInstaller();
             yield return new ManagementInstaller();
             yield return new QueryingInstaller();
+            yield return new PublishingInstaller();
         }
     }
 }
