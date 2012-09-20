@@ -67,7 +67,7 @@ namespace Statr.Server.Storage
 
         public void Dispose()
         {
-            Logger.Info("Disposing of DataPointCache");
+            Logger.Info("Disposing DataPointCache");
 
             if (subscription != null)
             {

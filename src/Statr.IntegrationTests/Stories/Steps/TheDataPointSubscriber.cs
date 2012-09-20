@@ -28,9 +28,8 @@ namespace Statr.IntegrationTests.Stories.Steps
         {
             return context =>
             {
-                Thread.Sleep(200);
-
                 var subscriber = context.Get<DataPointSubscriber>();
+                Thread.Sleep(300);
                 Assert.That(subscriber.NumReceivedDataPoints, Is.EqualTo(1));
             };
         }

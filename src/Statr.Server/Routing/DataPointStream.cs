@@ -32,7 +32,7 @@ namespace Statr.Server.Routing
 
         public void Dispose()
         {
-            Logger.InfoFormat("Disposing of DataPointStream");
+            Logger.InfoFormat("Disposing DataPointStream");
 
             root.OnCompleted();
             root.Dispose();

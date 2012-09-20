@@ -29,6 +29,8 @@ namespace Statr.Server.Publishing
 
         public int Port { get; set; }
 
+        public long NumPublishedMessage { get; private set; }
+
         public void Start()
         {
             Logger.Info("Starting TcpPublisher");
@@ -36,7 +38,10 @@ namespace Statr.Server.Publishing
             try
             {
                 context = new Context();
+
                 socket = context.Socket(SocketType.PUB);
+                socket.Linger = 0;
+
                 socket.Bind("tcp://*:" + Port);
             }
             catch (System.Exception e)
@@ -54,24 +59,29 @@ namespace Statr.Server.Publishing
 
             socket.SendMore(address, Encoding.Unicode);
             socket.Send(dataPointEvent.ToString(), Encoding.Unicode);
+
+            ++NumPublishedMessage;
         }
 
         public void Dispose()
         {
-            Logger.Info("Shutting down TcpPublisher");
+            Logger.InfoFormat("Disposing TcpPublisher ({0} published messages)", NumPublishedMessage);
 
             if (subscription != null)
             {
+                Logger.Info(" => Disposing subscription");
                 subscription.Dispose();
             }
 
             if (socket != null)
             {
+                Logger.Info(" => Disposing socket");
                 socket.Dispose();
             }
 
             if (context != null)
             {
+                Logger.Info(" => Disposing context");
                 context.Dispose();
             }
         }

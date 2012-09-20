@@ -33,25 +33,25 @@ namespace Statr.Client.Subscriber
 
         public void StartReceiving()
         {
-            using (var context = new Context())
+            using (var context = new Context(1))
             {
                 using (var subscriber = context.Socket(SocketType.SUB))
                 {
-                    subscriber.Linger = 0;
-
                     subscriber.Connect(string.Format("tcp://{0}:{1}", server, port));
                     subscriber.Subscribe("datapoints/", Encoding.Unicode);
+
+                    Console.WriteLine("subscribed");
 
                     IsSubscribed = true;
 
                     while (!isDisposed)
                     {
-                        var address = subscriber.Recv(Encoding.Unicode, 10);
-                        var contents = subscriber.Recv(Encoding.Unicode, 10);
+                        var address = subscriber.Recv(Encoding.Unicode, 5);
+                        var contents = subscriber.Recv(Encoding.Unicode, 5);
 
                         if (string.IsNullOrEmpty(address) || string.IsNullOrEmpty(contents))
                         {
-                            Thread.Sleep(10);
+                            Thread.Sleep(5);
                             continue;
                         }
 
@@ -61,11 +61,16 @@ namespace Statr.Client.Subscriber
                     }
                 }
             }
+
+            Console.WriteLine("unsubscribed");
+
+            IsSubscribed = false;
         }
 
         public void Dispose()
         {
             isDisposed = true;
+            Console.WriteLine("dps dispose");
         }
     }
 }
