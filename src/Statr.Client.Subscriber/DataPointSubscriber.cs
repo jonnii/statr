@@ -40,8 +40,6 @@ namespace Statr.Client.Subscriber
                     subscriber.Connect(string.Format("tcp://{0}:{1}", server, port));
                     subscriber.Subscribe("datapoints/", Encoding.Unicode);
 
-                    Console.WriteLine("subscribed");
-
                     IsSubscribed = true;
 
                     while (!isDisposed)
@@ -62,15 +60,12 @@ namespace Statr.Client.Subscriber
                 }
             }
 
-            Console.WriteLine("unsubscribed");
-
             IsSubscribed = false;
         }
 
         public void Dispose()
         {
             isDisposed = true;
-            Console.WriteLine("dps dispose");
         }
     }
 }
