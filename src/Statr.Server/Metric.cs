@@ -37,7 +37,7 @@ namespace Statr.Server
 
         public BucketReference ToBucket()
         {
-            return new BucketReference(Name, MetricType);
+            return new BucketReference(MetricType, Name);
         }
     }
 }

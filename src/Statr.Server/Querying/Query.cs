@@ -14,7 +14,7 @@ namespace Statr.Server.Querying
 
         public BucketReference BucketReference
         {
-            get { return new BucketReference(BucketName, MetricType); }
+            get { return new BucketReference(MetricType, BucketName); }
         }
 
         public override string ToString()

@@ -1,12 +1,13 @@
 using System;
 using System.Text;
 using Castle.Core.Logging;
+using Newtonsoft.Json;
 using Statr.Server.Routing;
 using ZMQ;
 
 namespace Statr.Server.Publishing
 {
-    public class Publisher : IPublisher
+    public class TcpPublisher : IPublisher
     {
         private readonly IDataPointStream dataPointStream;
 
@@ -16,7 +17,7 @@ namespace Statr.Server.Publishing
 
         private Socket socket;
 
-        public Publisher(IDataPointStream dataPointStream)
+        public TcpPublisher(IDataPointStream dataPointStream)
         {
             this.dataPointStream = dataPointStream;
 
@@ -30,7 +31,7 @@ namespace Statr.Server.Publishing
 
         public void Start()
         {
-            Logger.Info("Starting Publisher");
+            Logger.Info("Starting TcpPublisher");
 
             try
             {
@@ -49,15 +50,15 @@ namespace Statr.Server.Publishing
 
         public void Publish(DataPointEvent dataPointEvent)
         {
-            Logger.Info("Publishing data point");
+            var address = string.Concat("datapoints/", dataPointEvent.Bucket.Key);
 
-            socket.SendMore("message", Encoding.Unicode);
+            socket.SendMore(address, Encoding.Unicode);
             socket.Send(dataPointEvent.ToString(), Encoding.Unicode);
         }
 
         public void Dispose()
         {
-            Logger.Info("Shutting down Publisher");
+            Logger.Info("Shutting down TcpPublisher");
 
             if (subscription != null)
             {
@@ -66,21 +67,18 @@ namespace Statr.Server.Publishing
 
             if (socket != null)
             {
-                try
-                {
-                    socket.Dispose();
-                }
-                catch { }
+                socket.Dispose();
             }
 
             if (context != null)
             {
-                try
-                {
-                    context.Dispose();
-                }
-                catch { }
+                context.Dispose();
             }
+        }
+
+        public string Serialize(DataPointEvent dataPointEvent)
+        {
+            return JsonConvert.SerializeObject(dataPointEvent);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Statr.Server.Specifications.Storage
         {
             Establish context = () =>
                 The<IStorageEngine>().WhenToldTo(e => e.ListBuckets()).Return(
-                    new[] { new BucketReference("bucket", MetricType.Count) });
+                    new[] { new BucketReference(MetricType.Count, "bucket") });
 
             Because of = () =>
                 Subject.FetchInitialBucketList();
@@ -21,7 +21,7 @@ namespace Statr.Server.Specifications.Storage
                 The<IStorageEngine>().WasToldTo(e => e.ListBuckets());
 
             It should_have_loaded_bucket = () =>
-                Subject.Exists(new BucketReference("bucket", MetricType.Count)).ShouldBeTrue();
+                Subject.Exists(new BucketReference(MetricType.Count, "bucket")).ShouldBeTrue();
         }
 
         [Subject(typeof(BucketRepository))]
@@ -39,7 +39,7 @@ namespace Statr.Server.Specifications.Storage
         public class with_buckets : WithSubject<BucketRepository>
         {
             Establish context = () =>
-                Subject.Get(new BucketReference("bucket.name", MetricType.Count));
+                Subject.Get(new BucketReference(MetricType.Count, "bucket.name"));
         }
     }
 }

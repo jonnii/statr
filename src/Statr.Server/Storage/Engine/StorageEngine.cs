@@ -59,7 +59,7 @@ namespace Statr.Server.Storage.Engine
 
                 foreach (var bucket in metricDirectory.GetDirectories())
                 {
-                    yield return new BucketReference(bucket.Name, metricType);
+                    yield return new BucketReference(metricType, bucket.Name);
                 }
             }
         }

@@ -26,7 +26,7 @@ namespace Statr.Server.Specifications.Storage.Engine
                 tree = An<IStorageTree>();
                 tree.WhenToldTo(t => t.GetOrCreateNode(Param.IsAny<string>())).Return(node);
 
-                Subject = new StorageEngineDataPointWriter(tree, new BucketReference("bucket.name", MetricType.Count));
+                Subject = new StorageEngineDataPointWriter(tree, new BucketReference(MetricType.Count, "bucket.name"));
             };
 
             protected static StorageEngineDataPointWriter Subject;

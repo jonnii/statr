@@ -16,7 +16,7 @@ namespace Statr.IntegrationTests.Components
             {
                 var storageEngine = (StorageEngine)container.Resolve<IStorageEngine>();
 
-                var bucket = new BucketReference("stats.component.tests", MetricType.Count);
+                var bucket = new BucketReference(MetricType.Count, "stats.component.tests");
                 const long when = 634836685639422723; // 19th sept 2012
 
                 var tree = storageEngine.GetStorageTree(bucket);

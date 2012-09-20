@@ -14,6 +14,12 @@ namespace Statr.IntegrationTests.Stories.Steps
                 var subscriber = new DataPointSubscriber("localhost", 17892);
                 subscriber.Start();
 
+                while (!subscriber.IsSubscribed)
+                {
+                    Thread.Sleep(10);
+                }
+                Thread.Sleep(10);
+
                 context.Add(subscriber);
             };
         }
@@ -22,7 +28,7 @@ namespace Statr.IntegrationTests.Stories.Steps
         {
             return context =>
             {
-                Thread.Sleep(2000);
+                Thread.Sleep(200);
 
                 var subscriber = context.Get<DataPointSubscriber>();
                 Assert.That(subscriber.NumReceivedDataPoints, Is.EqualTo(1));

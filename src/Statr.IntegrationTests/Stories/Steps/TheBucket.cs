@@ -29,7 +29,7 @@ namespace Statr.IntegrationTests.Stories.Steps
                 return context =>
                 {   
                     var bucketRepository = context.Container.Resolve<IBucketRepository>();
-                    var bucket = bucketRepository.Get(new BucketReference(name, metricType));
+                    var bucket = bucketRepository.Get(new BucketReference(metricType, name));
 
                     Assert.That(predicate(bucket), Is.True, "Bucket did not pass predicate");
                 };

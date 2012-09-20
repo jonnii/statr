@@ -11,7 +11,7 @@ namespace Statr.Server.Installers
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
-                Component.For<IPublisher>().ImplementedBy<Publisher>().StartUsingMethod("Start"));
+                Component.For<IPublisher>().ImplementedBy<TcpPublisher>().StartUsingMethod("Start"));
         }
     }
 }

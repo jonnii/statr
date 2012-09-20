@@ -12,7 +12,7 @@ namespace Statr.IntegrationTests.Stories.Steps
         {
             return context =>
             {
-                var bucket = new BucketReference(metricName, type);
+                var bucket = new BucketReference(type, metricName);
 
                 var repository = context.Container.Resolve<IDataPointRepository>();
                 var metrics = repository.Get(bucket);

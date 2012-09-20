@@ -14,7 +14,7 @@ namespace Statr.IntegrationTests.Windsor
             using (var container = GetContainer())
             {
                 var storageStrategyFactory = container.Resolve<IBufferStrategyFactory>();
-                var strategy = storageStrategyFactory.Build(new BucketReference("unknown", MetricType.Count));
+                var strategy = storageStrategyFactory.Build(new BucketReference(MetricType.Count, "unknown"));
 
                 Assert.That(strategy, Is.TypeOf<BufferedStrategy>());
             }
@@ -26,7 +26,7 @@ namespace Statr.IntegrationTests.Windsor
             using (var container = GetContainer())
             {
                 var storageStrategyFactory = container.Resolve<IBufferStrategyFactory>();
-                var strategy = storageStrategyFactory.Build(new BucketReference("immedate.bucket", MetricType.Count));
+                var strategy = storageStrategyFactory.Build(new BucketReference(MetricType.Count, "immedate.bucket"));
 
                 Assert.That(strategy, Is.TypeOf<ImmediateStrategy>());
             }
@@ -38,7 +38,7 @@ namespace Statr.IntegrationTests.Windsor
             using (var container = GetContainer())
             {
                 var storageStrategyFactory = container.Resolve<IBufferStrategyFactory>();
-                var strategy = (BufferedStrategy)storageStrategyFactory.Build(new BucketReference("buffered.with.properties", MetricType.Count));
+                var strategy = (BufferedStrategy)storageStrategyFactory.Build(new BucketReference(MetricType.Count, "buffered.with.properties"));
 
                 Assert.That(strategy.BufferSize, Is.EqualTo(10000));
             }

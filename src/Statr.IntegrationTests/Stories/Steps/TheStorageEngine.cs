@@ -44,7 +44,7 @@ namespace Statr.IntegrationTests.Stories.Steps
             return context =>
             {
                 var storageEngine = context.StorageEngine;
-                var writer = storageEngine.GetWriter(new BucketReference(bucketName, metricType));
+                var writer = storageEngine.GetWriter(new BucketReference(metricType, bucketName));
                 writer.Write(points);
             };
         }
@@ -64,7 +64,7 @@ namespace Statr.IntegrationTests.Stories.Steps
             return context =>
             {
                 var storageEngine = context.StorageEngine;
-                var reader = storageEngine.GetReader(new BucketReference(bucketName, metricType));
+                var reader = storageEngine.GetReader(new BucketReference(metricType, bucketName));
                 var points = reader.Read();
                 context.Add(points);
             };

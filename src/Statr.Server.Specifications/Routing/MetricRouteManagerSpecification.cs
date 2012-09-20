@@ -80,7 +80,7 @@ namespace Statr.Server.Specifications.Routing
             Establish context = () =>
             {
                 route = new Moq.Mock<IMetricRoute>();
-                bucket = new BucketReference("stats.awesome", MetricType.Count);
+                bucket = new BucketReference(MetricType.Count, "stats.awesome");
 
                 metricRouteFactory.WhenToldTo(f => f.Build(Param.IsAny<BucketReference>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
                     .Return(route.Object);
@@ -101,11 +101,11 @@ namespace Statr.Server.Specifications.Routing
         public class when_building_route : with_configuration
         {
             Establish context = () =>
-                metricRouteFactory.WhenToldTo(f => f.Build(new BucketReference("stats.awesome", MetricType.Count), 60, Param.IsAny<IAggregationStrategy>()))
+                metricRouteFactory.WhenToldTo(f => f.Build(new BucketReference(MetricType.Count, "stats.awesome"), 60, Param.IsAny<IAggregationStrategy>()))
                     .Return(An<IMetricRoute>());
 
             Because of = () =>
-                route = Subject.BuildRoute(new BucketReference("stats.awesome", MetricType.Count));
+                route = Subject.BuildRoute(new BucketReference(MetricType.Count, "stats.awesome"));
 
             It should_build_metric_route_for_highest_frequency_retention_period = () =>
                 route.ShouldNotBeNull();

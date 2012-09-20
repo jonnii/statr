@@ -2,7 +2,7 @@ namespace Statr.Server
 {
     public class BucketReference
     {
-        public BucketReference(string name, MetricType metricType)
+        public BucketReference(MetricType metricType, string name)
         {
             Name = name;
             MetricType = metricType;
@@ -11,6 +11,14 @@ namespace Statr.Server
         public string Name { get; private set; }
 
         public MetricType MetricType { get; private set; }
+
+        public string Key
+        {
+            get
+            {
+                return string.Concat(MetricType, "/", Name);
+            }
+        }
 
         public override string ToString()
         {

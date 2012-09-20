@@ -23,6 +23,8 @@ namespace Statr.Client.Subscriber
 
         public long NumReceivedDataPoints { get; private set; }
 
+        public bool IsSubscribed { get; private set; }
+
         public void Start()
         {
             thread = new Thread(StartReceiving);
@@ -38,7 +40,9 @@ namespace Statr.Client.Subscriber
                     subscriber.Linger = 0;
 
                     subscriber.Connect(string.Format("tcp://{0}:{1}", server, port));
-                    subscriber.Subscribe("message", Encoding.Unicode);
+                    subscriber.Subscribe("datapoints/", Encoding.Unicode);
+
+                    IsSubscribed = true;
 
                     while (!isDisposed)
                     {
@@ -47,6 +51,7 @@ namespace Statr.Client.Subscriber
 
                         if (string.IsNullOrEmpty(address) || string.IsNullOrEmpty(contents))
                         {
+                            Thread.Sleep(10);
                             continue;
                         }
 

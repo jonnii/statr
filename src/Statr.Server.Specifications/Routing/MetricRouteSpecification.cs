@@ -83,7 +83,7 @@ namespace Statr.Server.Specifications.Routing
             Establish context = () =>
             {
                 route = new MetricRoute(
-                    new BucketReference("key", MetricType.Count),
+                    new BucketReference(MetricType.Count, "key"),
                     120,
                     new AccumulateAggregationStrategy());
 
@@ -117,7 +117,7 @@ namespace Statr.Server.Specifications.Routing
         public class with_route
         {
             Establish context = () =>
-                Subject = new MetricRoute(new BucketReference("key", MetricType.Count), 1, new AccumulateAggregationStrategy());
+                Subject = new MetricRoute(new BucketReference(MetricType.Count, "key"), 1, new AccumulateAggregationStrategy());
 
             protected static MetricRoute Subject;
         }

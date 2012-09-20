@@ -16,13 +16,13 @@ namespace Statr.Server.Specifications.Storage
                 The<IDataPointCache>().WhenToldTo(c => c.Get(Param.IsAny<BucketReference>())).Return(DataPointFixture.CreateMany(5));
 
             Because of = () =>
-                points = Subject.Get(new BucketReference("metric.name", MetricType.Count));
+                points = Subject.Get(new BucketReference(MetricType.Count, "metric.name"));
 
             It should_get_data_points = () =>
                 points.Count().ShouldEqual(5);
 
             It should_get_points_for_bucket = () =>
-                The<IDataPointCache>().WasToldTo(c => c.Get(new BucketReference("metric.name", MetricType.Count)));
+                The<IDataPointCache>().WasToldTo(c => c.Get(new BucketReference(MetricType.Count, "metric.name")));
 
             static IEnumerable<DataPoint> points;
         }

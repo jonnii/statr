@@ -13,7 +13,7 @@ namespace Statr.Server.Specifications.Routing
             Because of = () =>
             {
                 var args = new DataPointEvent(
-                    new BucketReference("name", MetricType.Count),
+                    new BucketReference(MetricType.Count, "name"),
                     new DataPoint(DateTime.Now, 500, 1));
 
                 Subject.DataPoints.Subscribe(d => ++raised);

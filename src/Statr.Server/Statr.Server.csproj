@@ -140,7 +140,7 @@
     <Compile Include="MetricTypeParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Publishing\IPublisher.cs" />
-    <Compile Include="Publishing\Publisher.cs" />
+    <Compile Include="Publishing\TcpPublisher.cs" />
     <Compile Include="Querying\IQueryEngine.cs" />
     <Compile Include="Querying\Query.cs" />
     <Compile Include="Querying\QueryEngine.cs" />

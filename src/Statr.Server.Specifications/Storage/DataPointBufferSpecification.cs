@@ -19,7 +19,7 @@ namespace Statr.Server.Specifications.Storage
                     .Return(new[]
                     {
                         new DataPointEvent(
-                            new BucketReference("bucket", MetricType.Count), 
+                            new BucketReference(MetricType.Count, "bucket"), 
                             new DataPoint(DateTime.Now, 500, 1))
                     }.ToObservable());
 
@@ -39,7 +39,7 @@ namespace Statr.Server.Specifications.Storage
 
                 writer = An<IDataPointWriter>();
 
-                The<IStorageEngine>().WhenToldTo(e => e.GetWriter(new BucketReference("bucket", MetricType.Count)))
+                The<IStorageEngine>().WhenToldTo(e => e.GetWriter(new BucketReference(MetricType.Count, "bucket")))
                     .Return(writer);
             };
 
