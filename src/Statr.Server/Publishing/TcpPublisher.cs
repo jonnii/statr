@@ -56,9 +56,10 @@ namespace Statr.Server.Publishing
         public void Publish(DataPointEvent dataPointEvent)
         {
             var address = string.Concat("datapoints/", dataPointEvent.Bucket.Key);
+            var payload = Serialize(dataPointEvent);
 
             socket.SendMore(address, Encoding.Unicode);
-            socket.Send(dataPointEvent.ToString(), Encoding.Unicode);
+            socket.Send(payload, Encoding.Unicode);
 
             ++NumPublishedMessage;
         }
@@ -88,7 +89,7 @@ namespace Statr.Server.Publishing
 
         public string Serialize(DataPointEvent dataPointEvent)
         {
-            return JsonConvert.SerializeObject(dataPointEvent);
+            return JsonConvert.SerializeObject(dataPointEvent.DataPoint);
         }
     }
 }

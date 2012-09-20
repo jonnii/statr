@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Text;
 using System.Threading;
+using Newtonsoft.Json;
+using Statr.Api.Models;
 using ZMQ;
 
 namespace Statr.Client.Subscriber
@@ -20,6 +22,8 @@ namespace Statr.Client.Subscriber
             this.server = server;
             this.port = port;
         }
+
+        public event EventHandler<DataPointEventArgs> DataPointReceived;
 
         public long NumReceivedDataPoints { get; private set; }
 
@@ -53,7 +57,9 @@ namespace Statr.Client.Subscriber
                             continue;
                         }
 
-                        Console.WriteLine("{0} : {1}", address, contents);
+                        var dataPoint = JsonConvert.DeserializeObject<DataPoint>(contents);
+
+                        OnDataPointEvent(address, dataPoint);
 
                         ++NumReceivedDataPoints;
                     }
@@ -61,6 +67,15 @@ namespace Statr.Client.Subscriber
             }
 
             IsSubscribed = false;
+        }
+
+        private void OnDataPointEvent(string bucket, DataPoint dataPointEvent)
+        {
+            var handler = DataPointReceived;
+            if (handler != null)
+            {
+                handler(this, new DataPointEventArgs(bucket, dataPointEvent));
+            }
         }
 
         public void Dispose()
