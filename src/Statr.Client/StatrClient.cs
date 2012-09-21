@@ -6,22 +6,19 @@ namespace Statr.Client
     {
         public const int DefaultPort = 17890;
 
-        public static IStatrClient Build(string hostname)
+        public StatrClient(string hostname)
+            : this(new UdpTransport(hostname, DefaultPort))
         {
-            return new StatrClient(new UdpTransport(hostname, DefaultPort));
+
         }
 
-        public static IStatrClient Build(string hostname, int port)
+        public StatrClient(string hostname, int port)
+            : this(new UdpTransport(hostname, port))
         {
-            return new StatrClient(new UdpTransport(hostname, port));
+
         }
 
-        public static IStatrClient Build(IClientTransport clientTransport)
-        {
-            return new StatrClient(clientTransport);
-        }
-
-        private StatrClient(IClientTransport clientTransport)
+        public StatrClient(IClientTransport clientTransport)
         {
             Transport = clientTransport;
         }

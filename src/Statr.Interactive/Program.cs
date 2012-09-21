@@ -7,7 +7,7 @@ namespace Statr.Interactive
     {
         public static void Main(string[] args)
         {
-            using (var client = StatrClient.Build("127.0.0.1"))
+            using (var client = new StatrClient("127.0.0.1"))
             {
                 Console.WriteLine("!!! Created client {0}", client);
                 var interactive = new MetricsGenerator(client);

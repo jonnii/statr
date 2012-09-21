@@ -22,7 +22,7 @@ namespace Statr.IntegrationTests.Installers
         {
             var transport = kernel.Resolve<DirectClientTransport>();
 
-            return StatrClient.Build(transport);
+            return new StatrClient(transport);
         }
     }
 }

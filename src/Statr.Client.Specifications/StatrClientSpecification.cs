@@ -10,7 +10,7 @@ namespace Statr.Client.Specifications
         public class in_general
         {
             Establish context = () =>
-                client = (StatrClient)StatrClient.Build("somehost");
+                client = new StatrClient("somehost");
 
             It should_use_udp_transport = () =>
                 client.Transport.ShouldBeOfType<UdpTransport>();
@@ -63,7 +63,7 @@ namespace Statr.Client.Specifications
             Establish context = () =>
             {
                 transport = An<IClientTransport>();
-                client = StatrClient.Build(transport);
+                client = new StatrClient(transport);
             };
 
             protected static IClientTransport transport;
