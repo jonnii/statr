@@ -11,8 +11,6 @@ namespace Statr.Api.Models
 
         public string Directory { get; set; }
 
-        public string Namespace { get; set; }
-
         public List<Entry> Entries { get; set; }
     }
 }

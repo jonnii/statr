@@ -14,7 +14,7 @@ namespace Statr.IntegrationTests.Stories.Storage
         {
             Given(TheApplication.IsStarted).
             When(TheStorageEngine.WritesDataPoints("stats.example", MetricType.Count)).
-            Then(TheStorageEngine.ShouldHaveCreatedDirectory("default/Count/stats.example"));
+            Then(TheStorageEngine.ShouldHaveCreatedDirectory("Count/stats.example"));
         }
 
         [Test]

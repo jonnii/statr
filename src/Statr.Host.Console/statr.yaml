@@ -1,5 +1,4 @@
-﻿Directory: c:\dev\tmp\storage
-Namespace: default
+﻿Directory: c:\dev\tmp\storage\default
 
 Entries:
 - Pattern: ^stats

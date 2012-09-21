@@ -10,16 +10,12 @@ namespace Statr.Server.Storage.Engine
     {
         public StorageEngine()
         {
-            Namespace = "default";
-
             Logger = NullLogger.Instance;
         }
 
         public ILogger Logger { get; set; }
 
         public string RootFilePath { get; set; }
-
-        public string Namespace { get; set; }
 
         public IStorageTree GetOrCreateTree(string name)
         {
@@ -44,8 +40,7 @@ namespace Statr.Server.Storage.Engine
         {
             EnsureAllPropertiesAreConfigured();
 
-            var namespaceDirectory = Path.Combine(RootFilePath, Namespace);
-            var bucketDirectory = new DirectoryInfo(namespaceDirectory);
+            var bucketDirectory = new DirectoryInfo(RootFilePath);
 
             if (!bucketDirectory.Exists)
             {
@@ -66,8 +61,7 @@ namespace Statr.Server.Storage.Engine
 
         public void DeleteAllBuckets()
         {
-            var namespaceDirectory = Path.Combine(RootFilePath, Namespace);
-            var bucketDirectory = new DirectoryInfo(namespaceDirectory);
+            var bucketDirectory = new DirectoryInfo(RootFilePath);
 
             if (bucketDirectory.Exists)
             {
@@ -89,14 +83,13 @@ namespace Statr.Server.Storage.Engine
 
         public IStorageTree GetStorageTree(BucketReference bucketReference)
         {
-            var storageTreeName = string.Concat(Namespace, "/", bucketReference.MetricType.ToString().ToLower());
+            var storageTreeName = bucketReference.MetricType.ToString().ToLower();
             return GetOrCreateTree(storageTreeName);
         }
 
         public void NotifyConfigChanged(Config config)
         {
             RootFilePath = config.Directory;
-            Namespace = config.Namespace;
         }
 
         private void EnsureAllPropertiesAreConfigured()
@@ -105,12 +98,6 @@ namespace Statr.Server.Storage.Engine
             {
                 throw new StatrException(
                     "Cannot create a storage engine tree because the RootFilePath has not been specified");
-            }
-
-            if (string.IsNullOrEmpty(Namespace))
-            {
-                throw new StatrException(
-                    "Cannot create a storage engine tree because a Namespace has not been specified");
             }
         }
     }
