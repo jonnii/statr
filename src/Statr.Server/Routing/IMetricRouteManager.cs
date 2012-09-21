@@ -6,7 +6,7 @@ namespace Statr.Server.Routing
     {
         IEnumerable<IMetricRoute> Routes { get; }
 
-        IMetricRoute GetRoute(Metric metric);
+        IEnumerable<IMetricRoute> GetRoute(Metric metric);
 
         void FlushAll();
     }

@@ -1,4 +1,5 @@
-﻿using Machine.Fakes;
+﻿using System.Collections.Generic;
+using Machine.Fakes;
 using Machine.Specifications;
 using Statr.Server.Configuration;
 using Statr.Server.Routing;
@@ -69,9 +70,9 @@ namespace Statr.Server.Specifications.Routing
             It should_create_different_route_for_different_metric_types = () =>
                 gaugeRoute.ShouldNotBeTheSameAs(countRoute);
 
-            static IMetricRoute countRoute;
+            static IEnumerable<IMetricRoute> countRoute;
 
-            static IMetricRoute gaugeRoute;
+            static IEnumerable<IMetricRoute> gaugeRoute;
         }
 
         [Subject(typeof(MetricRouteManager))]
@@ -98,22 +99,6 @@ namespace Statr.Server.Specifications.Routing
         }
 
         [Subject(typeof(MetricRouteManager))]
-        public class when_building_route : with_configuration
-        {
-            Establish context = () =>
-                metricRouteFactory.WhenToldTo(f => f.Build(new BucketReference(MetricType.Count, "stats.awesome"), 60, Param.IsAny<IAggregationStrategy>()))
-                    .Return(An<IMetricRoute>());
-
-            Because of = () =>
-                route = Subject.BuildRoute(new BucketReference(MetricType.Count, "stats.awesome"));
-
-            It should_build_metric_route_for_highest_frequency_retention_period = () =>
-                route.ShouldNotBeNull();
-
-            static IMetricRoute route;
-        }
-
-        [Subject(typeof(MetricRouteManager))]
         public class when_flushing_routes : with_configuration
         {
             Establish context = () =>
@@ -121,7 +106,7 @@ namespace Statr.Server.Specifications.Routing
                 metricRouteFactory.WhenToldTo(f => f.Build(Param.IsAny<BucketReference>(), Param.IsAny<int>(), Param.IsAny<IAggregationStrategy>()))
                     .Return(An<IMetricRoute>());
 
-                route = Subject.GetRoute(Metric.Count("stats.awesome", 60));
+                Subject.GetRoute(Metric.Count("stats.awesome", 60));
             };
 
             Because of = () =>
@@ -132,8 +117,6 @@ namespace Statr.Server.Specifications.Routing
 
             It should_clear_out_routes = () =>
                 Subject.NumRoutes.ShouldEqual(0);
-
-            static IMetricRoute route;
         }
 
         public class with_metric_route_manager : WithFakes

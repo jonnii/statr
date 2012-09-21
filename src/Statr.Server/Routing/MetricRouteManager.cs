@@ -17,8 +17,8 @@ namespace Statr.Server.Routing
 
         private readonly IDataPointStream dataPointStream;
 
-        private readonly ConcurrentDictionary<BucketReference, IMetricRoute> registeredRoutes =
-            new ConcurrentDictionary<BucketReference, IMetricRoute>();
+        private readonly ConcurrentDictionary<BucketReference, IMetricRoute[]> registeredRoutes =
+            new ConcurrentDictionary<BucketReference, IMetricRoute[]>();
 
         public MetricRouteManager(
             IMetricRouteFactory metricRouteFactory,
@@ -43,10 +43,10 @@ namespace Statr.Server.Routing
 
         public IEnumerable<IMetricRoute> Routes
         {
-            get { return registeredRoutes.Values; }
+            get { return registeredRoutes.Values.SelectMany(r => r); }
         }
 
-        public IMetricRoute GetRoute(Metric metric)
+        public IEnumerable<IMetricRoute> GetRoute(Metric metric)
         {
             return registeredRoutes.GetOrAdd(metric.ToBucket(), BuildRoute);
         }
@@ -66,17 +66,14 @@ namespace Statr.Server.Routing
             registeredRoutes.Clear();
         }
 
-        public IMetricRoute BuildRoute(BucketReference bucketReference)
+        public IMetricRoute[] BuildRoute(BucketReference bucketReference)
         {
             Logger.InfoFormat("Building routes for: {0}", bucketReference);
 
             var configuration = configRepository.GetConfiguration();
+            var retentions = configuration.GetRetentions(bucketReference.Name);
 
-            var highestFrequencyRetention = configuration.GetRetentions(bucketReference.Name)
-                .OrderBy(r => r.Frequency)
-                .First();
-
-            return BuildRoute(bucketReference, highestFrequencyRetention);
+            return retentions.Select(r => BuildRoute(bucketReference, r)).ToArray();
         }
 
         public IMetricRoute BuildRoute(BucketReference bucketReference, Retention retention)

@@ -12,7 +12,7 @@ namespace Statr.Server.Specifications.Routing
             Establish context = () =>
             {
                 route = An<IMetricRoute>();
-                The<IMetricRouteManager>().WhenToldTo(r => r.GetRoute(Param.IsAny<Metric>())).Return(route);
+                The<IMetricRouteManager>().WhenToldTo(r => r.GetRoute(Param.IsAny<Metric>())).Return(new[] { route });
             };
 
             Because of = () =>

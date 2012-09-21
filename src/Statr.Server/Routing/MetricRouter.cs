@@ -21,8 +21,12 @@ namespace Statr.Server.Routing
         {
             Logger.DebugFormat("Routing {0}", metric);
 
-            var route = metricRouteManager.GetRoute(metric);
-            route.Push(metric);
+            var routes = metricRouteManager.GetRoute(metric);
+
+            foreach (var route in routes)
+            {
+                route.Push(metric);
+            }
 
             ++NumProcessedMetrics;
         }
