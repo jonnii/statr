@@ -19,7 +19,6 @@ namespace Statr.Server.Storage.Engine
         public void Write(IEnumerable<DataPoint> dataPoints)
         {
             var node = storageTree.GetOrCreateNode(bucketReference.Name);
-
             node.Write(dataPoints);
         }
     }

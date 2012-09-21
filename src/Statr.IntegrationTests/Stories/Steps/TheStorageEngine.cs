@@ -20,6 +20,8 @@ namespace Statr.IntegrationTests.Stories.Steps
         {
             return context =>
             {
+                Console.WriteLine("HERE");
+
                 var rootPath = ((StorageEngine)context.StorageEngine).RootFilePath;
                 var fullDirectoryPath = Path.Combine(rootPath, directory);
 

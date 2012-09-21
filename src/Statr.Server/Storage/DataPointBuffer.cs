@@ -46,7 +46,6 @@ namespace Statr.Server.Storage
                 var storableDataPoints = storageStrategy.Apply(dataPoints);
 
                 var bucketWriter = storageEngine.GetWriter(bucketReference);
-
                 storableDataPoints.Subscribe(bucketWriter.Write);
             });
         }

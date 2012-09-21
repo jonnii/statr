@@ -17,5 +17,10 @@ namespace Statr.Server.Storage.Strategies
         {
             return dataPoints.Buffer(BufferSize);
         }
+
+        public override string ToString()
+        {
+            return string.Format("[BufferedStrategy BufferSize={0}]", BufferSize);
+        }
     }
 }
