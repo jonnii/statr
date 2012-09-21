@@ -31,6 +31,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{6B5CFB62-33A4-4B0B-89BF-F79873A89366}"
 	ProjectSection(SolutionItems) = preProject
 		CommonAssemblyInfo.cs = CommonAssemblyInfo.cs
+		..\build\default.ps1 = ..\build\default.ps1
+		..\build\package.nuspec = ..\build\package.nuspec
+		..\build\psake.ps1 = ..\build\psake.ps1
+		..\build\psake.psm1 = ..\build\psake.psm1
+		..\VERSION = ..\VERSION
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statr.Host.Service", "Statr.Host.Service\Statr.Host.Service.csproj", "{665C445F-6525-4632-B1BA-FA73DE31365B}"

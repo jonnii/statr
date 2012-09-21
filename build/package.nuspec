@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Statr.Client</id>
+    <version>0.0.0.1</version>
+    <title>Statr.Client</title>
+    <authors>Jonathan Goldman</authors>
+    <owners>Jonathan Goldman</owners>
+    <summary>Statr client library</summary>
+    <description>Want to integrate with statr? You're in the right place.</description>
+    <language>en-US</language>
+    <projectUrl>http://github.com/jonnii/statr</projectUrl>
+    <licenseUrl>https://github.com/jonnii/statr/blob/master/LICENSE.txt</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <tags>stats statr metrics</tags>
+  </metadata>
+</package>
