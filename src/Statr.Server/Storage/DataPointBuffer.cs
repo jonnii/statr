@@ -45,6 +45,8 @@ namespace Statr.Server.Storage
                 var dataPoints = s.Select(e => e.DataPoint);
                 var storableDataPoints = storageStrategy.Apply(dataPoints);
 
+                Logger.DebugFormat("Buffering {0} with {1}", bucketReference, storageStrategy);
+
                 var bucketWriter = storageEngine.GetWriter(bucketReference);
                 storableDataPoints.Subscribe(bucketWriter.Write);
             });

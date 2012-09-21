@@ -4,6 +4,8 @@ Entries:
 - Pattern: ^stats
   Retentions:
   - 2s:10d
+  Buffer:
+    Type: ImmediateStrategy
 
 - Pattern: ^immedate.bucket
   Buffer:

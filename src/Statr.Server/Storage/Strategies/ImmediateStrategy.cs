@@ -10,5 +10,10 @@ namespace Statr.Server.Storage.Strategies
         {
             return dataPoints.Buffer(1);
         }
+
+        public override string ToString()
+        {
+            return "[ImmediateStrategy]";
+        }
     }
 }
