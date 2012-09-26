@@ -1,36 +1,19 @@
-﻿
-App.ApplicationController = Em.Controller.extend();
-App.ApplicationView = Em.View.extend({
-    templateName: 'application'
-});
+﻿// <reference path="models/bucket.js"/>
+// <reference path="models/config.js"/>
 
-App.NavigationController = Em.Controller.extend();
-App.NavigationView = Em.View.extend({
-    templateName: 'navigation'
-});
+// <reference path="controllers/application.js"/>
+// <reference path="controllers/navigation.js"/>
+// <reference path="controllers/home.js"/>
+// <reference path="controllers/bucket.js"/>
+// <reference path="controllers/buckets.js"/>
+// <reference path="controllers/configuration.js"/>
 
-// <reference path="models/bucket.js"/>
-
+// <reference path="views/application.js"/>
 // <reference path="views/footer.js"/>
 // <reference path="views/home.js"/>
-
 // <reference path="views/bucket.js"/>
-// <reference path="controllers/bucket.js"/>
-// <reference path="controllers/home.js"/>
-
-
-App.ConfigurationController = Em.Controller.extend();
-App.ConfigurationView = Em.View.extend({
-    templateName: 'configuration'
-});
-
-App.BucketsController = Em.ArrayController.extend();
-App.BucketsView = Em.View.extend({
-    templateName: 'buckets'
-});
-
-App.Config = DS.Model.extend({
-});
+// <reference path="views/buckets.js"/>
+// <reference path="views/configuration.js"/>
 
 App.Router = Em.Router.extend({
     enableLogging: true,

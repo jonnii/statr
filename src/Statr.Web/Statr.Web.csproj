@@ -155,7 +155,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="CassetteConfiguration.cs" />
+    <Compile Include="Cassette\CassetteBundleConfiguration.cs" />
+    <Compile Include="Cassette\CassetteConfiguration.cs" />
     <Compile Include="Controllers\Api\BucketsController.cs" />
     <Compile Include="Controllers\Api\ConfigsController.cs" />
     <Compile Include="Controllers\Api\DataPointsController.cs" />
@@ -220,13 +221,22 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Scripts\app\application.js" />
+    <Content Include="Scripts\app\controllers\application.js" />
     <Content Include="Scripts\app\controllers\bucket.js" />
+    <Content Include="Scripts\app\controllers\buckets.js" />
+    <Content Include="Scripts\app\controllers\configuration.js" />
     <Content Include="Scripts\app\controllers\home.js" />
+    <Content Include="Scripts\app\controllers\navigation.js" />
     <Content Include="Scripts\app\loader.js" />
     <Content Include="Scripts\app\models\bucket.js" />
+    <Content Include="Scripts\app\models\config.js" />
+    <Content Include="Scripts\app\views\application.js" />
     <Content Include="Scripts\app\views\bucket.js" />
+    <Content Include="Scripts\app\views\buckets.js" />
+    <Content Include="Scripts\app\views\configuration.js" />
     <Content Include="Scripts\app\views\footer.js" />
     <Content Include="Scripts\app\views\home.js" />
+    <Content Include="Scripts\app\views\navigation.js" />
     <Content Include="Scripts\lib\bootstrap.js" />
     <Content Include="Scripts\lib\bootstrap.min.js">
       <DependentUpon>bootstrap.js</DependentUpon>
