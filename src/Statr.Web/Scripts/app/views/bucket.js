@@ -11,7 +11,7 @@
             renderer: 'area',
             series: new Rickshaw.Series.FixedDuration([{ name: 'one', color: 'lightblue' }], undefined, {
                 timeInterval: 250,
-                maxDataPoints: 200,
+                maxDataPoints: 400,
                 timeBase: new Date().getTime() / 1000
             })
         });
