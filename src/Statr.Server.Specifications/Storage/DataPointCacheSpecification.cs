@@ -14,7 +14,7 @@ namespace Statr.Server.Specifications.Storage
         public class when_getting_bucket : WithSubject<DataPointCache>
         {
             Because of = () =>
-                points = Subject.Get(new BucketReference(MetricType.Count, "metric.name"));
+                points = Subject.GetAll(new BucketReference(MetricType.Count, "metric.name"));
 
             It should_get_empty_result = () =>
                 points.ShouldBeEmpty();
@@ -26,7 +26,7 @@ namespace Statr.Server.Specifications.Storage
         public class when_getting_bucket_with_points : with_points
         {
             Because of = () =>
-                points = Subject.Get(new BucketReference(MetricType.Count, "metric.name"));
+                points = Subject.GetAll(new BucketReference(MetricType.Count, "metric.name"));
 
             It should_get_results = () =>
                 points.ShouldNotBeEmpty();

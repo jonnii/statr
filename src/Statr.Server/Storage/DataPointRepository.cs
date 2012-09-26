@@ -13,7 +13,7 @@ namespace Statr.Server.Storage
 
         public IEnumerable<DataPoint> Get(BucketReference bucket)
         {
-            return dataPointCache.Get(bucket);
+            return dataPointCache.GetAll(bucket);
         }
     }
 }

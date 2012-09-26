@@ -14,7 +14,7 @@ namespace Statr.Server.Specifications.Querying
                 Subject.Execute(new Query("bucket", MetricType.Count));
 
             It should_fetch_datapoints_from_cache = () =>
-                The<IDataPointCache>().WasToldTo(c => c.Get(new BucketReference(MetricType.Count, "bucket")));
+                The<IDataPointCache>().WasToldTo(c => c.GetAll(new BucketReference(MetricType.Count, "bucket")));
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Statr.Server.Specifications.Storage
         public class when_getting_metrics_by_name : WithSubject<DataPointRepository>
         {
             Establish context = () =>
-                The<IDataPointCache>().WhenToldTo(c => c.Get(Param.IsAny<BucketReference>())).Return(DataPointFixture.CreateMany(5));
+                The<IDataPointCache>().WhenToldTo(c => c.GetAll(Param.IsAny<BucketReference>())).Return(DataPointFixture.CreateMany(5));
 
             Because of = () =>
                 points = Subject.Get(new BucketReference(MetricType.Count, "metric.name"));
@@ -22,7 +22,7 @@ namespace Statr.Server.Specifications.Storage
                 points.Count().ShouldEqual(5);
 
             It should_get_points_for_bucket = () =>
-                The<IDataPointCache>().WasToldTo(c => c.Get(new BucketReference(MetricType.Count, "metric.name")));
+                The<IDataPointCache>().WasToldTo(c => c.GetAll(new BucketReference(MetricType.Count, "metric.name")));
 
             static IEnumerable<DataPoint> points;
         }

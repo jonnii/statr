@@ -56,13 +56,18 @@ namespace Statr.Server.Storage
             return new List<DataPoint> { point };
         }
 
-        public IEnumerable<DataPoint> Get(BucketReference bucket)
+        public IEnumerable<DataPoint> GetAll(BucketReference bucket)
         {
             List<DataPoint> collection;
 
             return dataPoints.TryGetValue(bucket, out collection)
                        ? collection
                        : Enumerable.Empty<DataPoint>();
+        }
+
+        public IEnumerable<DataPoint> GetRecent(BucketReference bucket, int limit)
+        {
+            return GetAll(bucket).Take(limit);
         }
 
         public void Dispose()

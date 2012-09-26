@@ -6,8 +6,7 @@
 
         this.graph = new Rickshaw.Graph({
             element: document.querySelector("#data-points-graph"),
-            width: 580,
-            height: 250,
+            height: 400,
             renderer: 'area',
             series: new Rickshaw.Series.FixedDuration([{ name: 'one', color: 'lightblue' }], undefined, {
                 timeInterval: 250,

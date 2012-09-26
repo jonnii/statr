@@ -9,6 +9,6 @@ namespace Statr.Api
 
         IEnumerable<Bucket> Buckets();
 
-        IEnumerable<DataPoint> DataPoints(string metricType, string bucket);
+        IEnumerable<DataPoint> DataPoints(string metricType, string bucket, int limit);
     }
 }

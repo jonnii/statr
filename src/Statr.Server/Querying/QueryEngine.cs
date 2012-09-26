@@ -20,7 +20,7 @@ namespace Statr.Server.Querying
         {
             Logger.DebugFormat("Executing query: {0}", query);
 
-            var dataPoints = dataPointCache.Get(query.BucketReference);
+            var dataPoints = dataPointCache.GetAll(query.BucketReference);
 
             return new QueryResult(dataPoints);
         }

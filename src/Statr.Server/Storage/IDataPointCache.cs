@@ -4,6 +4,8 @@ namespace Statr.Server.Storage
 {
     public interface IDataPointCache
     {
-        IEnumerable<DataPoint> Get(BucketReference bucket);
+        IEnumerable<DataPoint> GetAll(BucketReference bucket);
+
+        IEnumerable<DataPoint> GetRecent(BucketReference bucket, int limit);
     }
 }

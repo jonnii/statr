@@ -11,10 +11,10 @@ namespace Statr.Server.Specifications.Management.Controllers
         public class on_get : WithSubject<DataPointsController>
         {
             Because of = () =>
-                Subject.Get("Count", "bucket.id");
+                Subject.Get("Count", "bucket.id", 100);
 
             It should_get_data_points_from_cache = () =>
-                The<IDataPointCache>().WasToldTo(c => c.Get(Param.IsAny<BucketReference>()));
+                The<IDataPointCache>().WasToldTo(c => c.GetRecent(Param.IsAny<BucketReference>(), 100));
         }
     }
 }
