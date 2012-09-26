@@ -1,5 +1,6 @@
 ﻿App.BucketController = Em.Controller.extend({
     dataPoints: Em.A([]),
+    lastMetric: 0.0,
 
     loadDataPoints: function () {
         var id = this.content.get('id');
@@ -23,7 +24,7 @@
             };
 
             subscriber.receive = function (message) {
-                that.get('dataPoints').pushObject(message);
+                that.set('lastMetric', message.Value);
             };
 
             console.log("registering for data points");

@@ -181,12 +181,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\bootstrap-responsive.css" />
-    <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
-    <Content Include="Content\nv.d3.css" />
+    <Content Include="Content\riskshaw.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -246,15 +244,7 @@
     <Content Include="Scripts\lib\ember-data-latest.min.js" />
     <Content Include="Scripts\lib\ember-latest.min.js" />
     <Content Include="Scripts\lib\handlebars-1.0.0.beta.6.js" />
-    <None Include="Scripts\lib\jquery-1.6.4-vsdoc.js" />
-    <Content Include="Scripts\lib\jquery-1.6.4.js" />
-    <Content Include="Scripts\lib\jquery-1.6.4.min.js" />
-    <Content Include="Scripts\lib\jquery-ui-1.8.11.js" />
-    <Content Include="Scripts\lib\jquery-ui-1.8.11.min.js">
-      <DependentUpon>jquery-ui-1.8.11.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\lib\jquery.signalR-0.5.3.js" />
-    <Content Include="Scripts\lib\jquery.signalR-0.5.3.min.js" />
     <Content Include="Scripts\lib\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\lib\jquery.unobtrusive-ajax.min.js">
       <DependentUpon>jquery.unobtrusive-ajax.js</DependentUpon>
@@ -269,7 +259,7 @@
     </Content>
     <Content Include="Scripts\app\main.js" />
     <Content Include="Scripts\lib\modernizr-2.5.3.js" />
-    <Content Include="Scripts\lib\nv.d3.min.js" />
+    <Content Include="Scripts\lib\riskshaw.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -1,36 +1,39 @@
 ﻿App.BucketView = Em.View.extend({
-    chart: null,
+    graph: null,
     templateName: 'bucket',
     didInsertElement: function () {
         console.log("setting up graph");
-        var that = this;
-        nv.addGraph(function () {
-            var data = [{
-                values: [],
-                key: 'Things',
-                color: '#ff7f0e'
-            }];
 
-            that.chart = nv.models.lineChart();
-            that.chart.xAxis
-                .axisLabel("Time")
-                .tickFormat(d3.format(',r'));
-
-            that.chart.yAxis
-                .axisLabel("Value")
-                .tickFormat(d3.format('.02f'));
-
-            d3.select("#data-points-graph")
-                .datum(data)
-                .transition().duration(500).call(that.chart);
-
-            return that.chart;
+        this.graph = new Rickshaw.Graph({
+            element: document.querySelector("#data-points-graph"),
+            width: 580,
+            height: 250,
+            renderer: 'area',
+            series: new Rickshaw.Series.FixedDuration([{ name: 'one', color: 'lightblue' }], undefined, {
+                timeInterval: 250,
+                maxDataPoints: 200,
+                timeBase: new Date().getTime() / 1000
+            })
         });
-    },
-    valueDidChange: function () {
-        var chart = this.get('chart');
 
-        if (chart == null) {
+        var xAxis = new Rickshaw.Graph.Axis.Time({
+            graph: this.graph
+        });
+
+        xAxis.render();
+
+        var yAxis = new Rickshaw.Graph.Axis.Y({
+            graph: this.graph
+        });
+
+        yAxis.render();
+
+        this.graph.render();
+    },
+    initialDataLoaded: function () {
+        var graph = this.get('graph');
+
+        if (graph == null) {
             return;
         }
 
@@ -38,18 +41,28 @@
             .get('dataPoints');
 
         var values = $.map(dataPoints, function (d) {
-            return { x: d.TimeStamp, y: d.Value };
+            return 0.0 + d.Value;
         });
 
-        var data = [{
-            values: values,
-            key: 'Things',
-            color: '#ff7f0e'
-        }];
+        console.log("adding new values: " + values.length);
 
-        d3.select('#data-points-graph')
-            .datum(data)
-            .transition().duration(500)
-            .call(chart);
-    }.observes('controller.dataPoints.@each')
+        $.each(values, function (i, v) {
+            var data = { one: v };
+            graph.series.addData(data);
+        });
+
+        graph.render();
+
+    }.observes('controller.dataPoints.@each'),
+
+    pushPoint: function () {
+        var lastMetric = this.get('controller').get('lastMetric');
+        var graph = this.get('graph');
+        if (graph == null) {
+            return;
+        }
+        var data = { one: lastMetric };
+        graph.series.addData(data);
+        graph.render();
+    }.observes('controller.lastMetric')
 });

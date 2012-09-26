@@ -6,7 +6,7 @@ namespace Statr.Web.Cassette
     {
         public void Configure(CassetteSettings configurable)
         {
-            configurable.IsDebuggingEnabled = false;
+            configurable.IsDebuggingEnabled = true;
         }
     }
 }
